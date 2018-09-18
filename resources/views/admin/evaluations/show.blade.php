@@ -17,6 +17,7 @@
 					<p><strong>Proceso:</strong>  {{ $evaluation->process->name }}</p>
 					<p><strong>Empresa:</strong>  {{ $evaluation->process->organization->name }}</p>
 					<a class="btn btn-default" href="{{ route('evaluations.edit', ['evaluation' => $evaluation]) }}"> <i class="fa fa-pencil"></i> Editar evaluación</a>
+					<p>feo</p>
 					<hr>
 					<h3><i class="fa fa-check-square-o"></i> Preguntas en esta evaluación</h3>
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
