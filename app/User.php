@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->name.' '.$this->last_name;
     }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 }

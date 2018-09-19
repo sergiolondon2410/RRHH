@@ -34,21 +34,27 @@
 						</div>
 					</div>
 					<hr>
-					<h3><i class="fa fa-check-square-o"></i> Preguntas en esta evaluación</h3>
+					<h3><i class="fa fa-address-card-o"></i> Usuarios en esta evaluación</h3>
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 						<thead>
 							<tr>
-								<th>Pregunta</th>
-								<th>Competencia</th>
-								<th>Escala de evaluación</th>
+								<th>Usuario</th>
+								<th>Autoevaluación</th>
+								<th>Estado</th>
+								<th>Heteroevaluación</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($evaluation->questions as $question)
+							@foreach ($evaluation->applications as $application)
 								<tr class="odd gradeX">
-									<td>{{ $question->text }}</td>
-									<td>{{ $question->competence->name }}</td>
-									<td>{{ $question->scale->name }}</td>
+									<td>{{ $application->user->name }}</td>
+									<td>
+										@if($application->evaluator_id == $application->evaluator_id)
+											Si
+										@endif
+									</td>
+									<td>{{ $application->status }}</td>
+									<td></td>
 								</tr>
 							@endforeach
 						</tbody>

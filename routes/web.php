@@ -31,16 +31,15 @@ Route::delete('/usuarios/{id}', 'UserController@destroy')->where('id', '[0-9]+')
 
 // ---------------- Usuarios (Final) ---------------------
 
-// Rutas para aplicación (Se debe cambiar por error de ortografía)
+// Rutas para aplicación (Se debe cambiar por error de ortografía) BORRAR
 Route::get('/aplicacion', 'AplicationController@index');
 Route::get('/aplicacion/nuevo/{id}', 'AplicationController@create')->name('aplication.create');
 Route::post('/aplicacion/crear', 'AplicationController@store');
 
-// Rutas para implementación
+// Rutas para implementación //Para borrar
 Route::get('/implementacion', 'ImplementationController@index');
 
 //Rutas Respuestas
-
 Route::get('/respuestas/nuevo/{aplication_id}/{contador}', 'AnswerController@create')->name('answer.create');
 Route::post('/respuestas/crear', 'AnswerController@store');
 
@@ -100,6 +99,9 @@ Route::resource('accomplishments', 'AccomplishmentController');
 //Rutas Evaluaciones x Preguntas
 Route::get('/evaluationquestion/{evaluation}/create', 'EvaluationQuestionController@create')->name('evaluationquestion.create');
 Route::post('/evaluationquestion/{evaluation}', 'EvaluationQuestionController@store')->name('evaluationquestion.store');
+
+//Rutas Aplicaciones
+Route::get('/applications/{evaluation}/index', 'ApplicationController@index')->name('applications.index');
 
 Auth::routes();
 
