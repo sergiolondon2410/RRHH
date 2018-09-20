@@ -102,6 +102,10 @@ Route::post('/evaluationquestion/{evaluation}', 'EvaluationQuestionController@st
 
 //Rutas Aplicaciones
 Route::get('/applications/{evaluation}/index', 'ApplicationController@index')->name('applications.index');
+Route::get('/applications/{user}', 'ApplicationController@show')->name('applications.show');
+Route::get('/applications/{user}/create', 'ApplicationController@create')->name('applications.create');
+Route::get('/applications/{user}/{evaluation}/edit', 'ApplicationController@edit')->name('applications.edit');
+Route::post('/applications/{user}/{evaluation}/', 'ApplicationController@store')->name('applications.store');
 
 Auth::routes();
 

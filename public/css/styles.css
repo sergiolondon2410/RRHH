@@ -538,3 +538,7 @@ table.dataTable thead .sorting:after {
     background-repeat: no-repeat !important;
     background-size: cover !important;
 }
+
+.verde {
+    color:green;
+}
