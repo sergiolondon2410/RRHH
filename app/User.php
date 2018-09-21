@@ -50,8 +50,13 @@ class User extends Authenticatable
         return $this->name.' '.$this->last_name;
     }
 
-    public function applications()
+    public function applications() //Son la aplicaciones en las que es evaluado
     {
         return $this->hasMany(Application::class);
+    }
+
+    public function evalapplications() //Son la aplicaciones en las que es evaluador (incluye autoevaluaciones)
+    {
+        return $this->hasMany(Application::class, 'evaluator_id');
     }
 }

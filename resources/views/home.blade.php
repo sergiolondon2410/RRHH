@@ -6,7 +6,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-9">
-
+            <h2>Hola {{ $user->name }}</h2>
+            <hr>
             <div class="row">
                 <div class="col-lg-4 col-md-12">
                     <div class="panel panel-primary">
@@ -16,12 +17,12 @@
                                     <i class="fa fa-check-square fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">4</div>
-                                    <div>Evaluaciones!</div>
+                                    <div class="huge">{{ $evaluations}}</div>
+                                    <div>Evaluaciones por resolver</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{ route('applications.show') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">Ver más</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

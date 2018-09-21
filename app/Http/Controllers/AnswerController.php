@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Aplication;
+use App\Application;
 use App\Implementation;
 use App\User;
 use App\Answer;
@@ -14,7 +15,11 @@ use App\Measure;
 
 class AnswerController extends Controller
 {
-    //
+    public function index(Application $application)
+    {
+        return view('admin.answers.index', compact('application'));
+    }
+
     public function create($aplication_id, $contador)
     {
 

@@ -40,8 +40,10 @@ Route::post('/aplicacion/crear', 'AplicationController@store');
 Route::get('/implementacion', 'ImplementationController@index');
 
 //Rutas Respuestas
-Route::get('/respuestas/nuevo/{aplication_id}/{contador}', 'AnswerController@create')->name('answer.create');
-Route::post('/respuestas/crear', 'AnswerController@store');
+// Route::get('/respuestas/nuevo/{aplication_id}/{contador}', 'AnswerController@create')->name('answer.create');
+// Route::post('/respuestas/crear', 'AnswerController@store');
+Route::get('/answers/{application}/index', 'AnswerController@index')->name('answers.index');
+
 
 //Rutas Empresas
 Route::get('/empresas', 'OrganizationController@index');
@@ -102,10 +104,11 @@ Route::post('/evaluationquestion/{evaluation}', 'EvaluationQuestionController@st
 
 //Rutas Aplicaciones
 Route::get('/applications/{evaluation}/index', 'ApplicationController@index')->name('applications.index');
-Route::get('/applications/{user}', 'ApplicationController@show')->name('applications.show');
+Route::get('/applications/show', 'ApplicationController@show')->name('applications.show');
 Route::get('/applications/{user}/create', 'ApplicationController@create')->name('applications.create');
 Route::get('/applications/{user}/{evaluation}/edit', 'ApplicationController@edit')->name('applications.edit');
 Route::post('/applications/{user}/{evaluation}/', 'ApplicationController@store')->name('applications.store');
+// Route::get('/applications/applications', 'ApplicationController@applications')->name('applications.applications');
 
 Auth::routes();
 

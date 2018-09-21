@@ -12,11 +12,16 @@
 				</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
-					<h4><strong>Evaluación:</strong> {{ $evaluation->name }}</h4>
-					<p><strong>Tipo de evaluación:</strong>  {{ $evaluation->evaluation_type->name }} <i>{{ $evaluation->evaluation_type->description }}</i></p>
-					<hr>
-					<h3><i class="fa fa-users"></i> Heteroevaluadores</h3>
 					{!! Form::open(['url' => route('applications.store', ['user' => $user, 'evaluation' => $evaluation]), 'method' => 'POST'])  !!}
+					<h4><strong>Evaluación:</strong> {{ $evaluation->name }}</h4>
+					<h4><input type="checkbox" name="autoevaluacion" value="{{$user->id}}"
+						@foreach ($user->evalapplications as $application) 
+							@if($application->user->id == $user->id  && $application->evaluation_id == $evaluation->id)
+								checked="checked"
+							@endif
+						@endforeach
+						> Realizar autoevaluación</h4>
+					<h3><i class="fa fa-users"></i> Heteroevaluadores</h3>
 					<div class="row">
 						<div class="col-lg-12">
 							<table width="100%" class="table table-striped table-bordered table-hover">
@@ -30,11 +35,17 @@
 									@foreach ($mates as $mate)
 										<tr class="odd gradeX">
 											<td>
-												<div class="checkbox">
-													<label>
-														<input type="checkbox" name="evaluadores[]" value="{{$mate->id}}">
-													</label>
-												</div>
+												<label>
+													<input type="checkbox"
+														@foreach ($mate->evalapplications as $application) 
+															@if($application->user->id == $user->id  && $application->evaluation_id == $evaluation->id)
+																checked="checked"
+															@endif
+														@endforeach
+														name="evaluadores[]" 
+														value="{{$mate->id}}"
+													>
+												</label>
 											</td>
 											<td>{{ $mate->name }} {{ $mate->last_name }}</td>
 										</tr>
@@ -54,7 +65,7 @@
 		</div>
 		<!-- /.col-lg-12 -->
 		<div class="col-lg-12">
-			<a class="btn btn-default" href="{{ route('evaluations.show', ['evaluation' => $evaluation]) }}"> <i class="fa fa-times"></i> Cancelar</a>
+			<a class="btn btn-default" href="{{ route('applications.index', ['evaluation' => $evaluation]) }}"> <i class="fa fa-times"></i> Cancelar</a>
 		</div>
 	</div>
 

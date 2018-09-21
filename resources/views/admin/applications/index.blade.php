@@ -29,14 +29,14 @@
 									<td><a href="{{ route('applications.show', ['user' => $user]) }}"><i class="fa fa-info-circle"></i></a> {{ $user->name }}</td>
 									<td>
 										@foreach ($user->applications as $application)
-											@if($application->evaluator_id == $user->id)
+											@if($application->evaluator_id == $user->id && $application->evaluation_id == $evaluation->id)
 												<i class="fa fa-check verde"></i>
 											@endif
 										@endforeach
 									</td>
 									<td>
 										@foreach ($user->applications as $application)
-											@if($application->evaluator_id == $user->id)
+											@if($application->evaluator_id == $user->id && $application->evaluation_id == $evaluation->id)
 												@if($application->status == 'uninitialized')
 													Sin responder
 												@else
@@ -47,7 +47,7 @@
 									</td>
 									<td>
 										@foreach ($user->applications as $application)
-											@if($application->evaluator_id != $user->id)
+											@if($application->evaluator_id != $user->id && $application->evaluation_id == $evaluation->id)
 												<i class="fa fa-check verde"></i>{{$application->evaluator->name}}
 											@endif
 										@endforeach

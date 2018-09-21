@@ -33,17 +33,20 @@
                             <a href="#"><i class="fa fa-table fa-fw"></i> Evaluaciones<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ route('evaluations.index') }}">Listado Evaluaciones</a>
+                                    <a href="{{ route('applications.show') }}">Mis Evaluaciones</a>
                                 </li>
+                                <!-- <li>
+                                    <a href="{{ route('evaluations.index') }}">Listado Evaluaciones</a>
+                                </li> -->
                                 <!-- <li>
                                     <a href="morris.html">Preguntas</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">Implementaciones</a>
                                 </li> -->
-                                <li>
+                                <!-- <li>
                                     <a href="{{ url("/implementacion")}}">Responder Evaluación</a>
-                                </li>
+                                </li> -->
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

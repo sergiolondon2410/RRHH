@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Application extends Model
 {
     protected $fillable = [
-        'user_id', 'evaluator_id', 'status'
+        'user_id', 'evaluator_id', 'status', 'evaluation_id'
     ];
 
     // public function assignation()
@@ -15,9 +15,13 @@ class Application extends Model
     //     return $this->belongsTo(Assignation::class);
     // }
 
-    public function evaluations()
+    // public function evaluations()
+    // {
+    //     return $this->belongsToMany(Evaluation::class);
+    // }
+    public function evaluation()
     {
-        return $this->belongsToMany(Evaluation::class);
+        return $this->belongsTo(Evaluation::class);
     }
 
     public function user()
