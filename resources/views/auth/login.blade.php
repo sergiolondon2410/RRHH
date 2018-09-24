@@ -9,8 +9,9 @@
 	</div>
 	<div class="wrapper2">
 		<div class="container">
-			<h1>Bienvenidos!</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+			<h1>¡Bienvenido!</h1>
+			<p>SAITH - Sistema de Administración Inteligente del Talento Humano</p>
+			<p>Digite su correo y contraseña para ingresar</p>
 			<form class="form" method="POST" action="{{ route('login') }}">
 				@csrf
 				

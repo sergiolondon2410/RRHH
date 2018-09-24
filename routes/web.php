@@ -21,13 +21,14 @@
 
 // ---------------- Usuarios (Inicio) ---------------------
 
-Route::get('/usuarios', 'UserController@index')->name('users.index');
-Route::get('/usuarios/{id}', 'UserController@show')->where('id', '[0-9]+');
-Route::get('/usuarios/nuevo', 'UserController@create')->name('users.create');
-Route::post('/usuarios/crear', 'UserController@store');
-Route::get('/usuarios/editar/{id}', 'UserController@edit')->where('id', '[0-9]+');
-Route::put('/usuarios/{id}', 'UserController@update')->where('id', '[0-9]+');
-Route::delete('/usuarios/{id}', 'UserController@destroy')->where('id', '[0-9]+');
+// Route::get('/usuarios', 'UserController@index')->name('users.index');
+// Route::get('/usuarios/{user}', 'UserController@show')->name('users.show');
+// Route::get('/usuarios/nuevo', 'UserController@create')->name('users.create');
+// Route::post('/usuarios/crear', 'UserController@store')->name('users.store');
+// Route::get('/usuarios/editar/{user}', 'UserController@edit')->name('users.edit');
+// Route::put('/usuarios/{user}', 'UserController@update')->name('users.update');
+// Route::delete('/usuarios/{id}', 'UserController@destroy')->name('users.destroy');
+Route::resource('users', 'UserController');
 
 // ---------------- Usuarios (Final) ---------------------
 
@@ -43,6 +44,8 @@ Route::get('/implementacion', 'ImplementationController@index');
 // Route::get('/respuestas/nuevo/{aplication_id}/{contador}', 'AnswerController@create')->name('answer.create');
 // Route::post('/respuestas/crear', 'AnswerController@store');
 Route::get('/answers/{application}/index', 'AnswerController@index')->name('answers.index');
+Route::get('/answers/{application}/create', 'AnswerController@create')->name('answers.create');
+Route::post('/answers/{application}/{question}/{count}', 'AnswerController@store')->name('answers.store');
 
 
 //Rutas Empresas

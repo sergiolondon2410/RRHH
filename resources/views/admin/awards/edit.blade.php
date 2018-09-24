@@ -15,7 +15,7 @@
 		</div>
 	@endif
 
-	{!! Form::model($award, ['method' => 'POST', 'action' => ['AwardController@update', $award]])  !!}
+	{!! Form::model($award, ['method' => 'POST', 'action' => ['AwardController@update', $award]]) !!}
 	 	@method('PUT')
 		<div class="row">
 			<div class="col-sm-12">
@@ -57,6 +57,6 @@
 
 	{!! Form::close() !!}
 
-	<a class="btn btn-default" href="{{ route('awards.show', ['award' => $award]) }}">Cancelar</a>
+	<a class="btn btn-default" href="{{ route('awards.show', ['award' => $award]) }}"> <i class="fa fa-times"></i> Cancelar</a>
 
 @endsection

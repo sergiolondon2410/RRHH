@@ -22,6 +22,7 @@
 						<thead>
 							<tr>
 								<th>Evaluación</th>
+								<th>Estado</th>
 								<th>Comenzar</th>
 							</tr>
 						</thead>
@@ -29,6 +30,7 @@
 							@foreach ($autoevaluations as $application)
 								<tr class="odd gradeX">
 									<td>{{ $application->evaluation->name }}</td>
+									<td>{{ $application->status }}</td>
 									<td>
 										<a class="btn btn-default" href="{{ route('answers.index', ['application' => $application]) }}"> <i class="fa fa-pencil"></i> Comenzar</a>
 									</td>
@@ -43,6 +45,7 @@
 							<tr>
 								<th>Evaluación</th>
 								<th>Evaluado</th>
+								<th>Estado</th>
 								<th>Comenzar</th>
 							</tr>
 						</thead>
@@ -51,6 +54,7 @@
 								<tr class="odd gradeX">
 									<td>{{ $application->evaluation->name }}</td>
 									<td>{{ $application->user->name }} {{ $application->user->last_name }}</td>
+									<td>{{ $application->status }}</td>
 									<td>
 										<a class="btn btn-default" href="{{ route('answers.index', ['application' => $application]) }}"> <i class="fa fa-pencil"></i> Comenzar</a>
 									</td>

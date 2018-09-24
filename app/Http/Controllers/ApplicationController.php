@@ -79,8 +79,9 @@ class ApplicationController extends Controller
 										->where('status', '<>', 'completed')
 										->get();
 		$heteroevaluations = Application::where('evaluator_id', $user->id)
+										->where('user_id', '<>',$user->id)
 										->where('status', '<>', 'completed')
-										->get()->except(['user_id', $user->id]);
+										->get();
 		return view('admin.applications.show', compact('user', 'autoevaluations', 'heteroevaluations'));
 	}
 

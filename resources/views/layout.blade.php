@@ -60,7 +60,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><img src="{{ asset('/images/logo.jpg') }}" alt=""></a>
+                <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('/images/logo.jpg') }}" alt="Logo Gente OK"></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -106,10 +106,10 @@
                         <i class="fa fa-user fa-fw"></i>{{ Auth::user()->name }} <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                        <li><a href="{{ route('users.show', ['id' => Auth::user()->id]) }}"><i class="fa fa-user fa-fw"></i> Perfil</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
-                        </li>
+                        <!-- <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
+                        </li> -->
                         <li class="divider"></li>
                         <li><a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
