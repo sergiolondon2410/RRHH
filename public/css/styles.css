@@ -543,3 +543,8 @@ table.dataTable thead .sorting:after {
     color:green;
 }
 
+.centrado {
+    text-align: center;
+    display:inline-block !important;
+}
+

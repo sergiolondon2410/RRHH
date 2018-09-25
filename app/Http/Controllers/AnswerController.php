@@ -19,22 +19,22 @@ class AnswerController extends Controller
 {
     public function index(Application $application)
     {
-
         return view('admin.answers.index', compact('application'));
     }
 
     public function create(Application $application, Request $request, $contador = 0)
     {
-    	$user = Auth::user()->id; //debe ser la variable de sesion
+    	$user = Auth::user()->id;
         $questions_array = $application->evaluation->questions->pluck('id');
         if($application->status == 'uninitialized'){
-            $application->status = 'started';
-            $application->save();
-            // $questions_array = $application->evaluation->questions->pluck('id');
-            // session(['questionsarray' => $questions_array]);
+            // $application->status = 'started';
+            // $application->save();
             $question = Question::find($questions_array[$contador]);
             $measures = $question->scale->measures->pluck('qualification','id');
-            return view('admin.answers.create', compact('contador', 'application', 'question', 'measures'));
+            $total = count($questions_array);
+            $percent = ceil((($contador)*100)/$total);
+            // dd($measures);
+            return view('admin.answers.create', compact('contador', 'application', 'question', 'measures', 'total', 'percent'));
         }
         elseif($application->status == 'started'){
             $contador++;

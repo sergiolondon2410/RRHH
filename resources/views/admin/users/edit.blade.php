@@ -111,4 +111,6 @@
 
 	<a class="btn btn-default" href="{{ route('users.show', ['user' => $user]) }}"> <i class="fa fa-times"></i> Cancelar</a>
 
+	<hr>
+
 @endsection

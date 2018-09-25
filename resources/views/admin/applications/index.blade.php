@@ -26,7 +26,7 @@
 						<tbody>
 							@foreach ($users as $user)
 								<tr class="odd gradeX">
-									<td><a href="{{ route('applications.show', ['user' => $user]) }}"><i class="fa fa-info-circle"></i></a> {{ $user->name }}</td>
+									<td><a href="{{ route('applications.show', ['user' => $user]) }}"><i class="fa fa-info-circle"></i></a> {{ $user->name }} {{ $user->last_name }}</td>
 									<td>
 										@foreach ($user->applications as $application)
 											@if($application->evaluator_id == $user->id && $application->evaluation_id == $evaluation->id)
@@ -48,7 +48,7 @@
 									<td>
 										@foreach ($user->applications as $application)
 											@if($application->evaluator_id != $user->id && $application->evaluation_id == $evaluation->id)
-												<i class="fa fa-check verde"></i>{{$application->evaluator->name}}
+												<i class="fa fa-check verde"></i>{{$application->evaluator->name}} {{ $application->evaluator->last_name }}
 											@endif
 										@endforeach
 									</td>

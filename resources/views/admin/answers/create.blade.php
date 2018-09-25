@@ -44,8 +44,19 @@
 							<div class="col-sm-6">
 								<p><strong>{{ $question->text }}</strong></p>
 							</div>
-							<div class="col-sm-2">
+							<!-- <div class="col-sm-2">
 								{!! Form::select('measure', $measures, null, ['class' => 'form-control']) !!}
+							</div> -->
+							<div class="col-sm-6">
+								<div class="row">
+									@foreach($measures as $measure => $qualification)
+										<div class="col-sm-3">			
+											<div class="form-group">
+												<label><input type="radio" value="{{ $measure }}" name="measure1"> {{ $qualification }}</label>
+											</div>
+										</div>
+									@endforeach
+								</div>
 							</div>
 							<div class="col-sm-4">
 								{!! Form::submit('Próxima pregunta >>', ['class' => 'form-control btn btn-danger']) !!}
@@ -53,6 +64,30 @@
 						</div>
 					</div>
 					{!! Form::close() !!}
+				</div>
+				<!-- <div class="row">
+					<div class="col-sm-12 centrado" >
+						<h4>Pregunta {{ $contador+1 }} de {{ $total }} - Avance: {{ $percent }}%</h4>
+					</div>
+					<div class="col-sm-12">
+						<div class="progress">
+							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ $percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $percent }}%;">
+								{{ $percent }}%
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<div class="row">
+					<div class="col-sm-12 centrado" >
+						<h4>Pregunta 2 de {{ $total }} - Avance: 25%</h4>
+					</div>
+					<div class="col-sm-12">
+						<div class="progress">
+							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ $percent }}" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+								25%
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

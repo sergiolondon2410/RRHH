@@ -41,16 +41,18 @@
                                     <a href="{{ route('evaluations.index') }}">Listado Evaluaciones</a>
                                 </li> -->
                                 <!-- <li>
-                                    <a href="morris.html">Preguntas</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Implementaciones</a>
-                                </li> -->
-                                <!-- <li>
                                     <a href="{{ url("/implementacion")}}">Responder Evaluación</a>
                                 </li> -->
                             </ul>
                             <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-certificate fa-fw"></i> Compromisos<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Mis Compromisos</a>
+                                </li>
+                            </ul>
                         </li>
                         @if(Auth::user()->user_type_id < 3)
                             <li>

@@ -45,7 +45,7 @@ body :-ms-input-placeholder {
   /* Internet Explorer 10+ */
   font-family: 'Source Sans Pro', sans-serif;
   color: #ce1e28;
-  font-weight: 300;
+  font-weight: 500;
 }
 .header_logo {
     width: 100%;
@@ -85,7 +85,7 @@ body :-ms-input-placeholder {
 }
 .container p {
     font-size: 18px;
-    text-shadow: 2px 2px 7px #000000a8;
+    text-shadow: 2px 2px 7px #000000ff;
      transition-duration: 1s;
   transition-timing-function: ease-in-put;
 }
@@ -97,7 +97,7 @@ body :-ms-input-placeholder {
     padding: 300px 0;
 }
 .container h1{
-    text-shadow: 1px 1px 11px #00000073;
+    text-shadow: 1px 1px 31px #000000ff;
 }
 .footer{
       width: 100%;
