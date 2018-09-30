@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Aplication;
+// use App\Aplication;
 use App\Application;
 use App\Implementation;
 use App\User;
@@ -22,86 +22,45 @@ class AnswerController extends Controller
         return view('admin.answers.index', compact('application'));
     }
 
-    public function create(Application $application, Request $request, $contador = 0)
+    public function create(Request $request, Application $application, $contador)
     {
-    	$user = Auth::user()->id;
-        $questions_array = $application->evaluation->questions->pluck('id');
-        if($application->status == 'uninitialized'){
-            // $application->status = 'started';
-            // $application->save();
+        $questions_array = $application->evaluation->questions->sortBy('competence_id')->pluck('id');
+        if($contador >= $questions_array->count()){
+            $application->status = 'completed';
+            $application->save();
+            return redirect()->action('ApplicationController@complete', compact('application'));
+        }
+        else{
+            if($application->status == 'uninitialized'){
+                $application->status = 'started';
+                $application->save();
+            }
+
             $question = Question::find($questions_array[$contador]);
-            $measures = $question->scale->measures->pluck('qualification','id');
+            $measures = $question->scale->measures->sortBy('numeric_value')->pluck('qualification','id');
             $total = count($questions_array);
             $percent = ceil((($contador)*100)/$total);
-            // dd($measures);
             return view('admin.answers.create', compact('contador', 'application', 'question', 'measures', 'total', 'percent'));
         }
-        elseif($application->status == 'started'){
-            $contador++;
-            if($contador == ($questions_array->count())){
-                return view('home');
-            }
-            else{
-                $question = Question::find($questions_array[$contador]);
-                $measures = $question->scale->measures->pluck('qualification','id');
-            return view('admin.answers.create', compact('contador', 'application', 'question', 'measures'));;
-            }
-        }
-    	// $aplication = Aplication::find($aplication_id);
-    	// $implementation_id = $aplication->implementation->id;
-    	// $implementation_questions = ImplementationQuestion::where('implementation_id', $implementation_id)->get();
-    	// $cantidadPreguntas = $questions_array->count();
-     //    dd($cantidadPreguntas);
-    	
-    	// else{
-
-	    // 	$preguntas = [''];
-	    // 	$competencias = [''];
-	    // 	$preguntas_id = [''];
-	    // 	$cont_int = 0;
-	    // 	foreach ($implementation_questions as $collection) {
-	    // 		$preguntas[$cont_int] = $collection->question->text;
-	    // 		$preguntas_id[$cont_int] = $collection->question->id;
-	    // 		$competencias[$cont_int] = $collection->question->competence_id;
-	    // 		$cont_int++;
-	    // 	}
-	    // 	$question = $preguntas[$contador];
-	    // 	$question_id = $preguntas_id[$contador];
-	    // 	$competence = Competence::find($competencias[$contador]);
-	    // 	$contador++;
-
-	    // 	$implementation = Implementation::find($implementation_id);
-
-	    // 	$scale_id = $implementation->evaluation->scale_id;
-
-	    // 	$measures = Measure::where('scale_id', $scale_id)->get();
-
-	    // 	foreach ($measures as $value) {
-	    // 		$scale[$value->id] = $value->qualification;  
-	    // 	}
-	    	
-	    // 	return view('admin.answers.create', compact('contador', 'aplication_id', 'question', 'question_id', 'competence', 'measures', 'scale'));
-    	// }
     }
 
-    public function store(Application $application, Request $request)
+    public function store(Request $request, Application $application, Question $question, $contador)
     {
-        dd($request);
-     //    $data = request()->all();
-     //    $user = 3; //debe ser la variable de sesion
-     //    $aplication_id = $data['aplication_id'];
-        $contador = $data['contador'];
-    	// $aplication = Aplication::find($aplication_id);
-    	// $implementation_id = $aplication->implementation->id;
-    	// $implementation_question = ImplementationQuestion::where('implementation_id', $implementation_id)->where('question_id', $data['question_id'])->get();
-
+        $data = request()->validate(
+            [
+                'measure' => 'required'
+            ],
+            [
+                'measure.required' => 'Debe seleccionar una de las opciones de la escala evaluativa'
+            ]
+        );
         $answer = Answer::create([
-
-            'measure_id' => $data['measure_id'],
+            'measure_id' => $data['measure']['0'],
         	'application_id' => $application->id,
-            'implementation_question_id' => 1,
+            'question_id' => $question->id
         ]);
-        return redirect()->action('AnswerController@create', compact('$application', 'contador'));
+        $contador++;
+        return redirect()->action('AnswerController@create', compact('application', 'contador'));
     }
 
 }

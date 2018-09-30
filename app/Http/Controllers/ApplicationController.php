@@ -85,4 +85,8 @@ class ApplicationController extends Controller
 		return view('admin.applications.show', compact('user', 'autoevaluations', 'heteroevaluations'));
 	}
 
+	public function complete(Application $application){
+		// dd();
+		return view('admin.applications.complete', compact('application'));
+	}
 }

@@ -5,7 +5,7 @@
 @section('content')
 
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-lg-9">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					{{ $application->evaluation->name }} 
@@ -17,7 +17,7 @@
 					<div class="row">
 						@if(Auth::user()->id != $application->user_id)
 							<div class="col-lg-12">
-								<h4><strong>Evaluando:</strong> {{ $application->user->name }} {{ $application->user->last_name }}</h4>
+								<h4><strong>Evaluado:</strong> {{ $application->user->name }} {{ $application->user->last_name }}</h4>
 							</div>
 						@endif
 						<div class="col-lg-12">
@@ -25,9 +25,10 @@
 						</div>
 						<div class="col-lg-12">
 							<strong>Tipo de evaluación:</strong>  {{ $application->evaluation->evaluation_type->name }} <i>{{ $application->evaluation->evaluation_type->description }}</i>
+							<hr>
 						</div>
 						<div class="col-lg-12">
-							<a class="btn btn-default" href="{{ route('answers.create', ['application' => $application]) }}"> <i class="fa fa-flag-checkered"></i> Responder evaluación</a>
+							<a class="btn btn-default" href="{{ route('answers.create', ['application' => $application, 'count' => '0']) }}"> <i class="fa fa-flag-checkered"></i> Responder evaluación</a>
 						</div>
 					</div>
 				</div>

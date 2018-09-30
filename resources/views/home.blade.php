@@ -26,8 +26,7 @@
                                     <i class="fa fa-question-circle fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <!-- <div class="huge">{{ $evaluations }}</div> -->
-                                    <div class="huge">3</div>
+                                    <div class="huge">{{ $evaluations }}</div>
                                     <div>Evaluaciones por resolver</div>
                                 </div>
                             </div>
