@@ -48,7 +48,7 @@
                                     <i class="fa fa-check fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">8</div>
+                                    <div class="huge">0</div>
                                     <div>Compromisos cumplidos</div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                     <i class="fa fa-certificate fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">2</div>
+                                    <div class="huge">0</div>
                                     <div>Compromisos por cumplir</div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                     <i class="fa fa-trophy fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">5</div>
+                                    <div class="huge">0</div>
                                     <div>Reconocimientos</div>
                                 </div>
                             </div>

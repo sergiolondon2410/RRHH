@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $evaluations = Application::where('evaluator_id', $user->id)->get()->count();
+        $evaluations = Application::where('evaluator_id', $user->id)->where('status', 'uninitialized')->get()->count();
         return view('home', compact('user', 'evaluations'));
     }
 }
