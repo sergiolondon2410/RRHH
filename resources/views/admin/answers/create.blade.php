@@ -46,15 +46,15 @@
 			<div class="col-sm-10">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-				  		<h3 class="panel-title"><strong>Competencia:</strong> {{ $question->competence->name }}</h3>
+				  		<h3 class="panel-title"><strong>{{ $question->competence->competence_type->name }}:</strong> {{ $question->competence->name }}</h3>
 					</div>
 					{!! Form::open(['url' => route('answers.store', ['application' => $application, 'question' => $question, 'contador' => $contador]), 'method' => 'POST'])  !!}
 					<div class="panel-body">
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-5">
 								<p><strong>{{ $question->text }}</strong></p>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-4">
 								<div class="row">
 									@foreach($measures as $measure => $qualification)
 										<div class="col-sm-3">			
@@ -65,7 +65,7 @@
 									@endforeach
 								</div>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								{!! Form::submit('Próxima pregunta >>', ['class' => 'form-control btn btn-danger']) !!}
 							</div>
 						</div>

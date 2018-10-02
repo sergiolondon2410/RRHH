@@ -86,7 +86,6 @@ class ApplicationController extends Controller
 	}
 
 	public function complete(Application $application){
-		// dd();
 		return view('admin.applications.complete', compact('application'));
 	}
 }

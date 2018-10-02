@@ -11,6 +11,7 @@
 		</div>
 		<!-- /.col-lg-12 -->
 		<div class="col-lg-12">
+			<hr>
 			<a class="btn btn-default" href="{{ route('home') }}"> <i class="fa fa-home"></i> Ir al panel principal</a>
 		</div>
 	</div>

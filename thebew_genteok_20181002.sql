@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-09-2018 a las 04:14:44
+-- Tiempo de generación: 03-10-2018 a las 01:09:38
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -79,7 +79,9 @@ INSERT INTO `answers` (`id`, `measure_id`, `created_at`, `updated_at`, `applicat
 (8, 3, '2018-09-28 23:30:31', '2018-09-28 23:30:31', 2, NULL, 4),
 (9, 1, '2018-09-28 23:30:47', '2018-09-28 23:30:47', 2, NULL, 6),
 (10, 3, '2018-09-28 23:30:55', '2018-09-28 23:30:55', 2, NULL, 7),
-(11, 3, '2018-09-28 23:31:13', '2018-09-28 23:31:13', 2, NULL, 8);
+(11, 3, '2018-09-28 23:31:13', '2018-09-28 23:31:13', 2, NULL, 8),
+(12, 3, '2018-10-02 01:35:10', '2018-10-02 01:35:10', 11, NULL, 1),
+(13, 4, '2018-10-02 01:38:42', '2018-10-02 01:38:42', 11, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -145,7 +147,11 @@ INSERT INTO `applications` (`id`, `evaluator_id`, `status`, `deleted_at`, `creat
 (7, 8, 'uninitialized', NULL, '2018-09-21 04:34:32', '2018-09-29 03:05:44', 8, 1),
 (8, 12, 'uninitialized', NULL, '2018-09-25 01:34:37', '2018-09-25 01:34:37', 12, 1),
 (9, 13, 'uninitialized', NULL, '2018-09-25 01:37:05', '2018-09-25 01:37:05', 13, 1),
-(10, 13, 'uninitialized', NULL, '2018-09-25 04:27:47', '2018-09-25 04:27:47', 13, 2);
+(10, 13, 'uninitialized', NULL, '2018-09-25 04:27:47', '2018-09-25 04:27:47', 13, 2),
+(11, 13, 'started', NULL, '2018-10-02 00:18:58', '2018-10-02 00:20:45', 10, 1),
+(12, 13, 'started', NULL, '2018-10-02 00:19:10', '2018-10-02 01:54:44', 8, 1),
+(13, 13, 'uninitialized', NULL, '2018-10-02 00:19:41', '2018-10-02 00:19:41', 14, 1),
+(14, 13, 'uninitialized', NULL, '2018-10-02 00:19:50', '2018-10-02 00:19:50', 12, 1);
 
 -- --------------------------------------------------------
 
@@ -352,8 +358,8 @@ CREATE TABLE `competence_types` (
 --
 
 INSERT INTO `competence_types` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Competencias', '2018-06-19 05:00:00', '2018-06-19 05:00:00'),
-(2, 'Indicadores de productividad', '2018-06-19 05:00:00', '2018-06-19 05:00:00');
+(1, 'Competencia', '2018-06-19 05:00:00', '2018-06-19 05:00:00'),
+(2, 'Indicador de productividad', '2018-06-19 05:00:00', '2018-06-19 05:00:00');
 
 -- --------------------------------------------------------
 
@@ -741,16 +747,16 @@ INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `user_type_
 (1, 'Sergio', 'Londoño', 'sergio@mail.com', '123', 2, 1, '1128444449', 'ingeniero', 'tecno', '2017-06-19 05:00:00', NULL, '2018-04-17 05:00:00', '2018-08-22 00:38:26', NULL, 'perfil-1_1534887506.png', 1, 1),
 (2, 'Juan', 'Pérez', 'jp@mail.com', '123', 5, 2, '12634563464', 'Operario', NULL, NULL, NULL, NULL, '2018-08-23 05:15:51', '2018-08-23 05:15:51', 'profile_image.png', 1, 0),
 (3, 'Pepe', 'Mora', 'pepe@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 5, 2, '1234567', 'Asistente operativo', NULL, '2016-03-15 05:00:00', 'g4V5sVf3nEVD7nQTLWEM0B0o6N3VfRuRQPcofnVy3mXaMu6YhTIljanwdDKz', '2018-04-19 10:48:08', '2018-08-22 23:14:08', '2018-08-22 23:14:08', 'profile_image.png', 1, 0),
-(4, 'SuperAdministrador', 'Gente', 'admin@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 1, 1, '9876382', 'Auxiliar contable', NULL, NULL, 'Ps7OJwJEf8QWLwb24REPn9KEjMTmi2XbnrE2fH1BwoVqQhYpIyEI6ZNqu3b9', '2018-04-19 22:41:42', '2018-04-19 22:41:42', NULL, 'profile_image.png', 1, 0),
+(4, 'SuperAdministrador', 'Gente', 'admin@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 1, 1, '9876382', 'Auxiliar contable', NULL, NULL, 'kbX4KEjobdtZZA2rdsRzJb31B2DUmdBRjsIWWo2sMxPUG77m5pEfm4rfOuMZ', '2018-04-19 22:41:42', '2018-04-19 22:41:42', NULL, 'profile_image.png', 1, 0),
 (5, 'Rosa', 'Gómez', 'rosa@mail.com', '$2y$10$B5BoRHsrJsjTvwCAdV2L6.4SiexqWiy8va4MnwfVm5iqXjcobgjM.', 5, 2, '1256784', 'Jefe de área', NULL, NULL, NULL, '2018-04-20 03:53:56', '2018-08-23 05:45:54', '2018-08-23 05:45:54', 'profile_image.png', 1, 0),
 (6, 'Maria', 'Pino', 'maria@mail.com', '$2y$10$0nZiuXGNT1VyO4mud2JY3es7L6.AY6Ix3vUWbeCRBcrzymgLyPndy', 5, 2, '125678422', 'Cajero', NULL, NULL, NULL, '2018-04-20 04:02:40', '2018-08-22 23:12:04', '2018-08-22 23:12:04', 'profile_image.png', 1, 0),
 (7, 'Brito', 'Ventura', 'brito@mail.com', '$2y$10$Ff9LGKW8btZeRfQfwSqg2OdMqA.q/FvFALgAWX/NYLzB4cb7cI3H6', 5, 2, '8766251', 'Gerente de sucursal', NULL, NULL, NULL, '2018-04-20 04:04:16', '2018-08-22 23:05:34', '2018-08-22 23:05:34', 'profile_image.png', 1, 0),
-(8, 'Diana', 'Herrera', 'diana@mail.com', '$2y$10$WmtXDGj/VR9M/EQrquKgJuqIu1C2BPcY48jBWEXtmZU4mBg1T2NuS', 5, 2, '123456667', 'Gerente', 'Administrativa', NULL, 'Xrd2Px0G0i6yVYqOltyg2gXyyGxzsZWmLYILtvae4KwOmuEYpi2R9PKQXFlv', '2018-04-20 19:30:43', '2018-09-24 05:52:30', NULL, 'perfil-8_1537757510.png', 1, 0),
+(8, 'Diana', 'Herrera', 'diana@mail.com', '$2y$10$WmtXDGj/VR9M/EQrquKgJuqIu1C2BPcY48jBWEXtmZU4mBg1T2NuS', 5, 2, '123456667', 'Gerente', 'Administrativa', NULL, 'X3pt21xSXDuoX7iNTYVJL7jP2E1leBKdtENsFj09ss8NxpCb53Z4h7w4j7W5', '2018-04-20 19:30:43', '2018-09-24 05:52:30', NULL, 'perfil-8_1537757510.png', 1, 0),
 (9, 'Halle', 'Berry', 'halle.b@mail.com', '$2y$10$OEhz2hV9IN9U8qpNzMaIG.3eTRC.VPRmx4C.74iwJVmDtwmw1L4e2', 5, 2, '1037777722', NULL, NULL, NULL, NULL, '2018-07-24 05:08:25', '2018-08-22 00:37:50', NULL, 'perfil-9_1534887470.png', 1, 0),
 (10, 'Brad', 'Peters', 'brad@mail.com', '$2y$10$F78jzaSZMhJWH/JBzJZXSOF/2SpagfmIXl9bZehs/q.UURm3BnfBW', 5, 2, '70223122', 'Empleado', 'Operativa', NULL, 'SwFE3NE3ElB8Soq1diWCk9BF7iFbdVLpi3rX1C6uL3bKjshZHCNkDfkqk9Xd', '2018-07-24 05:12:28', '2018-09-24 19:24:00', NULL, 'perfil-10.png', 1, 0),
 (11, 'Administrador', 'Prueba', 'administrador-prueba@mail.com', '$2y$10$SlNWsiexFyUop740J/rSje3U9kSjx0yQM/iUnClh.Cd5QSGQrAd3C', 2, 1, '112233', NULL, NULL, NULL, NULL, '2018-08-10 07:42:06', '2018-08-10 07:42:06', NULL, 'perfil-11.png', 1, 1),
 (12, 'Supervisor', 'Apellido', 'super@mail.com', '$2y$10$sPqJim0szaxeKPR8JIwf2uclwrb.HE3SehY4kMNQ/1iLPaH43i2Iq', 4, 2, '1234566', 'Supervisor', 'Operativa', NULL, 'Upjd5NwMWDRhgvKT5KqevC2U5sFnPe8idyKK2IF7xHwLfC61HeolVO8V7AOz', '2018-08-15 23:16:51', '2018-09-25 01:31:11', NULL, 'perfil-12.png', 1, 1),
-(13, 'Empleado', 'Apellido', 'empleado@mail.com', '$2y$10$XPnulUqOMMFrq1uulv7pQerO1DnmJaDDKgZnsLjWK.otkl5xGuVy2', 5, 2, '12345', 'Empleado', 'Operativa', NULL, 'LHHYWo5ypRc8egBvLiaJtcURp1p96Pjt2cIkZ35UKMCtyaz9DAQqIaZQqG5g', '2018-08-15 23:34:34', '2018-09-25 04:27:03', NULL, 'perfil-13_1537827109.png', 1, 1),
+(13, 'Empleado', 'Apellido', 'empleado@mail.com', '$2y$10$XPnulUqOMMFrq1uulv7pQerO1DnmJaDDKgZnsLjWK.otkl5xGuVy2', 5, 2, '12345', 'Empleado', 'Operativa', NULL, 'Dd46V8o36JzJgK2ZSy00OSS6KFDLa1P888RyAvy9jTplYJSo28va4f7wUlzj', '2018-08-15 23:34:34', '2018-09-25 04:27:03', NULL, 'perfil-13_1537827109.png', 1, 1),
 (14, 'Prueba', 'Tres', 'prueba3@gmail.com', '$2y$10$iGHV9CDHCatD1.X0oZPIGeVKHbHXEHbMWF613IAoWnImZ6W/vFpZq', 5, 2, '1037976435', NULL, NULL, NULL, 'jRX9s33jOdIGFHIWVKCzoHaZR8jXwH3umlBA9zE6Ul06IiS0ZeBsvaQzrtGi', '2018-08-21 23:04:27', '2018-09-11 02:26:47', NULL, 'perfil-14_1534887126.png', 1, 1),
 (15, 'Prueba', 'Cuatro', 'prueba4@gmail.com', '$2y$10$dvHpzi6zkX589qqlGWrqqelg.1uIGsqKZZlEXLt9GMyyqA8BWzvhW', 5, 7, '123456', NULL, NULL, NULL, NULL, '2018-08-21 23:40:10', '2018-08-21 23:47:41', NULL, 'profile_image.png', 1, 1),
 (16, 'Angie Carolina', 'Forero Buitrago', 'administracion.bogota@inser.com.co', '$2y$10$OJPduJCXCf02JioJZhF6aOf.Iyq4qRdmrqwtWJZNFhB3Z9EJlDMhC', 5, 14, '1023011562', 'Administradora', 'Administrativa', NULL, 'NUUY3zSlrLv5c6e9n5dECME5UYhetRl0YvPuCrUquFmQ3rnTNCh7rYmv2NfV', '2018-09-21 21:04:02', '2018-09-24 05:02:12', NULL, 'perfil-16_1537553043.png', 1, 1),
@@ -979,7 +985,7 @@ ALTER TABLE `accomplishments`
 -- AUTO_INCREMENT de la tabla `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `aplications`
@@ -991,7 +997,7 @@ ALTER TABLE `aplications`
 -- AUTO_INCREMENT de la tabla `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `application_evaluation`

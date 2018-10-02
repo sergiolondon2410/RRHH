@@ -24,6 +24,8 @@ class AnswerController extends Controller
 
     public function create(Request $request, Application $application, $contador)
     {
+
+
         $questions_array = $application->evaluation->questions->sortBy('competence_id')->pluck('id');
         if($contador >= $questions_array->count()){
             $application->status = 'completed';
@@ -54,11 +56,15 @@ class AnswerController extends Controller
                 'measure.required' => 'Debe seleccionar una de las opciones de la escala evaluativa'
             ]
         );
-        $answer = Answer::create([
-            'measure_id' => $data['measure']['0'],
-        	'application_id' => $application->id,
-            'question_id' => $question->id
-        ]);
+
+        $actual = Answer::where('application_id', $application->id)->where('question_id', $question->id)->get();
+        if($actual == null){
+            $answer = Answer::create([
+                'measure_id' => $data['measure']['0'],
+            	'application_id' => $application->id,
+                'question_id' => $question->id
+            ]);
+        }
         $contador++;
         return redirect()->action('AnswerController@create', compact('application', 'contador'));
     }
