@@ -112,8 +112,9 @@ Route::get('/applications/show', 'ApplicationController@show')->name('applicatio
 Route::get('/applications/{user}/create', 'ApplicationController@create')->name('applications.create');
 Route::get('/applications/{user}/{evaluation}/edit', 'ApplicationController@edit')->name('applications.edit');
 Route::post('/applications/{user}/{evaluation}/', 'ApplicationController@store')->name('applications.store');
-Route::get('/applications/{application}/complete/', 'ApplicationController@complete')->name('applications.complete
-	');
+Route::get('/applications/{application}/complete/', 'ApplicationController@complete')->name('applications.complete');
+Route::get('/applications/filter', 'ApplicationController@filter')->name('applications.filter');
+Route::get('/applications/report/', 'ApplicationController@report')->name('applications.report');
 // Route::get('/applications/applications', 'ApplicationController@applications')->name('applications.applications');
 
 Auth::routes();

@@ -88,4 +88,22 @@ class ApplicationController extends Controller
 	public function complete(Application $application){
 		return view('admin.applications.complete', compact('application'));
 	}
+
+	public function filter(){
+		$evaluations = Evaluation::all()->pluck('name','id');;
+		return view('admin.applications.filter', compact('evaluations'));
+	}
+
+	public function report(Request $request){
+		$evaluation = Evaluation::find($request->evaluation);
+		$all = $evaluation->applications->count();
+		$completed = $this->percentage($all, Application::where('evaluation_id', $request->evaluation)->where('status', 'completed')->get()->count());
+		$uninitialized = $this->percentage($all, Application::where('evaluation_id', $request->evaluation)->where('status', 'uninitialized')->get()->count());
+		$started = $this->percentage($all, Application::where('evaluation_id', $request->evaluation)->where('status', 'started')->get()->count());
+		return view('admin.applications.report', compact('evaluation', 'completed', 'uninitialized', 'started'));
+	}
+
+	public function percentage($total, $value){
+		return round((($value/$total)*100), 2);
+	}
 }

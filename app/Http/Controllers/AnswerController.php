@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Aplication;
 use App\Application;
 use App\Implementation;
 use App\User;
@@ -24,8 +23,6 @@ class AnswerController extends Controller
 
     public function create(Request $request, Application $application, $contador)
     {
-
-
         $questions_array = $application->evaluation->questions->sortBy('competence_id')->pluck('id');
         if($contador >= $questions_array->count()){
             $application->status = 'completed';

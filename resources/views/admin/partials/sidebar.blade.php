@@ -37,6 +37,11 @@
                                 <li>
                                     <a href="{{ route('applications.show') }}">Mis Evaluaciones</a>
                                 </li>
+                                @if(Auth::user()->user_type_id < 3)
+                                    <li>
+                                        <a href="{{ route('applications.filter') }}">Reporte de evaluaciones</a>
+                                    </li>
+                                @endif
                                 <!-- <li>
                                     <a href="{{ route('evaluations.index') }}">Listado Evaluaciones</a>
                                 </li> -->
