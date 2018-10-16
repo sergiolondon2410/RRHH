@@ -114,8 +114,18 @@ Route::get('/applications/{user}/{evaluation}/edit', 'ApplicationController@edit
 Route::post('/applications/{user}/{evaluation}/', 'ApplicationController@store')->name('applications.store');
 Route::get('/applications/{application}/complete/', 'ApplicationController@complete')->name('applications.complete');
 Route::get('/applications/filter', 'ApplicationController@filter')->name('applications.filter');
-Route::get('/applications/report/', 'ApplicationController@report')->name('applications.report');
+	
 // Route::get('/applications/applications', 'ApplicationController@applications')->name('applications.applications');
+
+//Rutas Compromisos
+
+Route::get('/compromises/organization/', 'CompromiseController@organization')->name('compromises.organization');
+Route::post('/compromises/user/', 'CompromiseController@user')->name('compromises.user');
+Route::post('/compromises/validator/', 'CompromiseController@validator')->name('compromises.validator');
+Route::post('/compromises/{user}/create/', 'CompromiseController@create')->name('compromises.create');
+Route::post('/compromises/{user}/{validator}/', 'CompromiseController@store')->name('compromises.store');
+Route::get('/compromises', 'CompromiseController@index')->name('compromises.index');
+Route::get('/compromises/{compromise}/', 'CompromiseController@show')->name('compromises.show');
 
 Auth::routes();
 

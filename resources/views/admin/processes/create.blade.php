@@ -15,7 +15,7 @@
 		</div>
 	@endif
 
-	{!! Form::open(['url' => route('processes.store'), 'method' => 'POST', 'files' => true])  !!}
+	{!! Form::open(['url' => route('processes.store'), 'method' => 'POST', 'files' => true]) !!}
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="panel panel-default">

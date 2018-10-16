@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Evaluation extends Model
 {
-    
+
 	protected $fillable = [
         'name', 'description', 'evaluation_type_id', 'process_id', 'creator_id'
     ];
@@ -30,11 +30,6 @@ class Evaluation extends Model
     {
         return $this->belongsToMany(Question::class);
     }
-
-    // public function applications()
-    // {
-    //     return $this->belongsToMany(Application::class);
-    // }
 
     public function applications() //Son la aplicaciones en las que es evaluado
     {

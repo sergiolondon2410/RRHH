@@ -57,6 +57,11 @@
                                 <li>
                                     <a href="#">Mis Compromisos</a>
                                 </li>
+                                @if(Auth::user()->user_type_id < 3)
+                                    <li>
+                                        <a href="{{ route('compromises.organization') }}">Asignar compromiso</a>
+                                    </li>
+                                @endif
                             </ul>
                         </li>
                         @if(Auth::user()->user_type_id < 3)

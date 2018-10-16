@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-10-2018 a las 01:09:38
+-- Tiempo de generación: 16-10-2018 a las 13:47:33
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -364,6 +364,61 @@ INSERT INTO `competence_types` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `compromises`
+--
+
+CREATE TABLE `compromises` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `validator_id` int(10) UNSIGNED DEFAULT NULL,
+  `activity` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `observation` mediumtext COLLATE utf8mb4_unicode_ci,
+  `ending` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `compromises`
+--
+
+INSERT INTO `compromises` (`id`, `user_id`, `validator_id`, `activity`, `observation`, `ending`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 11, 'Llegar temprano', 'Segunda oportunidad', '2018-10-16 22:10:37', 'pending', NULL, '2018-10-15 22:10:37', '2018-10-15 22:10:37'),
+(2, 8, 9, 'Leer el manual del empleado', '', '2018-11-02 09:06:36', 'pending', NULL, '2018-10-16 09:06:36', '2018-10-16 09:06:36'),
+(3, 12, 10, 'Realizar el curso virtual de excel', 'Obtener el certificado entregado por la academia virtual', '2018-11-30 09:11:30', 'pending', NULL, '2018-10-16 09:11:30', '2018-10-16 09:11:30'),
+(4, 8, 12, 'Enviar los reportes de final de día', 'Realizar esta acción todos los días de este mes', '2018-10-28 09:13:27', 'pending', NULL, '2018-10-16 09:13:27', '2018-10-16 09:13:27'),
+(5, 1, 4, 'rgtgegr', 'bbfunyfhgdv', '2018-10-20 09:19:12', 'pending', NULL, '2018-10-16 09:19:12', '2018-10-16 09:19:12');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compromise_alerts`
+--
+
+CREATE TABLE `compromise_alerts` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `compromise_id` int(10) UNSIGNED NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `compromise_alerts`
+--
+
+INSERT INTO `compromise_alerts` (`id`, `compromise_id`, `date`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 2, '2018-10-20 09:06:36', 'pending', NULL, '2018-10-16 09:06:36', '2018-10-16 09:06:36'),
+(2, 3, '2018-11-24 09:11:30', 'pending', NULL, '2018-10-16 09:11:30', '2018-10-16 09:11:30'),
+(3, 5, '2018-10-19 09:19:12', 'pending', NULL, '2018-10-16 09:19:12', '2018-10-16 09:19:12');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `evaluations`
 --
 
@@ -575,7 +630,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (41, '2018_09_18_020350_modify_applications_table', 27),
 (43, '2018_09_19_025709_create_application_evaluation_table', 28),
 (44, '2018_09_20_202236_add_evaluation_id_column_to_applications_table', 29),
-(45, '2018_09_21_152934_add_question_column_to_answers_table', 30);
+(45, '2018_09_21_152934_add_question_column_to_answers_table', 30),
+(46, '2018_10_14_154637_create_compromises_table', 31),
+(47, '2018_10_14_160436_create_compromise_alerts_table', 32);
 
 -- --------------------------------------------------------
 
@@ -636,8 +693,7 @@ CREATE TABLE `processes` (
 --
 
 INSERT INTO `processes` (`id`, `name`, `description`, `organization_id`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'Proceso de evaluación del clima laboral Kent', 'Proceso de evaluación para la empresa Kent', 2, '2018-04-19 05:00:00', '2018-09-17 23:09:53', 'activo'),
-(2, 'Proceso de prueba', 'Proceso de evaluación para Bancolombia', 8, '2018-09-03 06:12:54', '2018-09-03 06:12:54', 'activo');
+(1, 'Proceso de evaluación del clima laboral Kent', 'Proceso de evaluación para la empresa Kent', 2, '2018-04-19 05:00:00', '2018-09-17 23:09:53', 'activo');
 
 -- --------------------------------------------------------
 
@@ -876,6 +932,21 @@ ALTER TABLE `competence_types`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `compromises`
+--
+ALTER TABLE `compromises`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `compromises_user_id_foreign` (`user_id`),
+  ADD KEY `compromises_validator_id_foreign` (`validator_id`);
+
+--
+-- Indices de la tabla `compromise_alerts`
+--
+ALTER TABLE `compromise_alerts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `compromise_alerts_compromise_id_foreign` (`compromise_id`);
+
+--
 -- Indices de la tabla `evaluations`
 --
 ALTER TABLE `evaluations`
@@ -1042,6 +1113,18 @@ ALTER TABLE `competence_types`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `compromises`
+--
+ALTER TABLE `compromises`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `compromise_alerts`
+--
+ALTER TABLE `compromise_alerts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `evaluations`
 --
 ALTER TABLE `evaluations`
@@ -1081,7 +1164,7 @@ ALTER TABLE `measures`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `organizations`
@@ -1093,7 +1176,7 @@ ALTER TABLE `organizations`
 -- AUTO_INCREMENT de la tabla `processes`
 --
 ALTER TABLE `processes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `questions`
@@ -1169,6 +1252,19 @@ ALTER TABLE `awards`
   ADD CONSTRAINT `awards_creator_id_foreign` FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `awards_organization_id_foreign` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`),
   ADD CONSTRAINT `awards_resource_id_foreign` FOREIGN KEY (`resource_id`) REFERENCES `award_resources` (`id`);
+
+--
+-- Filtros para la tabla `compromises`
+--
+ALTER TABLE `compromises`
+  ADD CONSTRAINT `compromises_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `compromises_validator_id_foreign` FOREIGN KEY (`validator_id`) REFERENCES `users` (`id`);
+
+--
+-- Filtros para la tabla `compromise_alerts`
+--
+ALTER TABLE `compromise_alerts`
+  ADD CONSTRAINT `compromise_alerts_compromise_id_foreign` FOREIGN KEY (`compromise_id`) REFERENCES `compromises` (`id`);
 
 --
 -- Filtros para la tabla `evaluations`

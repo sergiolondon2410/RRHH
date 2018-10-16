@@ -34,6 +34,11 @@
     <!-- Datatables styles -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap.min.css">
+
+    <!-- Datepicker Files -->
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
+    <!-- <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}"> -->
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker.standalone.css')}}">
     
     <!-- Dropzone - Plugin para subir archivos -->
     <!-- <link href="{{ asset('/css/dropzone.css') }}" rel="stylesheet"> -->
