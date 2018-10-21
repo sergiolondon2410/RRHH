@@ -45,9 +45,8 @@ Route::get('/implementacion', 'ImplementationController@index');
 // Route::get('/respuestas/nuevo/{aplication_id}/{contador}', 'AnswerController@create')->name('answer.create');
 // Route::post('/respuestas/crear', 'AnswerController@store');
 Route::get('/answers/{application}/index', 'AnswerController@index')->name('answers.index');
-Route::get('/answers/{application}/{contador?}/create', 'AnswerController@create')->name('answers.create');
+Route::get('/answers/{application}/{contador}/create', 'AnswerController@create')->name('answers.create');
 Route::post('/answers/{application}/{question}/{count}', 'AnswerController@store')->name('answers.store');
-
 
 //Rutas Empresas
 Route::get('/empresas', 'OrganizationController@index');
@@ -62,7 +61,6 @@ Route::get('/evaluations/{process}/create', 'EvaluationController@create')->name
 Route::post('/evaluations/{process}', 'EvaluationController@store')->name('evaluations.store');
 Route::get('/evaluations/{evaluation}/edit', 'EvaluationController@edit')->name('evaluations.edit');
 Route::put('/evaluations/{evaluation}', 'EvaluationController@update')->name('evaluations.update');
-
 
 //Rutas Competencias
 Route::get('/competencias', 'CompetenceController@index')->name('competences.index');
@@ -114,8 +112,11 @@ Route::get('/applications/{user}/{evaluation}/edit', 'ApplicationController@edit
 Route::post('/applications/{user}/{evaluation}/', 'ApplicationController@store')->name('applications.store');
 Route::get('/applications/{application}/complete/', 'ApplicationController@complete')->name('applications.complete');
 Route::get('/applications/filter', 'ApplicationController@filter')->name('applications.filter');
-	
-// Route::get('/applications/applications', 'ApplicationController@applications')->name('applications.applications');
+Route::get('/applications/report/', 'ApplicationController@report')->name('applications.report');
+Route::get('/applications/chart/', 'ApplicationController@chart')->name('applications.chart');
+Route::get('/applications/{evaluation}/results/', 'ApplicationController@results')->name('applications.results');
+Route::get('/applications/{application}/detail/', 'ApplicationController@detail')->name('applications.detail');
+Route::get('/applications/{application}/evaluate/', 'ApplicationController@evaluate')->name('applications.evaluate');
 
 //Rutas Compromisos
 

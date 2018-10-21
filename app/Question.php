@@ -29,4 +29,10 @@ class Question extends Model
     {
         return $this->belongsToMany(Evaluation::class);
     }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
 }

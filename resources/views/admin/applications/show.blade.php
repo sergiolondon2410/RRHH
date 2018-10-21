@@ -38,7 +38,7 @@
 											@endif
 										</td>
 										<td>
-											@if($application->status == 'uninitialized')
+											@if($application->status != 'completed')
 												<a class="btn btn-default" href="{{ route('answers.index', ['application' => $application]) }}"> <i class="fa fa-pencil"></i> Comenzar</a>
 											@endif
 										</td>
@@ -47,7 +47,7 @@
 							</tbody>
 						</table>
 					@endif
-					<!-- <hr> -->
+					
 					@if($heteroevaluations->count() > 0)
 						<h3><i class="fa fa-check-square-o"></i> Heteroevaluaciones</h3>
 						<table width="100%" class="table table-striped table-bordered table-hover" id="Auto">
@@ -74,7 +74,7 @@
 											@endif
 										</td>
 										<td>
-											@if($application->status == 'uninitialized')
+											@if($application->status != 'completed')
 												<a class="btn btn-default" href="{{ route('answers.index', ['application' => $application]) }}"> <i class="fa fa-pencil"></i> Comenzar</a>
 											@endif
 										</td>

@@ -31,6 +31,11 @@ class Evaluation extends Model
         return $this->belongsToMany(Question::class);
     }
 
+    public function questionsCompetence()
+    {
+        return $this->belongsToMany(Question::class)->where('');
+    }
+
     public function applications() //Son la aplicaciones en las que es evaluado
     {
         return $this->hasMany(Application::class);

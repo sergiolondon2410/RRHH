@@ -21,7 +21,7 @@
 							</div>
 						@endif
 						<div class="col-lg-12">
-							<strong>Descripción:</strong> {{ $application->evaluation->name }}
+							<strong>Descripción:</strong> {{ $application->evaluation->description }}
 						</div>
 						<div class="col-lg-12">
 							<strong>Tipo de evaluación:</strong>  {{ $application->evaluation->evaluation_type->name }} <i>{{ $application->evaluation->evaluation_type->description }}</i>

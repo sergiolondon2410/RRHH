@@ -114,6 +114,6 @@ class CompromiseController extends Controller
 
 		$request->session()->flash('success', 'Compromiso asignado exitosamente');
 		
-		return view('admin.compromises.show');
+		return redirect()->action('CompromiseController@index');
 	}
 }

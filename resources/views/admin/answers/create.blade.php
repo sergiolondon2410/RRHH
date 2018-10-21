@@ -13,7 +13,6 @@
 			</ul>
 		</div>
 	@endif
-
 	<div class="row">
 		<div class="col-sm-10">	
 			<div class="panel panel-default">

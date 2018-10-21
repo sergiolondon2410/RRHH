@@ -34,7 +34,8 @@ class AnswerController extends Controller
                 $application->status = 'started';
                 $application->save();
             }
-
+            
+            
             $question = Question::find($questions_array[$contador]);
             $measures = $question->scale->measures->sortBy('numeric_value')->pluck('qualification','id');
             $total = count($questions_array);
@@ -55,13 +56,16 @@ class AnswerController extends Controller
         );
 
         $actual = Answer::where('application_id', $application->id)->where('question_id', $question->id)->get();
-        if($actual == null){
+        if($actual->count() == 0){
             $answer = Answer::create([
                 'measure_id' => $data['measure']['0'],
-            	'application_id' => $application->id,
+                'application_id' => $application->id,
                 'question_id' => $question->id
             ]);
         }
+
+        $questions_array = $application->evaluation->questions->sortBy('competence_id')->pluck('id');
+
         $contador++;
         return redirect()->action('AnswerController@create', compact('application', 'contador'));
     }

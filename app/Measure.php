@@ -14,4 +14,9 @@ class Measure extends Model
     {
         return $this->belongsTo(Scale::class);
     }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
 }

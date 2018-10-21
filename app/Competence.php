@@ -15,4 +15,8 @@ class Competence extends Model
         return $this->belongsTo(CompetenceType::class);
     }
 
+    public function questions()
+    {
+    	return $this->hasMany(Question::class);
+    }
 }
