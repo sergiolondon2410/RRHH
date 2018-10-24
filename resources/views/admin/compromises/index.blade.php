@@ -17,7 +17,8 @@
 								<tr>
 									<th>Usuario</th>
 									<th>Validador</th>
-									<th>Compromiso</th>
+									<th>Aspecto</th>
+									<th>Acciones</th>
 									<th>Empresa</th>
 									<th>Plazo</th>
 								</tr>
@@ -31,6 +32,7 @@
 										<td>
 											{{ $compromise->validator->name }} {{ $compromise->validator->last_name }}
 										</td>
+										<td>{{ $compromise->observation }}</td>
 										<td>{{ $compromise->activity }}</td>
 										<td>{{ $compromise->user->organization->name }}</td>
 										<td>

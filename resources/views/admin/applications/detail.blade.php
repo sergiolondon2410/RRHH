@@ -72,7 +72,7 @@
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
-						<div id="bar-chart" ></div>
+						<div id="chart_div"></div>
 					</div>
 					<!-- /.panel-body -->
 				</div>
@@ -80,38 +80,47 @@
 			</div>
 		@endif
 		<div class="col-lg-12">
-			<a class="btn btn-default" href="{{ route('applications.filter') }}"> <i class="fa fa-times"></i> Volver</a>
+			<a class="btn btn-default" href="{{ route('applications.report', ['evaluation' => $application->evaluation]) }}"> <i class="fa fa-angle-double-left"></i> Volver</a>
 		</div>
 	</div>
-
+	<hr>
 @endsection
 
 @section('scripts')
 
 	<script>
 
-	jQuery(function(){
-		var data = [
-			@foreach($average as $item)
-				{ competence: '{{ $item["competence"]}}', average: '{{ $item["average"]}}' },
-			@endforeach
-		],
-		config = {
-			data: data,
-			xkey: 'competence',
-			ykeys: ['average'],
-			labels: ['Porcentaje', 'Competencia'],
-			fillOpacity: 0.6,
-			hideHover: 'auto',
-			behaveLikeLine: true,
-			resize: true,
-			pointFillColors:['#ffffff'],
-			pointStrokeColors: ['black'],
-			lineColors:['gray','red']
-		};
-		config.element = 'bar-chart';
-		Morris.Bar(config);
-	});
+		google.charts.load('current', {'packages':['bar']});
+		google.charts.setOnLoadCallback(drawStuff);
+
+		function drawStuff() {
+			var data = new google.visualization.arrayToDataTable([
+				['Competencia', 'Porcentaje'],
+				@foreach($average as $item)
+					["{{ $item["competence"]}}", {{ $item["average"]}} ],
+				@endforeach
+			]);
+
+			var options = {
+				legend: { position: 'none' },
+				axes: {
+					x: {
+						0: { side: 'bottom', label: 'Competencias'}
+					}
+				},
+				vAxis: {
+					format: '#,##%',
+					gridlines: {
+						count: 10,
+					},
+				},
+				height: 400,
+				bar: { groupWidth: "50%" }
+			};
+
+			var chart = new google.charts.Bar(document.getElementById('chart_div'));
+			chart.draw(data, google.charts.Bar.convertOptions(options));
+      };
 	</script>
 
 @endsection

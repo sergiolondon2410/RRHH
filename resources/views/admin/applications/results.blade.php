@@ -12,23 +12,70 @@
 				</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
+					<h3>Resultados por competencias</h3>
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 						<thead>
 							<tr>
-								<th>Evaluado</th>
-								<th>Estado</th>
+								<th></th>
+								<th></th>
 								@foreach ($competences as $competence)
-									<th>{{ $competence->name }}</th>
+									<th colspan="3">{{ $competence->name }}</th>
+								@endforeach
+							</tr>
+							<tr>
+								<th>Evaluado</th>
+								<th>Cargo</th>
+								@foreach ($competences as $competence)
+									<th>Auto</th>
+									<th>Hetero</th>
+									<th>Total</th>
 								@endforeach
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($users as $user)
+							@foreach ($users_competences as $user)
 									<tr class="odd gradeX">
-										<td>{{ $user->name }} {{ $user->last_name }}</td>
-										<td>{{ $user->position }}</td>
-										@foreach ($user->competencias as $competence)
-											<td>{{ $competence->name }}</td>
+										<td><a href="{{ route('applications.usercomputation', ['user' => $user['user_id'], 'evaluation' => $evaluation]) }}"><i class="fa fa-search-plus"></i></a> {{ $user['user_fullname'] }}</td>
+										<td>{{ $user['user_position'] }}</td>
+										@foreach ($competences as $competence)
+											<td>{{ $user['competences_avg'][$competence->id]['auto']*100 }}%</td>
+											<td>{{ $user['competences_avg'][$competence->id]['hetero']*100 }}%</td>
+											<td>{{ $user['competences_avg'][$competence->id]['total']*100 }}%</td>
+										@endforeach
+									</tr>
+							@endforeach
+						</tbody>
+					</table>
+					<hr>
+					<h3>Resultados por indicadores de productividad</h3>
+					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
+						<thead>
+							<tr>
+								<th></th>
+								<th></th>
+								@foreach ($indicators as $indicator)
+									<th colspan="3">{{ $indicator->name }}</th>
+								@endforeach
+							</tr>
+							<tr>
+								<th>Evaluado</th>
+								<th>Cargo</th>
+								@foreach ($indicators as $indicator)
+									<th>Auto</th>
+									<th>Hetero</th>
+									<th>Total</th>
+								@endforeach
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($users_indicators as $user)
+									<tr class="odd gradeX">
+										<td><a href="{{ route('applications.usercomputation', ['user' => $user['user_id'], 'evaluation' => $evaluation]) }}"><i class="fa fa-search-plus"></i></a> {{ $user['user_fullname'] }}</td>
+										<td>{{ $user['user_position'] }}</td>
+										@foreach ($indicators as $indicator)
+											<td>{{ $user['competences_avg'][$indicator->id]['auto']*100 }}%</td>
+											<td>{{ $user['competences_avg'][$indicator->id]['hetero']*100 }}%</td>
+											<td>{{ $user['competences_avg'][$indicator->id]['total']*100 }}%</td>
 										@endforeach
 									</tr>
 							@endforeach
@@ -39,39 +86,39 @@
 			</div>
 			<!-- /.panel -->
 		</div>
-		<!-- /.col-lg-18 -->
 		<div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Gráficas
-				</div>
-				<!-- /.panel-heading -->
-				<div class="panel-body">
-					<div id="pie-chart" ></div>
-				</div>
-				<!-- /.panel-body -->
-			</div>
-			<!-- /.panel -->
-		</div>
-		<div class="col-lg-12">
-			<a class="btn btn-default" href=""> <i class="fa fa-angle-double-left"></i> Volver a la buscar</a>
+			<a class="btn btn-default" href="{{ route('applications.report', ['evaluation' => $evaluation]) }}"> <i class="fa fa-angle-double-left"></i> Volver</a>
 		</div>
 	</div>
-
+	<hr>
+	
 @endsection
 
 @section('scripts')
-	
+	<script>
+		$(document).ready(function() {
+			$('#dataTables').DataTable({
+				responsive: true,
+				language:{
+					"sSearch":         "Buscar:",
+					"sProcessing":     "Procesando...",
+					"sLengthMenu":     "Mostrar _MENU_ registros",
+					"sZeroRecords":    "No se encontraron resultados",
+					"sEmptyTable":     "Ningún dato disponible en esta tabla",
+					"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+					"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+					"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+					"oPaginate": {
+						"sFirst":    "Primero",
+						"sLast":     "Último",
+						"sNext":     "Siguiente",
+						"sPrevious": "Anterior"
+					}
+				}
+			});
+		});
+    </script>	
 <script>
-jQuery(function(){
-	Morris.Donut({
-		element: 'pie-chart',
-		data: [
-			{label: "Finalizadas", value: '25'},
-			{label: "Sin finalizar", value: '25' },
-			{label: "Sin responder", value: '50' }
-		]
-	});
-});
+
 </script> 
 @endsection

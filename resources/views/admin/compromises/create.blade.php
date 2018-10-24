@@ -15,24 +15,30 @@
 		</div>
 	@endif
 
-	{!! Form::open(['url' => route('compromises.store', ['user' => $user, 'validator' => $validator]), 'method' => 'POST'])  !!}
+	{!! Form::open(['url' => route('compromises.store', ['user' => $user, 'evaluation' => $evaluation]), 'method' => 'POST'])  !!}
 		<div class="row">
 			<div class="col-lg-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Información de la evaluación
+						Asignar compromiso a {{ $user->name }} {{ $user->last_name }}
 					</div>
 					<div class="panel-body">
 						<div class="row">
-							<div class="col-lg-6">
-								<h5><span class="label label-default">Usuario</span> {{ $user->name }} {{ $user->last_name }}</h5>
-							</div>
-							<div class="col-lg-6">
-								<h5><span class="label label-default">Validador</span> {{ $validator->name }} {{ $validator->last_name }}</h5>
+							<div class="col-lg-12">
+								<div class="form-group">
+									{!! Form::label('validator', '*Validador') !!}
+									{!! Form::select('validator', $validators, null, ['class' => 'form-control']) !!}
+								</div>
 							</div>
 							<div class="col-lg-12">
 								<div class="form-group">
-									{!! Form::label('activity', 'Compromiso:') !!}
+									{!! Form::label('observation', 'Aspecto a mejorar:') !!}
+									{!! Form::text('observation', null, ['class' => 'form-control', 'value' => old('observation')]) !!}
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									{!! Form::label('activity', 'Acciones:') !!}
 									{!! Form::textarea('activity', null, ['class' => 'form-control', 'rows' => 4, 'value' => old('activity')]) !!}
 								</div>
 							</div>
@@ -43,12 +49,6 @@
 								<div class="form-group input-group">
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 									<input type="text" class="form-control datepicker" name="date">
-								</div>
-							</div>
-							<div class="col-lg-12">
-								<div class="form-group">
-									{!! Form::label('observation', 'Observación:') !!}
-									{!! Form::textarea('observation', null, ['class' => 'form-control', 'rows' => 4, 'value' => old('observation')]) !!}
 								</div>
 							</div>
 							<div class="col-lg-12">
@@ -68,7 +68,8 @@
 		</div>
 	{!! Form::close() !!}
 
-	<p><a class="btn btn-default" href="{{ route('compromises.organization') }}"> <i class="fa fa-times"></i> Cancelar</a></p>
+	<p><a class="btn btn-default" href="{{ route('applications.usercomputation', ['user' => $user, 'evaluation' => $evaluation]) }}"> <i class="fa fa-times"></i> Cancelar</a></p>
+	<hr>
 
 @endsection
 

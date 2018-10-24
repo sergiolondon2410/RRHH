@@ -59,7 +59,7 @@
                                 </li>
                                 @if(Auth::user()->user_type_id < 3)
                                     <li>
-                                        <a href="{{ route('compromises.organization') }}">Asignar compromiso</a>
+                                        <a href="#">Asignar compromiso</a>
                                     </li>
                                 @endif
                             </ul>

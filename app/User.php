@@ -45,7 +45,7 @@ class User extends Authenticatable
         return $this->belongsTo(Organization::class);
     }
 
-    public function fullname()
+    public function getFullNameAttribute()
     {
         return $this->name.' '.$this->last_name;
     }

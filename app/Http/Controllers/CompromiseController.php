@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Organization;
 use App\Compromise;
 use App\CompromiseAlert;
+use App\Evaluation;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -22,8 +23,6 @@ class CompromiseController extends Controller
 
 	public function show(Compromise $compromise)
 	{
-		// $compromise = Compromise::find($compromise);
-		// dd($compromise);
 		return view('admin.compromises.show', compact('compromise', 'title'));
 	}
 
@@ -51,26 +50,25 @@ class CompromiseController extends Controller
 	public function validator(Request $request)
 	{
 		$user = User::find($request->user[0]);
-		$validators = User::where('organization_id', $user->organization_id)->get()->except(['id', $user->id]);;
+		$validators = User::where('organization_id', $user->organization_id)->get()->except(['id', $user->id])->pluck('name', 'id');
 		$title = 'Asignar compromisos: Elegir usuario validador';
 		return view('admin.compromises.validator', compact('user', 'validators', 'title'));
 	}
 
-	public function create(Request $request, User $user)
+	public function create(Request $request, User $user, Evaluation $evaluation)
 	{
-		$validator = User::find($request->validator[0]);
+		$validators = User::where('organization_id', $user->organization_id)->get()->except(['id', $user->id])->pluck('full_name', 'id');
 		$alarm = ["Ninguna alarma", "Un día antes", "Dos días antes", "Tres días antes", "Una semana antes"];
-		return view('admin.compromises.create', compact('user', 'validator', 'alarm'));
+		return view('admin.compromises.create', compact('user', 'validators', 'alarm', 'evaluation'));
 	}
 
-	public function store(Request $request, User $user, User $validator)
+	public function store(Request $request, User $user, Evaluation $evaluation)
 	{
 		// $today = Carbon::now()->format('d/m/Y');
 		$alarm = ["Ninguna alarma", "Un día antes", "Dos días antes", "Tres días antes", "Una semana antes"];
-
 		$compromise = New Compromise([
 			'user_id' => $user->id,
-			'validator_id' => $validator->id
+			'validator_id' => $request['validator']
 		]);
 
 		if(is_null($request['activity'])){
@@ -114,6 +112,7 @@ class CompromiseController extends Controller
 
 		$request->session()->flash('success', 'Compromiso asignado exitosamente');
 		
-		return redirect()->action('CompromiseController@index');
+		// return redirect()->action('CompromiseController@index');
+		return redirect()->action('ApplicationController@userComputation', ['user' => $user, 'evaluation' => $evaluation]);
 	}
 }

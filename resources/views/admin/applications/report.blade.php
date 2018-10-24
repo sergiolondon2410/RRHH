@@ -52,38 +52,43 @@
 		<div class="col-lg-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Gráficas
+					Progreso de la evaluación
 				</div>
-				<!-- /.panel-heading -->
 				<div class="panel-body">
-					<div id="pie-chart" ></div>
+					<div id="donutchart" style="width: 300px; height: 300px;"></div>
 				</div>
-				<!-- /.panel-body -->
 			</div>
 			<!-- /.panel -->
+
 		</div>
 		<div class="col-lg-12">
-			<a class="btn btn-default" href="{{ route('applications.filter') }}"> <i class="fa fa-angle-double-left"></i> Volver a la buscar</a>
+			<a class="btn btn-default" href="{{ route('applications.filter') }}"> <i class="fa fa-angle-double-left"></i> Volver a buscar</a>
 		</div>
 	</div>
-
+	<hr>
 @endsection
 
 @section('scripts')
 
-	<script>
-	jQuery(function(){
-		var data = [
-				{label: "Finalizadas", value: {{ $completed }} },
-				{label: "Sin finalizar", value: {{ $started }} },
-				{label: "Sin responder", value: {{ $uninitialized }} }
-		];
-		Morris.Donut({
-			element: 'pie-chart',
-			data : data,
-			lineColors:['gray','red']
-		});
-	});
+	<script type="text/javascript">
+		google.charts.load("current", {packages:["corechart"]});
+		google.charts.setOnLoadCallback(drawChart);
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+				['Evaluaciones', 'Porcentaje'],
+				['Finalizadas', {{ $completed }}],
+				['Sin finalizar', {{ $started }}],
+				['Sin responder', {{ $uninitialized }}]
+			]);
+
+			var options = {
+				pieHole: 0.4,
+				legend: 'none'
+			};
+
+			var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+			chart.draw(data, options);
+		}
 	</script>
 
 @endsection
