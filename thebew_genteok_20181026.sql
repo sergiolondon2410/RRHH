@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2018 a las 13:47:33
+-- Tiempo de generación: 26-10-2018 a las 06:08:04
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -81,7 +81,23 @@ INSERT INTO `answers` (`id`, `measure_id`, `created_at`, `updated_at`, `applicat
 (10, 3, '2018-09-28 23:30:55', '2018-09-28 23:30:55', 2, NULL, 7),
 (11, 3, '2018-09-28 23:31:13', '2018-09-28 23:31:13', 2, NULL, 8),
 (12, 3, '2018-10-02 01:35:10', '2018-10-02 01:35:10', 11, NULL, 1),
-(13, 4, '2018-10-02 01:38:42', '2018-10-02 01:38:42', 11, NULL, 2);
+(13, 4, '2018-10-02 01:38:42', '2018-10-02 01:38:42', 11, NULL, 2),
+(14, 1, '2018-10-16 22:43:28', '2018-10-16 22:43:28', 1, NULL, 1),
+(15, 3, '2018-10-16 22:48:04', '2018-10-16 22:48:04', 1, NULL, 2),
+(16, 2, '2018-10-16 23:24:03', '2018-10-16 23:24:03', 1, NULL, 5),
+(17, 1, '2018-10-16 23:31:31', '2018-10-16 23:31:31', 1, NULL, 3),
+(18, 2, '2018-10-17 00:44:20', '2018-10-17 00:44:20', 1, NULL, 4),
+(19, 1, '2018-10-17 00:44:35', '2018-10-17 00:44:35', 1, NULL, 6),
+(20, 3, '2018-10-17 00:44:40', '2018-10-17 00:44:40', 1, NULL, 7),
+(21, 2, '2018-10-17 00:44:44', '2018-10-17 00:44:44', 1, NULL, 8),
+(22, 1, '2018-10-19 01:31:53', '2018-10-19 01:31:53', 15, NULL, 1),
+(23, 2, '2018-10-19 01:31:57', '2018-10-19 01:31:57', 15, NULL, 2),
+(24, 3, '2018-10-19 01:32:01', '2018-10-19 01:32:01', 15, NULL, 5),
+(25, 4, '2018-10-19 01:32:05', '2018-10-19 01:32:05', 15, NULL, 3),
+(26, 3, '2018-10-19 01:32:11', '2018-10-19 01:32:11', 15, NULL, 4),
+(27, 2, '2018-10-19 01:32:15', '2018-10-19 01:32:15', 15, NULL, 6),
+(28, 1, '2018-10-19 01:32:18', '2018-10-19 01:32:18', 15, NULL, 7),
+(29, 2, '2018-10-19 01:32:21', '2018-10-19 01:32:21', 15, NULL, 8);
 
 -- --------------------------------------------------------
 
@@ -138,7 +154,7 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`id`, `evaluator_id`, `status`, `deleted_at`, `created_at`, `updated_at`, `user_id`, `evaluation_id`) VALUES
-(1, 10, 'uninitialized', NULL, '2018-08-29 03:00:00', '2018-08-29 03:00:00', 10, 1),
+(1, 10, 'completed', NULL, '2018-08-29 03:00:00', '2018-10-17 00:44:44', 10, 1),
 (2, 8, 'completed', NULL, '2018-08-29 03:00:00', '2018-09-28 23:31:13', 10, 1),
 (3, 9, 'uninitialized', NULL, '2018-09-21 01:30:44', '2018-09-21 01:30:44', 10, 1),
 (4, 12, 'uninitialized', NULL, '2018-09-21 01:48:51', '2018-09-21 01:48:51', 13, 1),
@@ -151,7 +167,9 @@ INSERT INTO `applications` (`id`, `evaluator_id`, `status`, `deleted_at`, `creat
 (11, 13, 'started', NULL, '2018-10-02 00:18:58', '2018-10-02 00:20:45', 10, 1),
 (12, 13, 'started', NULL, '2018-10-02 00:19:10', '2018-10-02 01:54:44', 8, 1),
 (13, 13, 'uninitialized', NULL, '2018-10-02 00:19:41', '2018-10-02 00:19:41', 14, 1),
-(14, 13, 'uninitialized', NULL, '2018-10-02 00:19:50', '2018-10-02 00:19:50', 12, 1);
+(14, 13, 'uninitialized', NULL, '2018-10-02 00:19:50', '2018-10-02 00:19:50', 12, 1),
+(15, 10, 'completed', NULL, '2018-10-19 01:30:36', '2018-10-19 01:32:22', 8, 1),
+(16, 10, 'uninitialized', NULL, '2018-10-19 01:31:01', '2018-10-19 01:31:01', 13, 1);
 
 -- --------------------------------------------------------
 
@@ -334,7 +352,7 @@ INSERT INTO `competences` (`id`, `name`, `description`, `created_at`, `updated_a
 (4, 'Competencia 1', 'Texto de prueba 1', '2018-06-19 09:59:01', '2018-06-19 09:59:01', '#cb53ef', 1),
 (5, 'Competencia 2', 'Texto 2', '2018-06-19 10:03:37', '2018-06-19 10:03:37', '#f78a36', 1),
 (6, 'Indicador 1', 'Texto indicador 1', '2018-06-19 11:03:47', '2018-06-19 11:03:47', '#0fdb75', 2),
-(7, 'Trabajo en equipo', 'hjvdjhdvhjcsdcvsdsc', '2018-06-19 21:35:17', '2018-06-19 21:35:17', '#3bb8f7', 1),
+(7, 'Trabajo en equipo', 'hjvdjhdvhjcsdcvsdsc', '2018-06-19 21:35:17', '2018-06-19 21:35:17', '#3bb8f7', 2),
 (8, 'Competencia', 'descripción', '2018-08-31 06:36:31', '2018-09-04 16:52:20', '#3bb8f7', 2),
 (9, 'Sensibilidad interpersonal y vocación del servicio', 'Es el sentimiento compartido de orgullo de hacer parte de la compañía, que va acompañado de la responsabilidad y compromiso', '2018-09-21 20:48:49', '2018-09-21 20:48:49', '#f44242', 1),
 (10, 'Credibilidad', 'Los miembros de la familia Inser, se encuentran comprometidos con generar credibilidad y confianza en la gestión e información que se deriva de su labor, por eso se esfuerzan cada día...', '2018-09-21 20:50:24', '2018-09-21 20:50:24', '#3bb8f7', 1),
@@ -389,7 +407,14 @@ INSERT INTO `compromises` (`id`, `user_id`, `validator_id`, `activity`, `observa
 (2, 8, 9, 'Leer el manual del empleado', '', '2018-11-02 09:06:36', 'pending', NULL, '2018-10-16 09:06:36', '2018-10-16 09:06:36'),
 (3, 12, 10, 'Realizar el curso virtual de excel', 'Obtener el certificado entregado por la academia virtual', '2018-11-30 09:11:30', 'pending', NULL, '2018-10-16 09:11:30', '2018-10-16 09:11:30'),
 (4, 8, 12, 'Enviar los reportes de final de día', 'Realizar esta acción todos los días de este mes', '2018-10-28 09:13:27', 'pending', NULL, '2018-10-16 09:13:27', '2018-10-16 09:13:27'),
-(5, 1, 4, 'rgtgegr', 'bbfunyfhgdv', '2018-10-20 09:19:12', 'pending', NULL, '2018-10-16 09:19:12', '2018-10-16 09:19:12');
+(5, 1, 4, 'rgtgegr', 'bbfunyfhgdv', '2018-10-20 09:19:12', 'pending', NULL, '2018-10-16 09:19:12', '2018-10-16 09:19:12'),
+(6, 1, 4, 'fgsdgdsfgdg', 'fgdfgdbfgv', '2018-10-26 11:51:01', 'pending', NULL, '2018-10-16 11:51:01', '2018-10-16 11:51:01'),
+(7, 8, 12, 'xbcxcv', '', '2018-12-15 11:52:16', 'pending', NULL, '2018-10-16 11:52:16', '2018-10-16 11:52:16'),
+(8, 11, 1, 'dsfdsfdfdf', 'sdfsdfssd', '2018-10-25 11:53:47', 'pending', NULL, '2018-10-16 11:53:47', '2018-10-16 11:53:47'),
+(10, 10, 8, 'Leerksjvgdgjhdc', 'Trabajo en equipo', '2018-11-03 17:46:02', 'pending', NULL, '2018-10-22 17:46:02', '2018-10-22 17:46:02'),
+(11, 10, 12, 'Actividades', 'Trabajo en equipo', '2018-11-04 02:21:20', 'pending', NULL, '2018-10-24 02:21:20', '2018-10-24 02:21:20'),
+(12, 10, 9, 'Llegar temprano', 'Asistencia y Puntualidad', '2018-12-10 02:23:23', 'pending', NULL, '2018-10-24 02:23:23', '2018-10-24 02:23:23'),
+(13, 10, 8, 'Usar correctamente el uniforme', 'Cumplimiento de Normas disciplinarias y de seguridad', '2018-11-05 02:25:42', 'pending', NULL, '2018-10-24 02:25:42', '2018-10-24 02:25:42');
 
 -- --------------------------------------------------------
 
@@ -414,7 +439,11 @@ CREATE TABLE `compromise_alerts` (
 INSERT INTO `compromise_alerts` (`id`, `compromise_id`, `date`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 2, '2018-10-20 09:06:36', 'pending', NULL, '2018-10-16 09:06:36', '2018-10-16 09:06:36'),
 (2, 3, '2018-11-24 09:11:30', 'pending', NULL, '2018-10-16 09:11:30', '2018-10-16 09:11:30'),
-(3, 5, '2018-10-19 09:19:12', 'pending', NULL, '2018-10-16 09:19:12', '2018-10-16 09:19:12');
+(3, 5, '2018-10-19 09:19:12', 'pending', NULL, '2018-10-16 09:19:12', '2018-10-16 09:19:12'),
+(4, 6, '2018-10-13 11:51:01', 'pending', NULL, '2018-10-16 11:51:01', '2018-10-16 11:51:01'),
+(6, 10, '2018-10-31 17:46:03', 'pending', NULL, '2018-10-22 17:46:03', '2018-10-22 17:46:03'),
+(7, 11, '2018-11-03 02:21:20', 'pending', NULL, '2018-10-24 02:21:20', '2018-10-24 02:21:20'),
+(8, 13, '2018-10-30 02:25:42', 'pending', NULL, '2018-10-24 02:25:42', '2018-10-24 02:25:42');
 
 -- --------------------------------------------------------
 
@@ -632,7 +661,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (44, '2018_09_20_202236_add_evaluation_id_column_to_applications_table', 29),
 (45, '2018_09_21_152934_add_question_column_to_answers_table', 30),
 (46, '2018_10_14_154637_create_compromises_table', 31),
-(47, '2018_10_14_160436_create_compromise_alerts_table', 32);
+(47, '2018_10_14_160436_create_compromise_alerts_table', 32),
+(48, '2018_10_25_140758_create_recognition_resources_table', 33),
+(49, '2018_10_25_141231_create_recognitions_table', 34);
 
 -- --------------------------------------------------------
 
@@ -724,9 +755,89 @@ INSERT INTO `questions` (`id`, `text`, `competence_id`, `created_at`, `updated_a
 (6, 'Demuestra en su gestualidad y comportamiento cotidiano, una disposición optimista y empática, empleando expresiones que favorecen la sana interacción con los demás', 7, '2018-06-19 21:40:15', '2018-06-19 21:40:15', 1, 1),
 (7, 'Consolida relaciones empáticas con los miembros de la organización, favoreciendo un buen clima de trabajo', 7, '2018-06-19 21:40:32', '2018-06-19 21:40:32', 1, 1),
 (8, 'Gestiona con agilidad las solicitudes de los demás compañeros, favoreciendo la satisfacción de las demandas de los clientes internos y externos', 7, '2018-06-19 21:42:59', '2018-06-19 21:42:59', 1, 1),
-(9, 'Mire para arriba y luego para abajo', 5, '2018-09-03 02:33:15', '2018-09-03 04:48:03', 3, 2),
+(9, 'Mire para arriba y luego para abajo', 7, '2018-09-03 02:33:15', '2018-09-03 04:48:03', 3, 2),
 (10, 'Fgdfgsfgdfgdfgdfgd', 1, '2018-09-04 16:54:43', '2018-09-04 16:54:43', 2, 1),
 (11, 'Pregunta método', 4, '2018-09-12 02:11:31', '2018-09-12 02:11:31', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recognitions`
+--
+
+CREATE TABLE `recognitions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `observation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `resource_id` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `grantter_id` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `recognitions`
+--
+
+INSERT INTO `recognitions` (`id`, `name`, `observation`, `resource_id`, `user_id`, `grantter_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'Puntualidad', 'Llega temprano', 17, 10, 8, NULL, '2018-10-26 01:54:22', '2018-10-26 01:54:22');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recognition_resources`
+--
+
+CREATE TABLE `recognition_resources` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uri` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `recognition_resources`
+--
+
+INSERT INTO `recognition_resources` (`id`, `name`, `uri`, `created_at`, `updated_at`) VALUES
+(1, 'Escudo estrella', '/badges/002-shield.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(2, 'Listón estrella', '/badges/003-star.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(3, 'Escudo uno', '/badges/004-one.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(4, 'Copa estrella', '/badges/005-trophy.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(5, 'Copa mundial', '/badges/006-soccer.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(6, 'Premio uno', '/badges/007-award.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(7, 'Premio estrellas', '/badges/008-award-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(8, 'Estatuilla estrella dorada', '/badges/009-award-2.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(9, 'Premio estrella', '/badges/010-award-3.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(10, 'Estatuilla alas', '/badges/011-award-4.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(11, 'Premio diamante', '/badges/012-diamond.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(12, 'Estatuilla estrella plateada', '/badges/013-star-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(13, 'Estatuilla academia', '/badges/014-oscar.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(14, 'Estatuilla uno', '/badges/015-trophy-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(15, 'Cinturón estrella', '/badges/016-champion-belt.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(16, 'Trofeo estrella', '/badges/017-trophy-2.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(17, 'Trofeo cohete', '/badges/018-award-5.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(18, 'Copa Sonrisa', '/badges/019-champion.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(19, 'Trofeo globo', '/badges/020-golden-globe.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(20, 'Trofeo rubí', '/badges/021-trophy-3.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(21, 'Medalla militar estrella roja', '/badges/022-medal-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(22, 'Emblema estrella', '/badges/023-badge.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(23, 'Listón uno', '/badges/024-one-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(24, 'Botón OK', '/badges/025-best.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(25, 'Listón uno rojo', '/badges/026-one-2.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(26, 'Escudo tres estrellas', '/badges/027-medal-2.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(27, 'Medalla militar estrella verde', '/badges/028-medal-3.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(28, 'Medalla militar circulo gris', '/badges/029-medal-4.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(29, 'Medalla militar circulo check', '/badges/030-medal-5.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(30, 'Medalla militar circulo estrella', '/badges/031-medal-6.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(31, 'Estrella uno', '/badges/032-star-2.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(32, 'Medalla militar cruz', '/badges/033-badge-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(33, 'Listón', '/badges/034-ribbon.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(34, 'Trofeo corazón', '/badges/035-reward.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
+(35, 'Listón tierra', '/badges/036-reward-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00');
 
 -- --------------------------------------------------------
 
@@ -801,20 +912,20 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `user_type_id`, `organization_id`, `document`, `position`, `area`, `date_in`, `remember_token`, `created_at`, `updated_at`, `deleted_at`, `profile_img`, `boss_id`, `level`) VALUES
 (1, 'Sergio', 'Londoño', 'sergio@mail.com', '123', 2, 1, '1128444449', 'ingeniero', 'tecno', '2017-06-19 05:00:00', NULL, '2018-04-17 05:00:00', '2018-08-22 00:38:26', NULL, 'perfil-1_1534887506.png', 1, 1),
-(2, 'Juan', 'Pérez', 'jp@mail.com', '123', 5, 2, '12634563464', 'Operario', NULL, NULL, NULL, NULL, '2018-08-23 05:15:51', '2018-08-23 05:15:51', 'profile_image.png', 1, 0),
-(3, 'Pepe', 'Mora', 'pepe@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 5, 2, '1234567', 'Asistente operativo', NULL, '2016-03-15 05:00:00', 'g4V5sVf3nEVD7nQTLWEM0B0o6N3VfRuRQPcofnVy3mXaMu6YhTIljanwdDKz', '2018-04-19 10:48:08', '2018-08-22 23:14:08', '2018-08-22 23:14:08', 'profile_image.png', 1, 0),
-(4, 'SuperAdministrador', 'Gente', 'admin@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 1, 1, '9876382', 'Auxiliar contable', NULL, NULL, 'kbX4KEjobdtZZA2rdsRzJb31B2DUmdBRjsIWWo2sMxPUG77m5pEfm4rfOuMZ', '2018-04-19 22:41:42', '2018-04-19 22:41:42', NULL, 'profile_image.png', 1, 0),
-(5, 'Rosa', 'Gómez', 'rosa@mail.com', '$2y$10$B5BoRHsrJsjTvwCAdV2L6.4SiexqWiy8va4MnwfVm5iqXjcobgjM.', 5, 2, '1256784', 'Jefe de área', NULL, NULL, NULL, '2018-04-20 03:53:56', '2018-08-23 05:45:54', '2018-08-23 05:45:54', 'profile_image.png', 1, 0),
-(6, 'Maria', 'Pino', 'maria@mail.com', '$2y$10$0nZiuXGNT1VyO4mud2JY3es7L6.AY6Ix3vUWbeCRBcrzymgLyPndy', 5, 2, '125678422', 'Cajero', NULL, NULL, NULL, '2018-04-20 04:02:40', '2018-08-22 23:12:04', '2018-08-22 23:12:04', 'profile_image.png', 1, 0),
-(7, 'Brito', 'Ventura', 'brito@mail.com', '$2y$10$Ff9LGKW8btZeRfQfwSqg2OdMqA.q/FvFALgAWX/NYLzB4cb7cI3H6', 5, 2, '8766251', 'Gerente de sucursal', NULL, NULL, NULL, '2018-04-20 04:04:16', '2018-08-22 23:05:34', '2018-08-22 23:05:34', 'profile_image.png', 1, 0),
+(2, 'Juan', 'Pérez', 'jp@mail.com', '123', 5, 2, '12634563464', 'Operario', 'Operativa', NULL, NULL, NULL, '2018-08-23 05:15:51', '2018-08-23 05:15:51', 'profile_image.png', 1, 0),
+(3, 'Pepe', 'Mora', 'pepe@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 5, 2, '1234567', 'Asistente operativo', 'Operativa', '2016-03-15 05:00:00', 'g4V5sVf3nEVD7nQTLWEM0B0o6N3VfRuRQPcofnVy3mXaMu6YhTIljanwdDKz', '2018-04-19 10:48:08', '2018-08-22 23:14:08', '2018-08-22 23:14:08', 'profile_image.png', 1, 0),
+(4, 'SuperAdministrador', 'Gente', 'admin@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 1, 1, '9876382', 'Auxiliar contable', 'Operativa', NULL, 'aHg0Hn5dzBb2Q9ZMeeSefdnSeQc86YX8EVwh03QWChKpW4zz3TCjqDCx26PK', '2018-04-19 22:41:42', '2018-04-19 22:41:42', NULL, 'profile_image.png', 1, 0),
+(5, 'Rosa', 'Gómez', 'rosa@mail.com', '$2y$10$B5BoRHsrJsjTvwCAdV2L6.4SiexqWiy8va4MnwfVm5iqXjcobgjM.', 5, 2, '1256784', 'Jefe de área', 'Operativa', NULL, NULL, '2018-04-20 03:53:56', '2018-08-23 05:45:54', '2018-08-23 05:45:54', 'profile_image.png', 1, 0),
+(6, 'Maria', 'Pino', 'maria@mail.com', '$2y$10$0nZiuXGNT1VyO4mud2JY3es7L6.AY6Ix3vUWbeCRBcrzymgLyPndy', 5, 2, '125678422', 'Cajero', 'Operativa', NULL, NULL, '2018-04-20 04:02:40', '2018-08-22 23:12:04', '2018-08-22 23:12:04', 'profile_image.png', 1, 0),
+(7, 'Brito', 'Ventura', 'brito@mail.com', '$2y$10$Ff9LGKW8btZeRfQfwSqg2OdMqA.q/FvFALgAWX/NYLzB4cb7cI3H6', 5, 2, '8766251', 'Gerente de sucursal', 'Operativa', NULL, NULL, '2018-04-20 04:04:16', '2018-08-22 23:05:34', '2018-08-22 23:05:34', 'profile_image.png', 1, 0),
 (8, 'Diana', 'Herrera', 'diana@mail.com', '$2y$10$WmtXDGj/VR9M/EQrquKgJuqIu1C2BPcY48jBWEXtmZU4mBg1T2NuS', 5, 2, '123456667', 'Gerente', 'Administrativa', NULL, 'X3pt21xSXDuoX7iNTYVJL7jP2E1leBKdtENsFj09ss8NxpCb53Z4h7w4j7W5', '2018-04-20 19:30:43', '2018-09-24 05:52:30', NULL, 'perfil-8_1537757510.png', 1, 0),
-(9, 'Halle', 'Berry', 'halle.b@mail.com', '$2y$10$OEhz2hV9IN9U8qpNzMaIG.3eTRC.VPRmx4C.74iwJVmDtwmw1L4e2', 5, 2, '1037777722', NULL, NULL, NULL, NULL, '2018-07-24 05:08:25', '2018-08-22 00:37:50', NULL, 'perfil-9_1534887470.png', 1, 0),
-(10, 'Brad', 'Peters', 'brad@mail.com', '$2y$10$F78jzaSZMhJWH/JBzJZXSOF/2SpagfmIXl9bZehs/q.UURm3BnfBW', 5, 2, '70223122', 'Empleado', 'Operativa', NULL, 'SwFE3NE3ElB8Soq1diWCk9BF7iFbdVLpi3rX1C6uL3bKjshZHCNkDfkqk9Xd', '2018-07-24 05:12:28', '2018-09-24 19:24:00', NULL, 'perfil-10.png', 1, 0),
-(11, 'Administrador', 'Prueba', 'administrador-prueba@mail.com', '$2y$10$SlNWsiexFyUop740J/rSje3U9kSjx0yQM/iUnClh.Cd5QSGQrAd3C', 2, 1, '112233', NULL, NULL, NULL, NULL, '2018-08-10 07:42:06', '2018-08-10 07:42:06', NULL, 'perfil-11.png', 1, 1),
+(9, 'Halle', 'Berry', 'halle.b@mail.com', '$2y$10$OEhz2hV9IN9U8qpNzMaIG.3eTRC.VPRmx4C.74iwJVmDtwmw1L4e2', 5, 2, '1037777722', 'Empleado', 'Operativa', NULL, NULL, '2018-07-24 05:08:25', '2018-08-22 00:37:50', NULL, 'perfil-9_1534887470.png', 1, 0),
+(10, 'Brad', 'Peters', 'brad@mail.com', '$2y$10$F78jzaSZMhJWH/JBzJZXSOF/2SpagfmIXl9bZehs/q.UURm3BnfBW', 5, 2, '70223122', 'Empleado', 'Operativa', NULL, 'ANWKyWIUOSEa9gF12P3fOUpIZBmM3mEOhSoycRwax1BDESiMlcybn2uTTxHi', '2018-07-24 05:12:28', '2018-09-24 19:24:00', NULL, 'perfil-10.png', 1, 0),
+(11, 'Administrador', 'Prueba', 'administrador-prueba@mail.com', '$2y$10$SlNWsiexFyUop740J/rSje3U9kSjx0yQM/iUnClh.Cd5QSGQrAd3C', 2, 1, '112233', 'Empleado', 'Operativa', NULL, NULL, '2018-08-10 07:42:06', '2018-08-10 07:42:06', NULL, 'perfil-11.png', 1, 1),
 (12, 'Supervisor', 'Apellido', 'super@mail.com', '$2y$10$sPqJim0szaxeKPR8JIwf2uclwrb.HE3SehY4kMNQ/1iLPaH43i2Iq', 4, 2, '1234566', 'Supervisor', 'Operativa', NULL, 'Upjd5NwMWDRhgvKT5KqevC2U5sFnPe8idyKK2IF7xHwLfC61HeolVO8V7AOz', '2018-08-15 23:16:51', '2018-09-25 01:31:11', NULL, 'perfil-12.png', 1, 1),
 (13, 'Empleado', 'Apellido', 'empleado@mail.com', '$2y$10$XPnulUqOMMFrq1uulv7pQerO1DnmJaDDKgZnsLjWK.otkl5xGuVy2', 5, 2, '12345', 'Empleado', 'Operativa', NULL, 'Dd46V8o36JzJgK2ZSy00OSS6KFDLa1P888RyAvy9jTplYJSo28va4f7wUlzj', '2018-08-15 23:34:34', '2018-09-25 04:27:03', NULL, 'perfil-13_1537827109.png', 1, 1),
-(14, 'Prueba', 'Tres', 'prueba3@gmail.com', '$2y$10$iGHV9CDHCatD1.X0oZPIGeVKHbHXEHbMWF613IAoWnImZ6W/vFpZq', 5, 2, '1037976435', NULL, NULL, NULL, 'jRX9s33jOdIGFHIWVKCzoHaZR8jXwH3umlBA9zE6Ul06IiS0ZeBsvaQzrtGi', '2018-08-21 23:04:27', '2018-09-11 02:26:47', NULL, 'perfil-14_1534887126.png', 1, 1),
-(15, 'Prueba', 'Cuatro', 'prueba4@gmail.com', '$2y$10$dvHpzi6zkX589qqlGWrqqelg.1uIGsqKZZlEXLt9GMyyqA8BWzvhW', 5, 7, '123456', NULL, NULL, NULL, NULL, '2018-08-21 23:40:10', '2018-08-21 23:47:41', NULL, 'profile_image.png', 1, 1),
+(14, 'Prueba', 'Tres', 'prueba3@gmail.com', '$2y$10$iGHV9CDHCatD1.X0oZPIGeVKHbHXEHbMWF613IAoWnImZ6W/vFpZq', 5, 2, '1037976435', 'Empleado', 'Operativa', NULL, 'jRX9s33jOdIGFHIWVKCzoHaZR8jXwH3umlBA9zE6Ul06IiS0ZeBsvaQzrtGi', '2018-08-21 23:04:27', '2018-09-11 02:26:47', NULL, 'perfil-14_1534887126.png', 1, 1),
+(15, 'Prueba', 'Cuatro', 'prueba4@gmail.com', '$2y$10$dvHpzi6zkX589qqlGWrqqelg.1uIGsqKZZlEXLt9GMyyqA8BWzvhW', 5, 7, '123456', 'Empleado', 'Operativa', NULL, NULL, '2018-08-21 23:40:10', '2018-08-21 23:47:41', NULL, 'profile_image.png', 1, 1),
 (16, 'Angie Carolina', 'Forero Buitrago', 'administracion.bogota@inser.com.co', '$2y$10$OJPduJCXCf02JioJZhF6aOf.Iyq4qRdmrqwtWJZNFhB3Z9EJlDMhC', 5, 14, '1023011562', 'Administradora', 'Administrativa', NULL, 'NUUY3zSlrLv5c6e9n5dECME5UYhetRl0YvPuCrUquFmQ3rnTNCh7rYmv2NfV', '2018-09-21 21:04:02', '2018-09-24 05:02:12', NULL, 'perfil-16_1537553043.png', 1, 1),
 (17, 'Gilma Patricia', 'Rubiano Useda', 'enfermeria.bogota@inser.com.co', '$2y$10$LU9q6zw0CSXippQjI2JAD.irFwHhjH7oT.F1xQcnaD3Mr4CmWP8QK', 5, 14, '1033705388', 'Empleada', 'Enfermería', NULL, NULL, '2018-09-24 04:12:11', '2018-09-24 05:03:17', NULL, 'profile_image.png', 1, 1),
 (18, 'Katherine Gisell', 'Hernández Osorio', 'laboratorio.bogota@inser.com.co', '$2y$10$5QJ4QvRsQYmmcYh0gqponuB7t8kIz7fqUKQgmQqKg8VA15TcIqsZC', 5, 14, '1012321484', 'Empleado', 'Laboratorio', NULL, NULL, '2018-09-24 04:35:17', '2018-09-26 04:31:16', NULL, 'profile_image.png', 1, 1);
@@ -1021,6 +1132,21 @@ ALTER TABLE `questions`
   ADD KEY `questions_evaluation_type_id_foreign` (`evaluation_type_id`);
 
 --
+-- Indices de la tabla `recognitions`
+--
+ALTER TABLE `recognitions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `recognitions_resource_id_foreign` (`resource_id`),
+  ADD KEY `recognitions_user_id_foreign` (`user_id`),
+  ADD KEY `recognitions_grantter_id_foreign` (`grantter_id`);
+
+--
+-- Indices de la tabla `recognition_resources`
+--
+ALTER TABLE `recognition_resources`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `scales`
 --
 ALTER TABLE `scales`
@@ -1056,7 +1182,7 @@ ALTER TABLE `accomplishments`
 -- AUTO_INCREMENT de la tabla `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `aplications`
@@ -1068,7 +1194,7 @@ ALTER TABLE `aplications`
 -- AUTO_INCREMENT de la tabla `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `application_evaluation`
@@ -1116,13 +1242,13 @@ ALTER TABLE `competence_types`
 -- AUTO_INCREMENT de la tabla `compromises`
 --
 ALTER TABLE `compromises`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `compromise_alerts`
 --
 ALTER TABLE `compromise_alerts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `evaluations`
@@ -1164,7 +1290,7 @@ ALTER TABLE `measures`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `organizations`
@@ -1183,6 +1309,18 @@ ALTER TABLE `processes`
 --
 ALTER TABLE `questions`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `recognitions`
+--
+ALTER TABLE `recognitions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `recognition_resources`
+--
+ALTER TABLE `recognition_resources`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `scales`
@@ -1308,6 +1446,14 @@ ALTER TABLE `questions`
   ADD CONSTRAINT `questions_competence_id_foreign` FOREIGN KEY (`competence_id`) REFERENCES `competences` (`id`),
   ADD CONSTRAINT `questions_evaluation_type_id_foreign` FOREIGN KEY (`evaluation_type_id`) REFERENCES `evaluation_types` (`id`),
   ADD CONSTRAINT `questions_scale_id_foreign` FOREIGN KEY (`scale_id`) REFERENCES `scales` (`id`);
+
+--
+-- Filtros para la tabla `recognitions`
+--
+ALTER TABLE `recognitions`
+  ADD CONSTRAINT `recognitions_grantter_id_foreign` FOREIGN KEY (`grantter_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `recognitions_resource_id_foreign` FOREIGN KEY (`resource_id`) REFERENCES `recognition_resources` (`id`),
+  ADD CONSTRAINT `recognitions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `users`

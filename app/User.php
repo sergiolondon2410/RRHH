@@ -59,4 +59,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Application::class, 'evaluator_id');
     }
+
+    public function recognitions()
+    {
+        return $this->hasMany(Recognition::class);
+    }
+
+    public function compromises()
+    {
+        return $this->hasMany(Compromise::class);
+    }
 }

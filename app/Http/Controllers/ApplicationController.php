@@ -8,6 +8,7 @@ use App\Application;
 use App\User;
 use App\Competence;
 use App\Compromise;
+use App\Recognition;
 use App\Answer;
 use App\Question;
 use Illuminate\Support\Facades\Validator;
@@ -170,7 +171,8 @@ class ApplicationController extends Controller
 		$user_competences = $this->userResult($user, $evaluation, $competence_type_id_comp);
 		$user_indicators = $this->userResult($user, $evaluation, $competence_type_id_ind);
 		$compromises = Compromise::where('user_id', $user_id)->get();
-		return view('admin.applications.usercomputation', compact('user', 'evaluation', 'user_competences', 'user_indicators', 'competences', 'indicators', 'compromises'));
+		$recognitions = Recognition::where('user_id', $user_id)->get();
+		return view('admin.applications.usercomputation', compact('user', 'evaluation', 'user_competences', 'user_indicators', 'competences', 'indicators', 'compromises', 'recognitions'));
 	}
 
 	public function userResult(User $user, Evaluation $evaluation, $competence_type){

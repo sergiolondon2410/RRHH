@@ -120,7 +120,6 @@ Route::get('/applications/{application}/evaluate/', 'ApplicationController@evalu
 Route::get('/applications/{user}/{evaluation}/usercomputation/', 'ApplicationController@userComputation')->name('applications.usercomputation');
 
 //Rutas Compromisos
-
 Route::get('/compromises/organization/', 'CompromiseController@organization')->name('compromises.organization');
 Route::post('/compromises/user/', 'CompromiseController@user')->name('compromises.user');
 Route::post('/compromises/validator/', 'CompromiseController@validator')->name('compromises.validator');
@@ -128,6 +127,10 @@ Route::get('/compromises/{user}/{evaluation}/create/', 'CompromiseController@cre
 Route::post('/compromises/{user}/{evaluation}/', 'CompromiseController@store')->name('compromises.store');
 Route::get('/compromises', 'CompromiseController@index')->name('compromises.index');
 Route::get('/compromises/{compromise}/', 'CompromiseController@show')->name('compromises.show');
+
+//Rutas Reconocimientos
+Route::get('/recognitions/{user}/{evaluation}/create/', 'RecognitionController@create')->name('recognitions.create');
+Route::post('/recognitions/{user}/{evaluation}/', 'RecognitionController@store')->name('recognitions.store');
 
 Auth::routes();
 

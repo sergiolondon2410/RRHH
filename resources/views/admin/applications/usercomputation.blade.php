@@ -5,68 +5,104 @@
 @section('content')
 
 	<div class="row">
-
-			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Informe de {{ $evaluation->name}} - {{ $user->name }} {{ $user->last_name }}
-					</div>
-					<!-- /.panel-heading -->
-					<div class="panel-body">
-						<div id="chart_div"></div>
-
-						<div id="chart_indicators"></div>
-					</div>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Informe de {{ $evaluation->name}} - {{ $user->name }} {{ $user->last_name }}
 				</div>
-				<!-- /.panel -->
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+					<div id="chart_div"></div>
+					<div id="chart_indicators"></div>
+				</div>
 			</div>
-			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Compromisos - {{ $user->name }} {{ $user->last_name }}
-					</div>
-					<!-- /.panel-heading -->
-					<div class="panel-body">
-						@if($compromises->count() > 0)
-							<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-								<thead>
-									<tr>
-										<th>Usuario</th>
-										<th>Validador</th>
-										<th>Compromiso</th>
-										<th>Empresa</th>
-										<th>Plazo</th>
+			<!-- /.panel -->
+		</div>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Compromisos - {{ $user->name }} {{ $user->last_name }}
+				</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+					@if($compromises->count() > 0)
+						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+							<thead>
+								<tr>
+									<th>Aspecto a mejorar</th>
+									<th>Acciones</th>
+									<th>Validador</th>
+									<th>Plazo</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($compromises as $compromise)
+									<tr class="odd gradeX">
+										<td>{{ $compromise->observation }}</td>
+										<td>{{ $compromise->activity }}</td>
+										<td>
+											{{ $compromise->validator->name }} {{ $compromise->validator->last_name }}
+										</td>
+										<td>
+											{{ Carbon\Carbon::parse($compromise->ending)->format('d/m/Y') }}
+										</td>
 									</tr>
-								</thead>
-								<tbody>
-									@foreach ($compromises as $compromise)
-										<tr class="odd gradeX">
-											<td>
-												{{ $compromise->user->name }} {{ $compromise->user->last_name }}
-											</td>
-											<td>
-												{{ $compromise->validator->name }} {{ $compromise->validator->last_name }}
-											</td>
-											<td>{{ $compromise->activity }}</td>
-											<td>{{ $compromise->user->organization->name }}</td>
-											<td>
-												{{ Carbon\Carbon::parse($compromise->ending)->format('d/m/Y') }}
-											</td>
-										</tr>
-									@endforeach
-								</tbody>
-							</table>
-						@else
-							<div class="alert alert-warning" role="alert">Este usuario no tiene compromisos asignados</div>
-						@endif
-					</div>
-					<div class="panel-footer">
-						<a class="btn btn-default" href="{{ route('compromises.create', ['user' => $user, 'evaluation' => $evaluation]) }}"> <i class="fa fa-plus-circle"></i> Asignar un compromiso</a>
-					</div>
+								@endforeach
+							</tbody>
+						</table>
+					@else
+						<div class="alert alert-warning" role="alert">Este usuario no tiene compromisos asignados</div>
+					@endif
 				</div>
-				<!-- /.panel -->
+				<div class="panel-footer">
+					<a class="btn btn-default" href="{{ route('compromises.create', ['user' => $user, 'evaluation' => $evaluation]) }}"> <i class="fa fa-plus-circle"></i> Asignar un compromiso</a>
+				</div>
 			</div>
-
+				<!-- /.panel -->
+		</div>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Reconocimientos - {{ $user->name }} {{ $user->last_name }}
+				</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+					@if($recognitions->count() > 0)
+						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
+							<thead>
+								<tr>
+									<th>Insignia</th>
+									<th>Reconocimiento</th>
+									<th>Méritos</th>
+									<th>Otorgado Por</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($recognitions as $recognition)
+									<tr class="odd gradeX">
+										<td>
+											<img src="{{ asset('/storage') }}{{$recognition->resource->uri}}" height="100em">
+										</td>
+										<td>
+											{{ $recognition->name }}
+										</td>
+										<td>{{ $recognition->observation }}</td>
+										<td>
+											{{ $recognition->grantter->name }} {{ $recognition->grantter->last_name }}
+										</td>
+									</tr>
+								@endforeach
+							</tbody>
+						</table>
+					@else
+						<div class="alert alert-warning" role="alert">Este usuario no tiene reconocimientos otorgados</div>
+					@endif
+				</div>
+				<div class="panel-footer">
+					<a class="btn btn-default" href="{{ route('recognitions.create', ['user' => $user, 'evaluation' => $evaluation]) }}"> <i class="fa fa-plus-circle"></i> Otorgar un reconocimiento</a>
+				</div>
+			</div>
+		</div>
 		<div class="col-lg-12">
 			<a class="btn btn-default" href="{{ route('applications.results', ['evaluation' => $evaluation]) }}"> <i class="fa fa-angle-double-left"></i> Volver</a>
 		</div>
@@ -156,4 +192,29 @@
 		};
 	</script>
 
+	<script>
+		$(document).ready(function() {
+			$('#dataTables').DataTable({
+				responsive: true,
+				language:{
+					"sSearch":         "Buscar:",
+					"sProcessing":     "Procesando...",
+					"sLengthMenu":     "Mostrar _MENU_ registros",
+					"sZeroRecords":    "No se encontraron resultados",
+					"sEmptyTable":     "Ningún dato disponible en esta tabla",
+					"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+					"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+					"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+					"oPaginate": {
+						"sFirst":    "Primero",
+						"sLast":     "Último",
+						"sNext":     "Siguiente",
+						"sPrevious": "Anterior"
+					}
+				}
+			});
+		});
+	</script>
+
 @endsection
+
