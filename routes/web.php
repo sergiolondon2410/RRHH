@@ -118,6 +118,7 @@ Route::get('/applications/{evaluation}/results/', 'ApplicationController@results
 Route::get('/applications/{application}/detail/', 'ApplicationController@detail')->name('applications.detail');
 Route::get('/applications/{application}/evaluate/', 'ApplicationController@evaluate')->name('applications.evaluate');
 Route::get('/applications/{user}/{evaluation}/usercomputation/', 'ApplicationController@userComputation')->name('applications.usercomputation');
+Route::get('/applications/{user}/{evaluation}/useranswers/', 'ApplicationController@userAnswers')->name('applications.useranswers');
 
 //Rutas Compromisos
 Route::get('/compromises/organization/', 'CompromiseController@organization')->name('compromises.organization');

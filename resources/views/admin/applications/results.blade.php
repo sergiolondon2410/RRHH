@@ -12,63 +12,66 @@
 				</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
-					<h3>Resultados por competencias</h3>
-					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-						<thead>
-							<tr>
-								<th></th>
-								<th></th>
-								@foreach ($competences as $competence)
-									<th colspan="3">{{ $competence->name }}</th>
+					@if(count($competences) > 0)
+						<h3>Resultados por competencias</h3>
+						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+									@foreach ($competences as $competence)
+										<th colspan="3">{{ $competence->name }}</th>
+									@endforeach
+								</tr>
+								<tr>
+									<th>Evaluado</th>
+									<th>Cargo</th>
+									@foreach ($competences as $competence)
+										<th>Auto</th>
+										<th>Hetero</th>
+										<th>Total</th>
+									@endforeach
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($users_competences as $user)
+										<tr class="odd gradeX">
+											<td><a href="{{ route('applications.usercomputation', ['user' => $user['user_id'], 'evaluation' => $evaluation]) }}"><i class="fa fa-search-plus"></i></a> {{ $user['user_fullname'] }}</td>
+											<td>{{ $user['user_position'] }}</td>
+											@foreach ($competences as $competence)
+												<td>{{ $user['competences_avg'][$competence->id]['auto']*100 }}%</td>
+												<td>{{ $user['competences_avg'][$competence->id]['hetero']*100 }}%</td>
+												<td>{{ $user['competences_avg'][$competence->id]['total']*100 }}%</td>
+											@endforeach
+										</tr>
 								@endforeach
-							</tr>
-							<tr>
-								<th>Evaluado</th>
-								<th>Cargo</th>
-								@foreach ($competences as $competence)
-									<th>Auto</th>
-									<th>Hetero</th>
-									<th>Total</th>
-								@endforeach
-							</tr>
-						</thead>
-						<tbody>
-							@foreach ($users_competences as $user)
-									<tr class="odd gradeX">
-										<td><a href="{{ route('applications.usercomputation', ['user' => $user['user_id'], 'evaluation' => $evaluation]) }}"><i class="fa fa-search-plus"></i></a> {{ $user['user_fullname'] }}</td>
-										<td>{{ $user['user_position'] }}</td>
-										@foreach ($competences as $competence)
-											<td>{{ $user['competences_avg'][$competence->id]['auto']*100 }}%</td>
-											<td>{{ $user['competences_avg'][$competence->id]['hetero']*100 }}%</td>
-											<td>{{ $user['competences_avg'][$competence->id]['total']*100 }}%</td>
-										@endforeach
-									</tr>
-							@endforeach
-						</tbody>
-					</table>
-					<hr>
-					<h3>Resultados por indicadores de productividad</h3>
-					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
-						<thead>
-							<tr>
-								<th></th>
-								<th></th>
-								@foreach ($indicators as $indicator)
-									<th colspan="3">{{ $indicator->name }}</th>
-								@endforeach
-							</tr>
-							<tr>
-								<th>Evaluado</th>
-								<th>Cargo</th>
-								@foreach ($indicators as $indicator)
-									<th>Auto</th>
-									<th>Hetero</th>
-									<th>Total</th>
-								@endforeach
-							</tr>
-						</thead>
-						<tbody>
-							@foreach ($users_indicators as $user)
+							</tbody>
+						</table>
+						<hr>
+					@endif
+					@if(count($indicators) > 0)
+						<h3>Resultados por indicadores de productividad</h3>
+						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+									@foreach ($indicators as $indicator)
+										<th colspan="3">{{ $indicator->name }}</th>
+									@endforeach
+								</tr>
+								<tr>
+									<th>Evaluado</th>
+									<th>Cargo</th>
+									@foreach ($indicators as $indicator)
+										<th>Auto</th>
+										<th>Hetero</th>
+										<th>Total</th>
+									@endforeach
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($users_indicators as $user)
 									<tr class="odd gradeX">
 										<td><a href="{{ route('applications.usercomputation', ['user' => $user['user_id'], 'evaluation' => $evaluation]) }}"><i class="fa fa-search-plus"></i></a> {{ $user['user_fullname'] }}</td>
 										<td>{{ $user['user_position'] }}</td>
@@ -78,9 +81,10 @@
 											<td>{{ $user['competences_avg'][$indicator->id]['total']*100 }}%</td>
 										@endforeach
 									</tr>
-							@endforeach
-						</tbody>
-					</table>
+								@endforeach
+							</tbody>
+						</table>
+					@endif
 				</div>
 				<!-- /.panel-body -->
 			</div>
@@ -95,6 +99,7 @@
 @endsection
 
 @section('scripts')
+
 	<script>
 		$(document).ready(function() {
 			$('#dataTables').DataTable({

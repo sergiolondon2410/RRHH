@@ -10,15 +10,6 @@ class Application extends Model
         'user_id', 'evaluator_id', 'status', 'evaluation_id'
     ];
 
-    // public function assignation()
-    // {
-    //     return $this->belongsTo(Assignation::class);
-    // }
-
-    // public function evaluations()
-    // {
-    //     return $this->belongsToMany(Evaluation::class);
-    // }
     public function evaluation()
     {
         return $this->belongsTo(Evaluation::class);
@@ -37,6 +28,11 @@ class Application extends Model
     public function answers()
     {
         return $this->hasMany(Answer::class);
+    }
+
+    public function answer($question_id)
+    {
+        return $this->hasMany(Answer::class)->where('question_id', $question_id)->first();
     }
 
     public function answersCompetence()

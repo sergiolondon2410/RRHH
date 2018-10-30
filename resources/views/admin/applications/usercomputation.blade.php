@@ -8,12 +8,50 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
+					Respuestas {{ $evaluation->name }} - Evaluado:  {{ $user->full_name }}
+				</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+						<thead>
+							<tr>
+								<th>Competencia</th>
+								<th>Pregunta</th>
+								<th>Autoevaluación</th>
+								<th>Heteroevaluación</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($answers as $answer)
+								<tr class="odd gradeX">
+									<td>{{ $answer["competence"] }}</td>
+									<td>{{ $answer["text"] }}</td>
+									<td>{{ $answer["value"] }}</td>
+									<td>{{ $answer["heteroevaluation"] }}</td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+				<!-- /.panel -->
+		</div>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
 					Informe de {{ $evaluation->name}} - {{ $user->name }} {{ $user->last_name }}
 				</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
-					<div id="chart_div"></div>
-					<div id="chart_indicators"></div>
+					@if(count($competences) > 0)
+						<div id="chart_div"></div>
+					@endif
+					@if(count($indicators) > 0)
+						<div id="chart_indicators"></div>
+					@endif
+				</div>
+				<div class="panel-footer">
+					<a class="btn btn-default" href="{{ route('applications.useranswers', ['user' => $user, 'evaluation' => $evaluation]) }}"> <i class="fa fa-plus-circle"></i> Ver detalle por pregunta</a>
 				</div>
 			</div>
 			<!-- /.panel -->
@@ -118,6 +156,7 @@
 		google.charts.setOnLoadCallback(drawStuff);
 
 		function drawStuff() {
+			@if(count($competences) > 0)
 			var data = new google.visualization.arrayToDataTable([
 				['Competencia', 'Autoevaluación', 'Heteroevaluación', 'Porcentaje Total Competencia'],
 				@foreach($competences as $competence)
@@ -153,7 +192,8 @@
 
 			var chart = new google.charts.Bar(document.getElementById('chart_div'));
 			chart.draw(data, google.charts.Bar.convertOptions(options));
-
+			@endif
+			@if(count($indicators) > 0)
 			var data_indicators = new google.visualization.arrayToDataTable([
 				['Indicador', 'Autoevaluación', 'Heteroevaluación', 'Porcentaje Total Indicador'],
 				@foreach($indicators as $indicator)
@@ -189,6 +229,7 @@
 
 			var chart = new google.charts.Bar(document.getElementById('chart_indicators'));
 			chart.draw(data_indicators, google.charts.Bar.convertOptions(options_indicators));
+			@endif
 		};
 	</script>
 

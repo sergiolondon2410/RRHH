@@ -68,7 +68,7 @@
                             <li>
                                 <a href="{{ route('processes.index') }}"><i class="fa fa-star fa-fw"></i> Procesos</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Reportes<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -78,8 +78,7 @@
                                         <a href="morris.html">PDF</a>
                                     </li>
                                 </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
+                            </li> -->
                         @endif
                         <li>
                             <a href="#"><i class="fa fa-trophy fa-fw"></i> Premios<span class="fa arrow"></span></a>

@@ -172,7 +172,77 @@ class ApplicationController extends Controller
 		$user_indicators = $this->userResult($user, $evaluation, $competence_type_id_ind);
 		$compromises = Compromise::where('user_id', $user_id)->get();
 		$recognitions = Recognition::where('user_id', $user_id)->get();
-		return view('admin.applications.usercomputation', compact('user', 'evaluation', 'user_competences', 'user_indicators', 'competences', 'indicators', 'compromises', 'recognitions'));
+		//------------------
+		$answers = [];
+		$questions = $evaluation->questions->sortBy('competence_id');
+		$applications = Application::where('user_id', $user->id)
+									->where('status', 'completed')
+									->where('evaluator_id', '<>', $user->id)
+									->where('evaluation_id', $evaluation->id)
+									->get();
+		$autoevaluation = Application::where('user_id', $user->id)
+									->where('status', 'completed')
+									->where('evaluator_id', $user->id)
+									->where('evaluation_id', $evaluation->id)
+									->first();
+		$output = [];
+		foreach($questions as $question){
+			$output = [
+				"competence" => $question->competence->name,
+				"text" => $question->text,
+				"value" => 0
+			];
+			if($autoevaluation != null){
+				$answer = $autoevaluation->answer($question->id);
+				$output["value"] = $answer->measure->numeric_value;
+			}
+			$hetero = [];
+			foreach($applications as $application){
+				$heteroanswer = $application->answer($question->id);
+				array_push($hetero, $heteroanswer->measure->numeric_value);
+			}
+			$output["heteroevaluation"] = round(collect($hetero)->avg(), 4);
+			array_push($answers, $output);
+
+		}
+		//-----------------
+		return view('admin.applications.usercomputation', compact('user', 'evaluation', 'user_competences', 'user_indicators', 'competences', 'indicators', 'compromises', 'recognitions', 'questions', 'answers'));
+	}
+
+	public function userAnswers(User $user, Evaluation $evaluation){
+		$answers = [];
+		$questions = $evaluation->questions->sortBy('competence_id');
+		$applications = Application::where('user_id', $user->id)
+									->where('status', 'completed')
+									->where('evaluator_id', '<>', $user->id)
+									->where('evaluation_id', $evaluation->id)
+									->get();
+		$autoevaluation = Application::where('user_id', $user->id)
+									->where('status', 'completed')
+									->where('evaluator_id', $user->id)
+									->where('evaluation_id', $evaluation->id)
+									->first();
+		$output = [];
+		foreach($questions as $question){
+			$output = [
+				"competence" => $question->competence->name,
+				"text" => $question->text,
+				"value" => 0
+			];
+			if($autoevaluation != null){
+				$answer = $autoevaluation->answer($question->id);
+				$output["value"] = $answer->measure->numeric_value;
+			}
+			$hetero = [];
+			foreach($applications as $application){
+				$heteroanswer = $application->answer($question->id);
+				array_push($hetero, $heteroanswer->measure->numeric_value);
+			}
+			$output["heteroevaluation"] = round(collect($hetero)->avg(), 4);
+			array_push($answers, $output);
+
+		}
+		return view('admin.applications.useranswers', compact('user', 'evaluation', 'questions', 'answers'));
 	}
 
 	public function userResult(User $user, Evaluation $evaluation, $competence_type){
