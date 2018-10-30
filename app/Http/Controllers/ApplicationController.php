@@ -9,6 +9,7 @@ use App\User;
 use App\Competence;
 use App\Compromise;
 use App\Recognition;
+use App\Training;
 use App\Answer;
 use App\Question;
 use Illuminate\Support\Facades\Validator;
@@ -206,7 +207,8 @@ class ApplicationController extends Controller
 
 		}
 		//-----------------
-		return view('admin.applications.usercomputation', compact('user', 'evaluation', 'user_competences', 'user_indicators', 'competences', 'indicators', 'compromises', 'recognitions', 'questions', 'answers'));
+		$trainings = Training::where('user_id', $user->id)->get();
+		return view('admin.applications.usercomputation', compact('user', 'evaluation', 'user_competences', 'user_indicators', 'competences', 'indicators', 'compromises', 'recognitions', 'questions', 'answers', 'trainings'));
 	}
 
 	public function userAnswers(User $user, Evaluation $evaluation){

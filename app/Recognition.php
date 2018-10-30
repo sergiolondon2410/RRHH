@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Recognition extends Model
 {
-    protected $fillable = [
+	protected $fillable = [
 		'resource_id', 'name', 'observation', 'user_id', 'grantter_id'
 	];
 
-    public function user()
+	public function user()
 	{
 		return $this->belongsTo(User::class);
 	}

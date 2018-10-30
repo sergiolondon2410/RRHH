@@ -133,6 +133,10 @@ Route::get('/compromises/{compromise}/', 'CompromiseController@show')->name('com
 Route::get('/recognitions/{user}/{evaluation}/create/', 'RecognitionController@create')->name('recognitions.create');
 Route::post('/recognitions/{user}/{evaluation}/', 'RecognitionController@store')->name('recognitions.store');
 
+//Rutas Requerimientos de capacitación
+Route::get('/trainings/{user}/{evaluation}/create/', 'TrainingController@create')->name('trainings.create');
+Route::post('/trainings/{user}/{evaluation}/', 'TrainingController@store')->name('trainings.store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

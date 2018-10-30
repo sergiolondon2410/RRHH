@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2018 a las 06:08:04
+-- Tiempo de generación: 30-10-2018 a las 05:24:58
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -663,7 +663,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (46, '2018_10_14_154637_create_compromises_table', 31),
 (47, '2018_10_14_160436_create_compromise_alerts_table', 32),
 (48, '2018_10_25_140758_create_recognition_resources_table', 33),
-(49, '2018_10_25_141231_create_recognitions_table', 34);
+(49, '2018_10_25_141231_create_recognitions_table', 34),
+(51, '2018_10_29_203744_create_trainings_table', 35);
 
 -- --------------------------------------------------------
 
@@ -882,6 +883,29 @@ CREATE TABLE `sessions` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `trainings`
+--
+
+CREATE TABLE `trainings` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `observation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `trainings`
+--
+
+INSERT INTO `trainings` (`id`, `observation`, `status`, `user_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'Manejo de Excel', 'pending', 10, NULL, '2018-10-30 02:22:24', '2018-10-30 02:22:24');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `users`
 --
 
@@ -914,7 +938,7 @@ INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `user_type_
 (1, 'Sergio', 'Londoño', 'sergio@mail.com', '123', 2, 1, '1128444449', 'ingeniero', 'tecno', '2017-06-19 05:00:00', NULL, '2018-04-17 05:00:00', '2018-08-22 00:38:26', NULL, 'perfil-1_1534887506.png', 1, 1),
 (2, 'Juan', 'Pérez', 'jp@mail.com', '123', 5, 2, '12634563464', 'Operario', 'Operativa', NULL, NULL, NULL, '2018-08-23 05:15:51', '2018-08-23 05:15:51', 'profile_image.png', 1, 0),
 (3, 'Pepe', 'Mora', 'pepe@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 5, 2, '1234567', 'Asistente operativo', 'Operativa', '2016-03-15 05:00:00', 'g4V5sVf3nEVD7nQTLWEM0B0o6N3VfRuRQPcofnVy3mXaMu6YhTIljanwdDKz', '2018-04-19 10:48:08', '2018-08-22 23:14:08', '2018-08-22 23:14:08', 'profile_image.png', 1, 0),
-(4, 'SuperAdministrador', 'Gente', 'admin@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 1, 1, '9876382', 'Auxiliar contable', 'Operativa', NULL, 'aHg0Hn5dzBb2Q9ZMeeSefdnSeQc86YX8EVwh03QWChKpW4zz3TCjqDCx26PK', '2018-04-19 22:41:42', '2018-04-19 22:41:42', NULL, 'profile_image.png', 1, 0),
+(4, 'SuperAdministrador', 'Gente', 'admin@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 1, 1, '9876382', 'Auxiliar contable', 'Operativa', NULL, 'AlEIe2Jkw5fRMAk5sVKb8TXrLo37RnoWjBbe6rh01Cu1mqchxfwponPnbeOl', '2018-04-19 22:41:42', '2018-04-19 22:41:42', NULL, 'profile_image.png', 1, 0),
 (5, 'Rosa', 'Gómez', 'rosa@mail.com', '$2y$10$B5BoRHsrJsjTvwCAdV2L6.4SiexqWiy8va4MnwfVm5iqXjcobgjM.', 5, 2, '1256784', 'Jefe de área', 'Operativa', NULL, NULL, '2018-04-20 03:53:56', '2018-08-23 05:45:54', '2018-08-23 05:45:54', 'profile_image.png', 1, 0),
 (6, 'Maria', 'Pino', 'maria@mail.com', '$2y$10$0nZiuXGNT1VyO4mud2JY3es7L6.AY6Ix3vUWbeCRBcrzymgLyPndy', 5, 2, '125678422', 'Cajero', 'Operativa', NULL, NULL, '2018-04-20 04:02:40', '2018-08-22 23:12:04', '2018-08-22 23:12:04', 'profile_image.png', 1, 0),
 (7, 'Brito', 'Ventura', 'brito@mail.com', '$2y$10$Ff9LGKW8btZeRfQfwSqg2OdMqA.q/FvFALgAWX/NYLzB4cb7cI3H6', 5, 2, '8766251', 'Gerente de sucursal', 'Operativa', NULL, NULL, '2018-04-20 04:04:16', '2018-08-22 23:05:34', '2018-08-22 23:05:34', 'profile_image.png', 1, 0),
@@ -1153,6 +1177,13 @@ ALTER TABLE `scales`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `trainings`
+--
+ALTER TABLE `trainings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `trainings_user_id_foreign` (`user_id`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -1290,7 +1321,7 @@ ALTER TABLE `measures`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `organizations`
@@ -1327,6 +1358,12 @@ ALTER TABLE `recognition_resources`
 --
 ALTER TABLE `scales`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `trainings`
+--
+ALTER TABLE `trainings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -1454,6 +1491,12 @@ ALTER TABLE `recognitions`
   ADD CONSTRAINT `recognitions_grantter_id_foreign` FOREIGN KEY (`grantter_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `recognitions_resource_id_foreign` FOREIGN KEY (`resource_id`) REFERENCES `recognition_resources` (`id`),
   ADD CONSTRAINT `recognitions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Filtros para la tabla `trainings`
+--
+ALTER TABLE `trainings`
+  ADD CONSTRAINT `trainings_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `users`

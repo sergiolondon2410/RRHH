@@ -50,9 +50,6 @@
 						<div id="chart_indicators"></div>
 					@endif
 				</div>
-				<div class="panel-footer">
-					<a class="btn btn-default" href="{{ route('applications.useranswers', ['user' => $user, 'evaluation' => $evaluation]) }}"> <i class="fa fa-plus-circle"></i> Ver detalle por pregunta</a>
-				</div>
 			</div>
 			<!-- /.panel -->
 		</div>
@@ -138,6 +135,41 @@
 				</div>
 				<div class="panel-footer">
 					<a class="btn btn-default" href="{{ route('recognitions.create', ['user' => $user, 'evaluation' => $evaluation]) }}"> <i class="fa fa-plus-circle"></i> Otorgar un reconocimiento</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Requerimientos de capacitación - {{ $user->full_name }}
+				</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+					@if($trainings->count() > 0)
+						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
+							<thead>
+								<tr>
+									<th>Requerimiento</th>
+									<th>Fecha de solicitud</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($trainings as $training)
+									<tr class="odd gradeX">
+										<td>{{ $training->observation }}</td>
+										<td>
+											{{ Carbon\Carbon::parse($training->created_at)->format('d/m/Y') }}
+										</td>
+									</tr>
+								@endforeach
+							</tbody>
+						</table>
+					@else
+						<div class="alert alert-warning" role="alert">Este usuario no registra requerimientos de capacitación</div>
+					@endif
+				</div>
+				<div class="panel-footer">
+					<a class="btn btn-default" href="{{ route('trainings.create', ['user' => $user, 'evaluation' => $evaluation]) }}"> <i class="fa fa-plus-circle"></i> Crear requerimiento de capacitación</a>
 				</div>
 			</div>
 		</div>
