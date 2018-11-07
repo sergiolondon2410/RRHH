@@ -16,9 +16,22 @@ class CompromiseController extends Controller
 {
 	public function index()
 	{
+
 		$title = "Listado de compromisos";
-		$compromises = Compromise::all();
-		return view('admin.compromises.index', compact('compromises', 'title'));
+		$user = Auth::user();
+		$status = [
+			"pending" => "Pendiente",
+			"achieved" => "Cumplido",
+			"unsuccessful" => "No cumplido"
+		];
+		if($user->user_type_id < 3){
+			$compromises = Compromise::all();
+			return view('admin.compromises.index', compact('compromises', 'title', 'status'));
+		}
+		else{
+			$compromises = Compromise::where('user_id', $user->id)->get();
+			return view('admin.compromises.userindex', compact('compromises', 'user', 'title', 'status'));
+		}
 	}
 
 	public function show(Compromise $compromise)

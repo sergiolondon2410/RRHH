@@ -17,10 +17,11 @@
 								<tr>
 									<th>Usuario</th>
 									<th>Validador</th>
-									<th>Aspecto</th>
+									<th>Aspecto a mejorar</th>
 									<th>Acciones</th>
 									<th>Empresa</th>
 									<th>Plazo</th>
+									<th>Estado</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -38,6 +39,7 @@
 										<td>
 											{{ Carbon\Carbon::parse($compromise->ending)->format('d/m/Y') }}
 										</td>
+										<td>{{ $status[$compromise->status] }}</td>
 									</tr>
 								@endforeach
 							</tbody>

@@ -119,6 +119,8 @@ Route::get('/applications/{application}/detail/', 'ApplicationController@detail'
 Route::get('/applications/{application}/evaluate/', 'ApplicationController@evaluate')->name('applications.evaluate');
 Route::get('/applications/{user}/{evaluation}/usercomputation/', 'ApplicationController@userComputation')->name('applications.usercomputation');
 Route::get('/applications/{user}/{evaluation}/useranswers/', 'ApplicationController@userAnswers')->name('applications.useranswers');
+Route::get('/applications/{user}/{evaluation}/usercomputationprint/', 'ApplicationController@userComputationPrint')->name('applications.usercomputationprint');
+Route::get('/applications/{evaluation}/userresults/', 'ApplicationController@userResults')->name('applications.userresults');
 
 //Rutas Compromisos
 Route::get('/compromises/organization/', 'CompromiseController@organization')->name('compromises.organization');
@@ -130,6 +132,7 @@ Route::get('/compromises', 'CompromiseController@index')->name('compromises.inde
 Route::get('/compromises/{compromise}/', 'CompromiseController@show')->name('compromises.show');
 
 //Rutas Reconocimientos
+Route::get('/recognitions', 'RecognitionController@index')->name('recognitions.index');
 Route::get('/recognitions/{user}/{evaluation}/create/', 'RecognitionController@create')->name('recognitions.create');
 Route::post('/recognitions/{user}/{evaluation}/', 'RecognitionController@store')->name('recognitions.store');
 

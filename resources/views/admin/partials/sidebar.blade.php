@@ -34,12 +34,13 @@
                         <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i> Evaluaciones<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{{ route('applications.show') }}">Mis Evaluaciones</a>
-                                </li>
                                 @if(Auth::user()->user_type_id < 3)
                                     <li>
                                         <a href="{{ route('applications.filter') }}">Reporte de evaluaciones</a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="{{ route('applications.show') }}">Mis Evaluaciones</a>
                                     </li>
                                 @endif
                                 <!-- <li>
@@ -54,12 +55,13 @@
                         <li>
                             <a href="#"><i class="fa fa-certificate fa-fw"></i> Compromisos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Mis Compromisos</a>
-                                </li>
                                 @if(Auth::user()->user_type_id < 3)
                                     <li>
-                                        <a href="#">Asignar compromiso</a>
+                                        <a href="{{ route('compromises.index') }}">Ver Compromisos</a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="{{ route('compromises.index') }}">Mis Compromisos</a>
                                     </li>
                                 @endif
                             </ul>
@@ -81,28 +83,17 @@
                             </li> -->
                         @endif
                         <li>
-                            <a href="#"><i class="fa fa-trophy fa-fw"></i> Premios<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-trophy fa-fw"></i> Reconocimientos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 @if(Auth::user()->user_type_id < 3)
                                     <li>
-                                        <a href="{{ route('awards.index') }}">Ver premios</a>
+                                        <a href="{{ route('recognitions.index') }}">Ver Reconocimientos</a>
                                     </li>
+                                @else
                                     <li>
-                                        <a href="{{ route('awards.create') }}">Crear premio</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('accomplishments.create') }}">Otorgar reconocimiento</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('accomplishments.index') }}">Reconocimientos</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('accomplishments.index') }}">Reconocimientos</a>
+                                        <a href="{{ route('recognitions.index') }}">Mis Reconocimientos</a>
                                     </li>
                                 @endif
-                                <li>
-                                    <a href="#">Mis Reconocimientos</a>
-                                </li>
                             </ul>
                         </li>
                         @if(Auth::user()->user_type_id < 3)

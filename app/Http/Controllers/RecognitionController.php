@@ -12,9 +12,22 @@ use Illuminate\Support\Facades\Auth;
 
 class RecognitionController extends Controller
 {
+	public function index()
+	{
+		$title = "Listado de reconocimientos";
+		$user = Auth::user();
+		if($user->user_type_id < 3){
+			$recognitions = Recognition::all();
+			return view('admin.recognitions.index', compact('recognitions', 'title'));
+		}
+		else{
+			$recognitions = Recognition::where('user_id', $user->id)->get();
+			return view('admin.recognitions.userindex', compact('recognitions', 'user', 'title'));
+		}
+	}
+
     public function create(Request $request, User $user, Evaluation $evaluation)
 	{
-		// dd($user);
 		$resources = RecognitionResource::all();
 		$grantters = User::where('organization_id', $user->organization_id)->get()->except(['id', $user->id])->pluck('full_name', 'id');
 		return view('admin.recognitions.create', compact('user', 'evaluation', 'resources', 'grantters'));

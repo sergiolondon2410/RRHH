@@ -19,6 +19,7 @@
 								<th>Pregunta</th>
 								<th>Autoevaluación</th>
 								<th>Heteroevaluación</th>
+								<th>Total</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -28,6 +29,7 @@
 									<td>{{ $answer["text"] }}</td>
 									<td>{{ $answer["value"] }}</td>
 									<td>{{ $answer["heteroevaluation"] }}</td>
+									<td>{{ $answer["total"] }}</td>
 								</tr>
 							@endforeach
 						</tbody>
@@ -175,6 +177,7 @@
 		</div>
 		<div class="col-lg-12">
 			<a class="btn btn-default" href="{{ route('applications.results', ['evaluation' => $evaluation]) }}"> <i class="fa fa-angle-double-left"></i> Volver</a>
+			<a class="btn btn-default" href="{{ route('applications.usercomputationprint', ['user' => $user, 'evaluation' => $evaluation]) }}" target="_blank"> <i class="fa fa-print"></i> Imprimir</a>
 		</div>
 	</div>
 	<hr>
@@ -226,41 +229,41 @@
 			chart.draw(data, google.charts.Bar.convertOptions(options));
 			@endif
 			@if(count($indicators) > 0)
-			var data_indicators = new google.visualization.arrayToDataTable([
-				['Indicador', 'Autoevaluación', 'Heteroevaluación', 'Porcentaje Total Indicador'],
-				@foreach($indicators as $indicator)
-					[
-						"{{ $indicator->name }}", 
-						{{ $user_indicators["competences_avg"][$indicator->id]["auto"] }},
-						{{ $user_indicators["competences_avg"][$indicator->id]["hetero"] }},
-						{{ $user_indicators["competences_avg"][$indicator->id]["total"] }}
-					],
-				@endforeach
-			]);
-			var options_indicators = {
-				chart: {
-					title: 'Resultado por Indicadores de productividad',
-					subtitle: 'Porcentajes de Autoevaluación, Heteroevaluación y Total',
-				},
-				legend: { position: 'none' },
-				axes: {
-					x: {
-						0: { side: 'bottom', label: 'Indicadores'}
-					}
-				},
-				vAxis: {
-					format: '#,##%',
-					gridlines: {
-						count: 10,
+				var data_indicators = new google.visualization.arrayToDataTable([
+					['Indicador', 'Autoevaluación', 'Heteroevaluación', 'Porcentaje Total Indicador'],
+					@foreach($indicators as $indicator)
+						[
+							"{{ $indicator->name }}", 
+							{{ $user_indicators["competences_avg"][$indicator->id]["auto"] }},
+							{{ $user_indicators["competences_avg"][$indicator->id]["hetero"] }},
+							{{ $user_indicators["competences_avg"][$indicator->id]["total"] }}
+						],
+					@endforeach
+				]);
+				var options_indicators = {
+					chart: {
+						title: 'Resultado por Indicadores de productividad',
+						subtitle: 'Porcentajes de Autoevaluación, Heteroevaluación y Total',
 					},
-				},
-				height: 400,
-				width: 900,
-				bar: { groupWidth: "50%" }
-			};
+					legend: { position: 'none' },
+					axes: {
+						x: {
+							0: { side: 'bottom', label: 'Indicadores'}
+						}
+					},
+					vAxis: {
+						format: '#,##%',
+						gridlines: {
+							count: 10,
+						},
+					},
+					height: 400,
+					width: 900,
+					bar: { groupWidth: "50%" }
+				};
 
-			var chart = new google.charts.Bar(document.getElementById('chart_indicators'));
-			chart.draw(data_indicators, google.charts.Bar.convertOptions(options_indicators));
+				var chart = new google.charts.Bar(document.getElementById('chart_indicators'));
+				chart.draw(data_indicators, google.charts.Bar.convertOptions(options_indicators));
 			@endif
 		};
 	</script>

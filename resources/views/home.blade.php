@@ -48,12 +48,12 @@
                                     <i class="fa fa-check fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">0</div>
+                                    <div class="huge">{{ $accomplished_compromises }}</div>
                                     <div>Compromisos cumplidos</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{ route('compromises.index') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">Ver más</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -70,12 +70,12 @@
                                     <i class="fa fa-certificate fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">0</div>
+                                    <div class="huge">{{ $pending_compromises }}</div>
                                     <div>Compromisos por cumplir</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{ route('compromises.index') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">Ver detalles</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -92,12 +92,12 @@
                                     <i class="fa fa-trophy fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">0</div>
+                                    <div class="huge">{{ $recognitions }}</div>
                                     <div>Reconocimientos</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{ route('recognitions.index') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">Verlos todos</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

@@ -91,6 +91,57 @@
 			<!-- /.panel -->
 		</div>
 		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Gráficas por competencia
+				</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+					@if(count($competences) > 0)
+						@foreach ($competences as $competence)
+							<div id="chart_competence_{{ $competence->id }}"></div>
+						@endforeach
+					@endif
+					@if(count($indicators) > 0)
+						<div id="chart_indicators"></div>
+					@endif
+				</div>
+			</div>
+			<!-- /.panel -->
+		</div>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Gráficas por indicador de productividad
+				</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+					@if(count($indicators) > 0)
+						@foreach ($indicators as $indicator)
+							<div id="chart_indicator_{{ $indicator->id }}"></div>
+						@endforeach
+					@endif
+				</div>
+			</div>
+			<!-- /.panel -->
+		</div>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Resultados globales de medición
+				</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+					<div id="chart_global_competences"></div>
+				</div>
+
+				<div class="panel-body">
+					<div id="chart_global_indicators"></div>
+				</div>
+			</div>
+			<!-- /.panel -->
+		</div>
+		<div class="col-lg-12">
 			<a class="btn btn-default" href="{{ route('applications.report', ['evaluation' => $evaluation]) }}"> <i class="fa fa-angle-double-left"></i> Volver</a>
 		</div>
 	</div>
@@ -122,6 +173,160 @@
 				}
 			});
 		});
+	</script>
+
+	<script>
+
+		google.charts.load('current', {'packages':['bar']});
+		google.charts.setOnLoadCallback(drawStuff);
+
+		function drawStuff() {
+			@if(count($competences) > 0)
+				@foreach ($competences as $competence)
+					var data_{{$competence->id}} = new google.visualization.arrayToDataTable([
+						['Competencia', 'Porcentaje Total Competencia'],
+						@foreach($users_competences as $user)
+							[
+								'{{ $user['user_fullname'] }}',
+								{{ $user['competences_avg'][$competence->id]['total']*100 }}
+							],
+						@endforeach
+					]);
+					var options_{{$competence->id}} = {
+						chart: {
+							title: '{{$competence->name}}'
+						},
+						legend: { position: 'none' },
+						axes: {
+							x: {
+								0: { side: 'bottom', label: 'Evaluados'}
+							}
+						},
+						vAxis: {
+							format: '#,##%',
+							gridlines: {
+								count: 10,
+							},
+						},
+						height: 400,
+						width: 900,
+						colors: ['{{ $competence->color }}'],
+						bar: { groupWidth: "50%" }
+					};
+
+					var chart_{{$competence->id}} = new google.charts.Bar(document.getElementById('chart_competence_{{ $competence->id }}'));
+					chart_{{$competence->id}}.draw(data_{{$competence->id}}, google.charts.Bar.convertOptions(options_{{$competence->id}}));
+				@endforeach
+			@endif
+
+			@if(count($indicators) > 0)
+				@foreach ($indicators as $indicator)
+					var data_{{$indicator->id}} = new google.visualization.arrayToDataTable([
+						['Indicador de productividad', 'Porcentaje Total Competencia'],
+						@foreach($users_indicators as $user)
+							[
+								"{{ $user['user_fullname'] }}",
+								{{ $user['competences_avg'][$indicator->id]['total']*100 }}
+							],
+						@endforeach
+					]);
+					var options_{{$indicator->id}} = {
+						chart: {
+							title: '{{$indicator->name}}'
+						},
+						legend: { position: 'none' },
+						
+						vAxis: {
+							format: '#,##%',
+							gridlines: {
+								count: 10,
+							},
+						},
+						hAxis: {
+							title: "Evaluados",
+							slantedText: true,
+							slantedTextAngle: 90
+						},
+						height: 400,
+						width: 900,
+						colors: ['{{ $indicator->color }}'],
+						bar: { groupWidth: "50%" },
+						chartArea: { 'width': '82%', height: '60%', top: '9%', left: '15%', right: '3%', bottom: '0'}
+					};
+
+					var chart_{{$indicator->id}} = new google.charts.Bar(document.getElementById('chart_indicator_{{ $indicator->id }}'));
+					chart_{{$indicator->id}}.draw(data_{{$indicator->id}}, google.charts.Bar.convertOptions(options_{{$indicator->id}}));
+				@endforeach
+			@endif
+
+			var data_competences = new google.visualization.arrayToDataTable([
+				['Competencia', 'Total'],
+				@foreach($competences as $competence)
+					[
+						"{{ $competence->name }}", 
+						{{ round(collect($competences_summation[$competence->name])->avg(), 3)*100 }}
+					],
+				@endforeach
+			]);
+			var options_competences = {
+				chart: {
+					title: 'Resultado por Competencias',
+					subtitle: 'Porcentaje total',
+				},
+				legend: { position: 'none' },
+				axes: {
+					x: {
+						0: { side: 'bottom', label: 'Competencias'}
+					}
+				},
+				vAxis: {
+					format: '#,##%',
+					gridlines: {
+						count: 10,
+					},
+				},
+				height: 400,
+				width: 900,
+				bar: { groupWidth: "50%" }
+			};
+
+			var chart = new google.charts.Bar(document.getElementById('chart_global_competences'));
+			chart.draw(data_competences, google.charts.Bar.convertOptions(options_competences));
+
+			var data_indicators = new google.visualization.arrayToDataTable([
+				['Indicador', 'Total'],
+				@foreach($indicators as $indicator)
+					[
+						"{{ $indicator->name }}", 
+						{{ round(collect($indicators_summation[$indicator->name])->avg(), 3)*100 }}
+					],
+				@endforeach
+			]);
+			var options_indicators = {
+				chart: {
+					title: 'Resultado por Indicadores de productividad',
+					subtitle: 'Porcentaje total',
+				},
+				legend: { position: 'none' },
+				axes: {
+					x: {
+						0: { side: 'bottom', label: 'Indicadores'}
+					}
+				},
+				vAxis: {
+					format: '#,##%',
+					gridlines: {
+						count: 10,
+					},
+				},
+				height: 400,
+				width: 900,
+				bar: { groupWidth: "50%" }
+			};
+
+			var chart = new google.charts.Bar(document.getElementById('chart_global_indicators'));
+			chart.draw(data_indicators, google.charts.Bar.convertOptions(options_indicators));
+		};
 	</script>
 
 @endsection
