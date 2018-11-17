@@ -76,11 +76,21 @@
 						</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
+							
 							@if(count($competences) > 0)
-								<div id="chart_div"></div>
+								<h3>Resultado por Competencias</h3>
+								@foreach($competences as $competence)
+									<p><strong>{{ $competence->name }}: </strong> </p>
+									<p>Autoevaluación: {{ ($user_competences['competences_avg'][$competence->id]['auto'])*100 }}%  Heteroevaluación: {{ ($user_competences['competences_avg'][$competence->id]['hetero'])*100 }}%  Total: {{ ($user_competences['competences_avg'][$competence->id]['total'])*100 }}%</p>
+								@endforeach
 							@endif
+
 							@if(count($indicators) > 0)
-								<div id="chart_indicators"></div>
+								<h3>Resultado por Indicadores de productividad</h3>
+								@foreach($indicators as $indicator)
+									<p><strong>{{ $indicator->name }}: </strong> </p>
+									<p>Autoevaluación: {{ ($user_indicators['competences_avg'][$indicator->id]['auto'])*100 }}%  Heteroevaluación: {{ ($user_indicators['competences_avg'][$indicator->id]['hetero'])*100 }}%  Total: {{ ($user_indicators['competences_avg'][$indicator->id]['total'])*100 }}%</p>
+								@endforeach
 							@endif
 						</div>
 					</div>

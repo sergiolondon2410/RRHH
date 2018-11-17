@@ -177,7 +177,7 @@
 		</div>
 		<div class="col-lg-12">
 			<a class="btn btn-default" href="{{ route('applications.results', ['evaluation' => $evaluation]) }}"> <i class="fa fa-angle-double-left"></i> Volver</a>
-			<a class="btn btn-default" href="{{ route('applications.usercomputationprint', ['user' => $user, 'evaluation' => $evaluation]) }}" target="_blank"> <i class="fa fa-print"></i> Imprimir</a>
+			<a class="btn btn-default" href="{{ route('applications.usercomputationprint', ['user' => $user, 'evaluation' => $evaluation]) }}" target="_blank"> <i class="fa fa-file-pdf-o"></i> Generar reporte en PDF</a>
 		</div>
 	</div>
 	<hr>

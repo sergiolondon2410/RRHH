@@ -14,6 +14,7 @@ use App\Answer;
 use App\Question;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ApplicationController extends Controller
 {
@@ -150,7 +151,6 @@ class ApplicationController extends Controller
 				array_push($indicators_summation[$indicator->name], $user_array['competences_avg'][$indicator->id]['total']);
 			}
 		}
-		// dd($indicators_summation);
 		return view('admin.applications.results', compact('evaluation', 'users_competences', 'users_indicators', 'competences', 'indicators', 'competences_summation', 'indicators_summation'));
 	}
 
@@ -280,12 +280,14 @@ class ApplicationController extends Controller
 		}
 
 		$trainings = Training::where('user_id', $user->id)->get();
-		$filename = 'ReporteEvaluacion'.$user->full_name;
+		$prefilename = 'Reporte'.$evaluation->name.$user->full_name.'_'.Carbon::now()->format('Y_m_d').'.pdf';
+		$filename = static::camel($prefilename);
 		$view = \View::make('admin.applications.usercomputationprint', compact('user', 'evaluation', 'user_competences', 'user_indicators', 'competences', 'indicators', 'compromises', 'recognitions', 'questions', 'answers', 'trainings'))->render();
 		$pdf = \App::make('dompdf.wrapper');
 		$pdf->loadHTML($view);
-		return $pdf->stream('archivo');
-		// return view('admin.applications.usercomputationprint', compact('user', 'evaluation', 'user_competences', 'user_indicators', 'competences', 'indicators', 'compromises', 'recognitions', 'questions', 'answers', 'trainings'));
+
+		return $pdf->stream($filename);
+		return $view;
 	}
 
 	public function userResults(Evaluation $evaluation){
@@ -465,6 +467,20 @@ class ApplicationController extends Controller
 		}
 
 		return $competences;
+	}
+
+	public static function camel($value)
+	{
+		$segments = explode(' ', $value);
+		array_walk($segments, function(&$item){
+			$item = ucfirst($item);
+		});	
+		return implode('', $segments);
+	}
+
+	public static function lowerCamel($value)
+	{
+		return lcfirst(static::camel($value));
 	}
 
 
