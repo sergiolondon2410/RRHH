@@ -76,21 +76,37 @@
 						</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							
-							@if(count($competences) > 0)
-								<h3>Resultado por Competencias</h3>
-								@foreach($competences as $competence)
-									<p><strong>{{ $competence->name }}: </strong> </p>
-									<p>Autoevaluación: {{ ($user_competences['competences_avg'][$competence->id]['auto'])*100 }}%  Heteroevaluación: {{ ($user_competences['competences_avg'][$competence->id]['hetero'])*100 }}%  Total: {{ ($user_competences['competences_avg'][$competence->id]['total'])*100 }}%</p>
-								@endforeach
-							@endif
 
+							@if(count($competences) > 0)
+								<div class="row">
+									<div class="col-lg-4">
+										<p><strong>Resultado por Competencias</strong></p>
+									</div>
+									@foreach($competences as $competence)
+										<div class="col-lg-4">
+											{{ $competence->name }}: <i>{{ ($user_competences['competences_avg'][$competence->id]['total'])*100 }}%</i>
+										</div>
+										<div class="col-lg-8">
+											<img src="{{ asset('/storage') }}/100_bar.png" width="{{ ($user_competences['competences_avg'][$competence->id]['total'])*500 }}em" height="50em">
+										</div>
+									@endforeach
+								</div>
+							@endif
+							<hr>
 							@if(count($indicators) > 0)
-								<h3>Resultado por Indicadores de productividad</h3>
-								@foreach($indicators as $indicator)
-									<p><strong>{{ $indicator->name }}: </strong> </p>
-									<p>Autoevaluación: {{ ($user_indicators['competences_avg'][$indicator->id]['auto'])*100 }}%  Heteroevaluación: {{ ($user_indicators['competences_avg'][$indicator->id]['hetero'])*100 }}%  Total: {{ ($user_indicators['competences_avg'][$indicator->id]['total'])*100 }}%</p>
-								@endforeach
+								<div class="row">
+									<div class="col-lg-4">
+										<p><strong>Resultado por Indicadores de productividad</strong></p>
+									</div>
+									@foreach($indicators as $indicator)
+										<div class="col-lg-4">
+											{{ $indicator->name }}: <i>{{ ($user_indicators['competences_avg'][$indicator->id]['total'])*100 }}%</i>
+										</div>
+										<div class="col-lg-8">
+											<img src="{{ asset('/storage') }}/100_bar.png" width="{{ ($user_indicators['competences_avg'][$indicator->id]['total'])*500 }}em" height="50em">
+										</div>
+									@endforeach
+								</div>
 							@endif
 						</div>
 					</div>
