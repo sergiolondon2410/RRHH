@@ -15,6 +15,7 @@ use App\Question;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+set_time_limit(0);
 
 class ApplicationController extends Controller
 {
@@ -287,8 +288,53 @@ class ApplicationController extends Controller
 		$pdf->loadHTML($view);
 
 		return $pdf->stream($filename);
+		// return $view;
+	}
+
+	public function resultsPdf(Evaluation $evaluation){
+		$competence_type_id_comp = 1; //Competencias
+		$competence_type_id_ind = 2; //Indicadores de productividad
+		$evaluation_id = $evaluation->id;
+		$competences = $this->evaluationCompetences($competence_type_id_comp, $evaluation_id);
+		$indicators = $this->evaluationCompetences($competence_type_id_ind, $evaluation_id);
+		$users_completed = User::whereHas('applications', $filter = function($query) use ($evaluation_id){
+			$query->where('evaluation_id', $evaluation_id)->where('status', 'completed');
+		})->get(); //usuarios que tienen al menos una evalución finalizada
+		$users_competences = [];
+		$competences_summation = [];
+		foreach($competences as $competence){
+			$competences_summation[$competence->name] = [];
+		}
+		foreach($users_completed as $user){
+			$user_array = $this->userResult($user, $evaluation, $competence_type_id_comp);//con el parámetro se obtienen los valores de las competencias
+			array_push($users_competences, $user_array);
+			foreach($competences as $competence){
+				array_push($competences_summation[$competence->name], $user_array['competences_avg'][$competence->id]['total']);
+			}
+		}
+		$users_indicators = [];
+		$indicators_summation = [];
+		foreach($indicators as $indicator){
+			$indicators_summation[$indicator->name] = [];
+		}
+		foreach($users_completed as $user){
+			$user_array = $this->userResult($user, $evaluation, $competence_type_id_ind);
+			array_push($users_indicators, $user_array);
+			foreach($indicators as $indicator){
+				array_push($indicators_summation[$indicator->name], $user_array['competences_avg'][$indicator->id]['total']);
+			}
+		}
+
+		$prefilename = 'Reporte'.$evaluation->name.'_'.Carbon::now()->format('Y_m_d').'.pdf';
+		$filename = static::camel($prefilename);
+		$view = view('admin.applications.resultspdf', compact('evaluation', 'users_competences', 'users_indicators', 'competences', 'indicators', 'competences_summation', 'indicators_summation'))->render();
+		$pdf = \App::make('dompdf.wrapper');
+		$pdf->loadHTML($view);
+
+		return $pdf->stream($filename);
 		return $view;
 	}
+
 
 	public function userResults(Evaluation $evaluation){
 		$user = Auth::user();
