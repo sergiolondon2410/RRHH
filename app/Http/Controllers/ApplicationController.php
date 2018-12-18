@@ -140,14 +140,30 @@ class ApplicationController extends Controller
 	}
 
 	public function results(Evaluation $evaluation){
+		// if(!is_null(Input::get('position')) && (Input::get('position') != 'undefined')){
+		// 	dd(Input::get('position'));
+		// } 
 		$competence_type_id_comp = 1; //Competencias
 		$competence_type_id_ind = 2; //Indicadores de productividad
 		$evaluation_id = $evaluation->id;
 		$competences = $this->evaluationCompetences($competence_type_id_comp, $evaluation_id);
 		$indicators = $this->evaluationCompetences($competence_type_id_ind, $evaluation_id);
-		$users_completed = User::whereHas('applications', $filter = function($query) use ($evaluation_id){
-			$query->where('evaluation_id', $evaluation_id)->where('status', 'completed');
-		})->get(); //usuarios que tienen al menos una evalución finalizada
+		$positions = User::select('position')
+							->where('organization_id', $evaluation->process->organization_id)
+							->distinct('position')
+							->get()
+							->pluck('position', 'position');
+		$positions->prepend('Buscar por cargo', 'undefined');
+		$areas = User::select('area')
+							->where('organization_id', $evaluation->process->organization_id)
+							->distinct()
+							->get()
+							->pluck('area', 'area');
+		$areas->prepend('Buscar por área', 'undefined');
+		// $users_completed = User::whereHas('applications', $filter = function($query) use ($evaluation_id){
+		// 	$query->where('evaluation_id', $evaluation_id)->where('status', 'completed');
+		// })->get(); //usuarios que tienen al menos una evaluación finalizada
+		$users_completed = $this->selectedUsers(Input::get('position'), Input::get('area'), $evaluation_id);
 		$users_competences = [];
 		$competences_summation = [];
 		foreach($competences as $competence){
@@ -172,7 +188,26 @@ class ApplicationController extends Controller
 				array_push($indicators_summation[$indicator->name], $user_array['competences_avg'][$indicator->id]['total']);
 			}
 		}
-		return view('admin.applications.results', compact('evaluation', 'users_competences', 'users_indicators', 'competences', 'indicators', 'competences_summation', 'indicators_summation'));
+		return view('admin.applications.results', compact('evaluation', 'users_competences', 'users_indicators', 'competences', 'indicators', 'competences_summation', 'indicators_summation', 'areas', 'positions'));
+	}
+
+	public function selectedUsers($position, $area, $evaluation_id){
+
+		$user_list = (new User)->newQuery();
+
+		if(!is_null($position) && ($position != 'undefined')){
+			$user_list->where('position', $position);
+		}
+
+		if(!is_null($area) && ($area != 'undefined')){
+			$user_list->where('area', $area);
+		} 
+
+		$user_list->whereHas('applications', $filter = function($query) use ($evaluation_id){
+			$query->where('evaluation_id', $evaluation_id)->where('status', 'completed');
+		}); //usuarios que tienen al menos una evaluación finalizada
+
+		return $user_list->get();
 	}
 
 	public function detail(Application $application){

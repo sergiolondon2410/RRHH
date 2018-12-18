@@ -7,6 +7,34 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
+					<div class="panel-heading">
+						Filtros de búsqueda
+					</div>
+					<div class="panel-body">
+						{!! Form::open(['url' => route('applications.results', ['evaluation' => $evaluation]), 'method' => 'GET'])  !!}
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										{!! Form::select('position', $positions, null, ['class' => 'form-control']) !!}
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										{!! Form::select('area', $areas, null, ['class' => 'form-control']) !!}
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="form-group" style="margin-top: 20px">
+										{!! Form::submit('Filtrar resultados', ['class' => 'form-control btn btn-default']) !!}
+									</div>
+								</div>
+							</div>
+							<!-- /.row (nested) -->
+						{!! Form::close() !!}
+					</div>
+				</div>
+				<!-- /.panel -->
+			<div class="panel panel-default">
 				<div class="panel-heading">
 					Registro de resultados - {{ $evaluation->name }}
 				</div>

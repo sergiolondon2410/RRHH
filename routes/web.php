@@ -114,6 +114,7 @@ Route::get('/applications/{application}/complete/', 'ApplicationController@compl
 Route::get('/applications/filter', 'ApplicationController@filter')->name('applications.filter');
 Route::get('/applications/report/', 'ApplicationController@report')->name('applications.report');
 Route::get('/applications/chart/', 'ApplicationController@chart')->name('applications.chart');
+// Route::get('/applications/{evaluation}/{position}/{area}/results/', 'ApplicationController@results')->name('applications.results');
 Route::get('/applications/{evaluation}/results/', 'ApplicationController@results')->name('applications.results');
 Route::get('/applications/{application}/detail/', 'ApplicationController@detail')->name('applications.detail');
 Route::get('/applications/{application}/evaluate/', 'ApplicationController@evaluate')->name('applications.evaluate');

@@ -13,7 +13,7 @@
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<h4><i class="fa fa-bullhorn"></i> Resultados: {{ $evaluation->applications->count() }} evaluaciones</h4>
-					<a class="btn btn-default" href="{{ route('applications.results', ['evaluation' => $evaluation ]) }}"> <i class="fa fa-bar-chart"></i> Ver el registro de resultados</a>
+					<a class="btn btn-default" href="{{ route('applications.results', ['evaluation' => $evaluation]) }}"> <i class="fa fa-bar-chart"></i> Ver el registro de resultados</a>
 					<hr>
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 						<thead>
