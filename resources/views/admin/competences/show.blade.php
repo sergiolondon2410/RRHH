@@ -34,9 +34,6 @@
 					</table>
 				</div>
 			<!-- /.panel-body -->
-			<!-- Borrar esto -->
-				<button type="button" class="btn btn-default"><a href="{{ url("/preguntas/nuevo/$competence->id")}}">Nueva pregunta</a></button>
-
 			</div>
 			<!-- /.panel -->
 		</div>

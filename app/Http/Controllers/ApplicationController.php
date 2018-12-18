@@ -12,8 +12,11 @@ use App\Recognition;
 use App\Training;
 use App\Answer;
 use App\Question;
+use App\Organization;
+use App\Process;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 set_time_limit(0);
 
@@ -105,9 +108,26 @@ class ApplicationController extends Controller
 		return view('admin.applications.complete', compact('application'));
 	}
 
+	public function organizationFilter(){
+		$organization_id = Input::get('organization');
+		$processes = Process::where('organization_id', $organization_id)->get();
+		return response()->json($processes);
+	}
+
+	public function processFilter(){
+		$process_id = Input::get('process');
+		$evaluations = Evaluation::where('process_id', $process_id)->get();
+		// $evaluations = Evaluation::all();
+		return response()->json($evaluations);
+	}
+
 	public function filter(){
-		$evaluations = Evaluation::all()->pluck('name','id');;
-		return view('admin.applications.filter', compact('evaluations'));
+		$evaluations = Evaluation::all()->pluck('name','id');
+		$organizations = Organization::all()->pluck('name','id');
+		$organizations->prepend('Seleccione una empresa', 0);
+		// dd($organizations);
+		return view('admin.applications.filter', compact('evaluations', 'organizations'));
+
 	}
 
 	public function report(Request $request){

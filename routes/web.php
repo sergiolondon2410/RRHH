@@ -122,6 +122,8 @@ Route::get('/applications/{user}/{evaluation}/useranswers/', 'ApplicationControl
 Route::get('/applications/{user}/{evaluation}/usercomputationprint/', 'ApplicationController@userComputationPrint')->name('applications.usercomputationprint');
 Route::get('/applications/{evaluation}/userresults/', 'ApplicationController@userResults')->name('applications.userresults');
 Route::get('/applications/{evaluation}/resultspdf/', 'ApplicationController@resultsPdf')->name('applications.resultspdf');
+Route::get('/applications/organization', 'ApplicationController@organizationFilter')->name('applications.organization');
+Route::get('/applications/process', 'ApplicationController@processFilter')->name('applications.process');
 
 //Rutas Compromisos
 Route::get('/compromises/organization/', 'CompromiseController@organization')->name('compromises.organization');

@@ -22,7 +22,7 @@
 					{!! Form::open(['url' => route('evaluationquestion.store', ['evaluation' => $evaluation]), 'method' => 'POST'])  !!}
 					<div class="row">
 						<div class="col-lg-12">
-							<table width="100%" class="table table-striped table-bordered table-hover">
+							<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 								<thead>
 									<tr>
 										<th>Seleccionar</th>
