@@ -125,7 +125,6 @@ class ApplicationController extends Controller
 		$evaluations = Evaluation::all()->pluck('name','id');
 		$organizations = Organization::all()->pluck('name','id');
 		$organizations->prepend('Seleccione una empresa', 0);
-		// dd($organizations);
 		return view('admin.applications.filter', compact('evaluations', 'organizations'));
 
 	}
@@ -140,9 +139,7 @@ class ApplicationController extends Controller
 	}
 
 	public function results(Evaluation $evaluation){
-		// if(!is_null(Input::get('position')) && (Input::get('position') != 'undefined')){
-		// 	dd(Input::get('position'));
-		// } 
+
 		$competence_type_id_comp = 1; //Competencias
 		$competence_type_id_ind = 2; //Indicadores de productividad
 		$evaluation_id = $evaluation->id;
@@ -160,9 +157,7 @@ class ApplicationController extends Controller
 							->get()
 							->pluck('area', 'area');
 		$areas->prepend('Buscar por área', 'undefined');
-		// $users_completed = User::whereHas('applications', $filter = function($query) use ($evaluation_id){
-		// 	$query->where('evaluation_id', $evaluation_id)->where('status', 'completed');
-		// })->get(); //usuarios que tienen al menos una evaluación finalizada
+
 		$users_completed = $this->selectedUsers(Input::get('position'), Input::get('area'), $evaluation_id);
 		$users_competences = [];
 		$competences_summation = [];
@@ -289,7 +284,7 @@ class ApplicationController extends Controller
 		return view('admin.applications.usercomputation', compact('user', 'evaluation', 'user_competences', 'user_indicators', 'competences', 'indicators', 'compromises', 'recognitions', 'questions', 'answers', 'trainings'));
 	}
 
-	public function userComputationPrint(User $user, Evaluation $evaluation){
+	public function userComputationPrint(){
 
 		$competence_type_id_comp = 1; //Competencias
 		$competence_type_id_ind = 2; //Indicadores de productividad
@@ -344,6 +339,22 @@ class ApplicationController extends Controller
 
 		return $pdf->stream($filename);
 		// return $view;
+	}
+
+	public function competencesChartPrint(Evaluation $evaluation, $position){
+		dd($position);
+		// $competence_type_id_comp = 1; //Competencias
+		// $competences = $this->evaluationCompetences($competence_type_id_comp, $evaluation->id);
+		// $user_competences = $this->userResult($user, $evaluation, $competence_type_id_comp);
+		
+		// $prefilename = 'Reporte'.$evaluation->name.$user->full_name.'_'.Carbon::now()->format('Y_m_d').'.pdf';
+		// $filename = static::camel($prefilename);
+		// $view = \View::make('admin.applications.usercomputationprint', compact('user', 'evaluation', 'user_competences', 'user_indicators', 'competences', 'indicators', 'compromises', 'recognitions', 'questions', 'answers', 'trainings'))->render();
+		// $pdf = \App::make('dompdf.wrapper');
+		// $pdf->loadHTML($view);
+
+		// return $pdf->stream($filename);
+		
 	}
 
 	public function resultsPdf(Evaluation $evaluation){

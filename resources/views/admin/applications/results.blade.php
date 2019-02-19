@@ -4,6 +4,17 @@
 
 @section('content')
 
+@php
+	$position_get = 'undefined';
+	$area_get = 'undefined';
+	if(request()->get('position') !== null){
+		$position_get = request()->get('position');
+	}
+	if(request()->get('area') !== null){
+		$area_get = request()->get('area');
+	}
+@endphp
+
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
@@ -15,12 +26,12 @@
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
-										{!! Form::select('position', $positions, null, ['class' => 'form-control']) !!}
+										{!! Form::select('position', $positions, $position_get, ['class' => 'form-control']) !!}
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
-										{!! Form::select('area', $areas, null, ['class' => 'form-control']) !!}
+										{!! Form::select('area', $areas, $area_get, ['class' => 'form-control']) !!}
 									</div>
 								</div>
 								<div class="col-lg-12">
@@ -45,19 +56,12 @@
 						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
-									<th></th>
-									<th></th>
-									@foreach ($competences as $competence)
-										<th colspan="3">{{ $competence->name }}</th>
-									@endforeach
-								</tr>
-								<tr>
 									<th>Evaluado</th>
 									<th>Cargo</th>
 									@foreach ($competences as $competence)
 										<th>Auto</th>
 										<th>Hetero</th>
-										<th>Total</th>
+										<th>Total: {{ $competence->name }}</th>
 									@endforeach
 								</tr>
 							</thead>
@@ -82,19 +86,12 @@
 						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 							<thead>
 								<tr>
-									<th></th>
-									<th></th>
-									@foreach ($indicators as $indicator)
-										<th colspan="3">{{ $indicator->name }}</th>
-									@endforeach
-								</tr>
-								<tr>
 									<th>Evaluado</th>
 									<th>Cargo</th>
 									@foreach ($indicators as $indicator)
 										<th>Auto</th>
 										<th>Hetero</th>
-										<th>Total</th>
+										<th>Total: {{ $indicator->name }}</th>
 									@endforeach
 								</tr>
 							</thead>
@@ -130,9 +127,10 @@
 							<div id="chart_competence_{{ $competence->id }}"></div>
 						@endforeach
 					@endif
-					@if(count($indicators) > 0)
-						<div id="chart_indicators"></div>
-					@endif
+				</div>
+				
+				<div class="panel-footer">
+					<a class="btn btn-default" href="{{ route('applications.competenceschartprint', ['evaluation' => $evaluation, 'position' => $position_get, 'area' => $area_get]) }}"> <i class="fa fa-file-pdf-o"></i> Generar reporte en PDF</a>
 				</div>
 			</div>
 			<!-- /.panel -->
@@ -358,12 +356,6 @@
 			chart.draw(data_indicators, google.charts.Bar.convertOptions(options_indicators));
 		};
 	</script>
-	<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+	
 
 @endsection

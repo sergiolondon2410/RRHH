@@ -76,9 +76,9 @@
 		function drawChart() {
 			var data = google.visualization.arrayToDataTable([
 				['Evaluaciones', 'Porcentaje'],
-				['Finalizadas', {{ $completed }}],
-				['Sin finalizar', {{ $started }}],
-				['Sin responder', {{ $uninitialized }}]
+				['Finalizadas', {{ $completed }} ],
+				['Sin finalizar', {{ $started }} ],
+				['Sin responder', {{ $uninitialized }} ]
 			]);
 
 			var options = {

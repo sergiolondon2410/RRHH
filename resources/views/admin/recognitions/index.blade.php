@@ -13,7 +13,7 @@
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					@if($recognitions->count() > 0)
-						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
+						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
 									<th>Insignia</th>
@@ -21,6 +21,7 @@
 									<th>Otorgado a</th>
 									<th>Méritos</th>
 									<th>Otorgado por</th>
+									<th>Empresa</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -33,6 +34,7 @@
 										<td>{{ $recognition->user->full_name }}</td>
 										<td>{{ $recognition->observation }}</td>
 										<td>{{ $recognition->grantter->full_name }}</td>
+										<td>{{ $recognition->user->organization->name }}</td>
 									</tr>
 								@endforeach
 							</tbody>
