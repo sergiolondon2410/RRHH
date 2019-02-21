@@ -341,19 +341,34 @@ class ApplicationController extends Controller
 		// return $view;
 	}
 
-	public function competencesChartPrint(Evaluation $evaluation, $position){
-		dd($position);
-		// $competence_type_id_comp = 1; //Competencias
-		// $competences = $this->evaluationCompetences($competence_type_id_comp, $evaluation->id);
-		// $user_competences = $this->userResult($user, $evaluation, $competence_type_id_comp);
+	public function competencesChartPrint(Evaluation $evaluation, $position, $area){
 		
-		// $prefilename = 'Reporte'.$evaluation->name.$user->full_name.'_'.Carbon::now()->format('Y_m_d').'.pdf';
-		// $filename = static::camel($prefilename);
-		// $view = \View::make('admin.applications.usercomputationprint', compact('user', 'evaluation', 'user_competences', 'user_indicators', 'competences', 'indicators', 'compromises', 'recognitions', 'questions', 'answers', 'trainings'))->render();
-		// $pdf = \App::make('dompdf.wrapper');
-		// $pdf->loadHTML($view);
+		$competence_type_id_comp = 1; //Competencias
+		$competences = $this->evaluationCompetences($competence_type_id_comp, $evaluation->id);
+		// $user_competences = $this->userResult($user, $evaluation, $competence_type_id_comp);
+		$users_completed = $this->selectedUsers($position, $area, $evaluation->id);
 
-		// return $pdf->stream($filename);
+		$users_competences = [];
+		$competences_summation = [];
+		foreach($competences as $competence){
+			$competences_summation[$competence->name] = [];
+		}
+		foreach($users_completed as $user){
+			$user_array = $this->userResult($user, $evaluation, $competence_type_id_comp);//con el parámetro se obtienen los valores de las competencias
+			array_push($users_competences, $user_array);
+			foreach($competences as $competence){
+				array_push($competences_summation[$competence->name], $user_array['competences_avg'][$competence->id]['total']);
+			}
+		}
+		
+		$prefilename = 'GraficaporCompetencias'.$evaluation->name.'_'.Carbon::now()->format('Y_m_d').'.pdf';
+		$filename = static::camel($prefilename);
+		$view = \View::make('admin.applications.competenceschartpdf', compact('evaluation', 'users_competences', 'competences'))->render();
+		$pdf = \App::make('dompdf.wrapper');
+		$pdf->loadHTML($view);
+
+		return $pdf->stream($filename);
+		// return $view;
 		
 	}
 

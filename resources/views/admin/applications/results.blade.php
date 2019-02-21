@@ -130,7 +130,7 @@
 				</div>
 				
 				<div class="panel-footer">
-					<a class="btn btn-default" href="{{ route('applications.competenceschartprint', ['evaluation' => $evaluation, 'position' => $position_get, 'area' => $area_get]) }}"> <i class="fa fa-file-pdf-o"></i> Generar reporte en PDF</a>
+					<a class="btn btn-default" href="{{ route('applications.competenceschartprint', ['evaluation' => $evaluation, 'position' => $position_get, 'area' => $area_get]) }}" target="_blank"> <i class="fa fa-file-pdf-o"></i> Generar reporte en PDF</a>
 				</div>
 			</div>
 			<!-- /.panel -->
