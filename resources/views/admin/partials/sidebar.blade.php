@@ -109,9 +109,6 @@
                                     <li>
                                         <a href="{{ route('evaluationtypes.index')}}">Tipos de evaluaciones</a>
                                     </li>
-                                    <li>
-                                        <a href="{{ route('processes.index')}}">Procesos evaluativos</a>
-                                    </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>

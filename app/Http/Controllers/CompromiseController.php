@@ -10,27 +10,42 @@ use App\Evaluation;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 
 class CompromiseController extends Controller
 {
 	public function index()
 	{
-
+		// dd(Input::get('status'));
 		$title = "Listado de compromisos";
 		$user = Auth::user();
 		$status = [
+			"undefined" => "Buscar por estado",
 			"pending" => "Pendiente",
 			"achieved" => "Cumplido",
 			"unsuccessful" => "No cumplido"
 		];
+		$organizations = Organization::all()->pluck('name', 'id');
+		$organizations->prepend('Buscar por empresa', 'undefined');
 		if($user->user_type_id < 3){
-			$compromises = Compromise::all();
-			return view('admin.compromises.index', compact('compromises', 'title', 'status'));
+			$compromise_list = (new Compromise)->newQuery();
+
+			if(!is_null(Input::get('organization')) && (Input::get('organization') != 'undefined')){
+				$organization_id = Input::get('organization');
+				$compromise_list->whereHas('user', $filter = function($query) use ($organization_id){
+					$query->where('organization_id', $organization_id);
+				});
+			}
+			if(!is_null(Input::get('status')) && (Input::get('status') != 'undefined')){
+				$compromise_list->where('status', Input::get('status'));
+			}
+			$compromises = $compromise_list->get();
+			return view('admin.compromises.index', compact('compromises', 'title', 'status', 'organizations'));
 		}
 		else{
 			$compromises = Compromise::where('user_id', $user->id)->get();
-			return view('admin.compromises.userindex', compact('compromises', 'user', 'title', 'status'));
+			return view('admin.compromises.userindex', compact('compromises', 'user', 'title', 'status', 'organizations'));
 		}
 	}
 
@@ -39,7 +54,7 @@ class CompromiseController extends Controller
 		return view('admin.compromises.show', compact('compromise', 'title'));
 	}
 
-	public function organization()
+	public function organization() //?????
 	{
 		$organizations = Organization::all();
 		$title = 'Asignar compromisos: Elegir empresa';

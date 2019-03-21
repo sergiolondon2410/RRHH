@@ -94,11 +94,6 @@ Route::resource('evaluationtypes', 'EvaluationTypeController');
 //Rutas Procesos de selección
 Route::resource('processes', 'ProcessController');
 
-//Rutas Premios
-Route::resource('awards', 'AwardController');
-
-//Rutas Reconocimientos
-Route::resource('accomplishments', 'AccomplishmentController');
 
 //Rutas Evaluaciones x Preguntas
 Route::get('/evaluationquestion/{evaluation}/create', 'EvaluationQuestionController@create')->name('evaluationquestion.create');
@@ -123,7 +118,7 @@ Route::get('/applications/{user}/{evaluation}/useranswers/', 'ApplicationControl
 Route::get('/applications/{user}/{evaluation}/usercomputationprint/', 'ApplicationController@userComputationPrint')->name('applications.usercomputationprint');
 Route::get('/applications/{evaluation}/userresults/', 'ApplicationController@userResults')->name('applications.userresults');
 Route::get('/applications/{evaluation}/resultspdf/', 'ApplicationController@resultsPdf')->name('applications.resultspdf');
-Route::get('/applications/organization', 'ApplicationController@organizationFilter')->name('applications.organization');
+Route::get('/applications/organization', 'ApplicationController@organizationFilter')->name('applications.organization'); //??????
 Route::get('/applications/process', 'ApplicationController@processFilter')->name('applications.process');
 Route::get('/applications/{evaluation}/{position}/{area}/competenceschartprint/', 'ApplicationController@competencesChartPrint')->name('applications.competenceschartprint');
 
@@ -140,6 +135,12 @@ Route::get('/compromises/{compromise}/', 'CompromiseController@show')->name('com
 Route::get('/recognitions', 'RecognitionController@index')->name('recognitions.index');
 Route::get('/recognitions/{user}/{evaluation}/create/', 'RecognitionController@create')->name('recognitions.create');
 Route::post('/recognitions/{user}/{evaluation}/', 'RecognitionController@store')->name('recognitions.store');
+
+//Rutas Premios ?
+Route::resource('awards', 'AwardController');
+
+//Rutas Reconocimientos ??????
+Route::resource('accomplishments', 'AccomplishmentController');
 
 //Rutas Requerimientos de capacitación
 Route::get('/trainings/{user}/{evaluation}/create/', 'TrainingController@create')->name('trainings.create');

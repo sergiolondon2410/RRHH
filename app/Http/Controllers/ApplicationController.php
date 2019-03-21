@@ -284,8 +284,8 @@ class ApplicationController extends Controller
 		return view('admin.applications.usercomputation', compact('user', 'evaluation', 'user_competences', 'user_indicators', 'competences', 'indicators', 'compromises', 'recognitions', 'questions', 'answers', 'trainings'));
 	}
 
-	public function userComputationPrint(){
-
+	public function userComputationPrint(User $user, Evaluation $evaluation){
+	// public function userComputationPrint(){
 		$competence_type_id_comp = 1; //Competencias
 		$competence_type_id_ind = 2; //Indicadores de productividad
 		$competences = $this->evaluationCompetences($competence_type_id_comp, $evaluation->id);
