@@ -3,7 +3,7 @@
 @section('title', $title)
 
 @section('content')
-	
+
 	@if($errors->any())
 		<div class="alert alert-danger">
 			<h4>El formulario tiene los siguientes errores</h4>
@@ -16,16 +16,16 @@
 	@endif
 
 	{!! Form::model($scale, ['method' => 'POST', 'action' => ['ScaleController@update', $scale],  'files' => true])  !!}
-	 	@method('PUT')
+		@method('PUT')
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-                        Información
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12">
+						Información
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
@@ -47,20 +47,19 @@
 									</div>
 								</div>	
 								<div class="form-group" style="margin-top: 20px">
-										{!! Form::submit('Editar Escala', ['class' => 'form-control btn btn-default']) !!}
+									{!! Form::submit('Editar Escala', ['class' => 'form-control btn btn-default']) !!}
 								</div>
 							</div>
-                        </div>
-                        <!-- /.row (nested) -->
-                    </div>
+						</div>
+						<!-- /.row (nested) -->
+					</div>
 				</div>
-                <!-- /.panel -->
+				<!-- /.panel -->
 			</div>
-		</div>
-		
+		</div>	
 
 	{!! Form::close() !!}
 
-	<p><a href="{{ route('scales.show', ['scale' => $scale]) }}">Volver al detalle de escala</a></p>
+	<a class="btn btn-default" href="{{ route('scales.show', ['scale' => $scale]) }}"> <i class="fa fa-times"></i> Cancelar</a>
 
 @endsection

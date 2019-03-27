@@ -1,9 +1,9 @@
 @extends('layout')
 
-@section('title', "Nuevo Compromiso")
+@section('title', $title)
 
 @section('content')
-	
+
 	@if($errors->any())
 		<div class="alert alert-danger">
 			<h4>El formulario tiene los siguientes errores</h4>
@@ -15,12 +15,13 @@
 		</div>
 	@endif
 
-	{!! Form::open(['url' => route('compromises.store', ['user' => $user, 'evaluation' => $evaluation]), 'method' => 'POST'])  !!}
+	{!! Form::model($compromise, ['method' => 'POST', 'action' => ['CompromiseController@update', $compromise],  'files' => true])  !!}
+		@method('PUT')
 		<div class="row">
 			<div class="col-lg-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Asignar compromiso a {{ $user->full_name }}
+						Asignar compromiso a {{ $compromise->user->full_name }}
 					</div>
 					<div class="panel-body">
 						<div class="row">
@@ -32,7 +33,7 @@
 							</div>
 							<div class="col-lg-12">
 								<div class="form-group">
-									{!! Form::label('observation', '*Aspecto a mejorar:') !!}
+									{!! Form::label('observation', 'Aspecto a mejorar:') !!}
 									{!! Form::text('observation', null, ['class' => 'form-control', 'value' => old('observation')]) !!}
 								</div>
 							</div>
@@ -43,33 +44,28 @@
 								</div>
 							</div>
 							<div class="col-lg-12">
-								{!! Form::label('date', '*Fecha de cumplimiento:') !!}
+								{!! Form::label('end_date', 'Fecha de cumplimiento:') !!}
 							</div>
 							<div class="col-lg-12">
 								<div class="form-group input-group">
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-									<input type="text" class="form-control datepicker" name="date">
+									{!! Form::text('end_date', null, ['class' => 'form-control datepicker', 'value' => old('end_date')]) !!}
 								</div>
 							</div>
-							<div class="col-lg-12">
-								<div class="form-group">
-									{!! Form::label('alarm', 'Crear alarma:') !!}
-									{!! Form::select('alarm', $alarm, null, ['class' => 'form-control']) !!}
-								</div>
-							</div>
-							<div class="form-group col-sm-12">
-								{!! Form::submit('Crear Compromiso', ['class' => 'form-control btn btn-default']) !!}
+							<div class="form-group col-sm-12" style="margin-top: 20px">
+								{!! Form::submit('Editar Compromiso', ['class' => 'form-control btn btn-default']) !!}
 							</div>
 						</div>
 					</div>
 					<!-- /.panel-body -->
 				</div>
 			</div>
-		</div>
+			
+		</div>	
+
 	{!! Form::close() !!}
 
-	<p><a class="btn btn-default" href="{{ route('applications.usercomputation', ['user' => $user, 'evaluation' => $evaluation]) }}"> <i class="fa fa-times"></i> Cancelar</a></p>
-	<hr>
+	<a class="btn btn-default" href="{{ route('compromises.show', ['compromise' => $compromise]) }}"> <i class="fa fa-times"></i> Cancelar</a>
 
 @endsection
 
@@ -81,6 +77,11 @@
 		$('.datepicker').datepicker({
 			format: "dd/mm/yyyy",
 			language: "es",
+			defaultViewDate: {
+				year: 2018,
+				month: 4,
+				day: 25
+			},
 			autoclose: true
 		});
 	</script>

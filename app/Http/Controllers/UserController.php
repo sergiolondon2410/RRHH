@@ -47,7 +47,7 @@ class UserController extends Controller
                 'document' => 'required|unique:users,document',
                 'user_type' => 'required',
                 'email' => 'required|email|unique:users,email',
-                'password'      => 'required|min:3',
+                'password' => 'required|min:3',
                 'password_confirm'=> 'required|same:password'
             ],
             [ 
@@ -99,7 +99,6 @@ class UserController extends Controller
         $message = "El usuario $user->name $user->last_name fue creado correctamente";
         $request->session()->flash('success', $message);
         return redirect()->action('UserController@index');
-        // return view('admin.users.index', compact('title'));
     }
 
     public function edit(Request $request, User $user)

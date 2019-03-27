@@ -25,12 +25,15 @@
 					</div>
 				</div>
 				<!-- /.panel-body -->
+				<div class="panel-footer">
+					<a class="btn btn-default" href="{{ route('scales.index') }}"> <i class="fa fa-angle-double-left"></i> Volver al listado</a>
+				</div>
 			</div>
 			<!-- /.panel -->
 		</div>
 	    <!-- /.col-lg-12 -->
 	</div>
-	<p><a href="{{ route('scales.index') }}">Volver al listado</a></p>
+	
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -64,7 +67,9 @@
 					</table>
 				</div>
 				<!-- /.panel-body -->
-				<div class="panel-footer"><a class="btn btn-default" href="{{ route('measures.create', ['scale' => $scale]) }}"> <i class="fa fa-plus-circle"></i> Nueva medida</a></div>
+				<div class="panel-footer">
+					<a class="btn btn-default" href="{{ route('measures.create', ['scale' => $scale]) }}"> <i class="fa fa-plus-circle"></i> Nueva medida</a>
+				</div>
 			</div>
 			<!-- /.panel -->
 		</div>

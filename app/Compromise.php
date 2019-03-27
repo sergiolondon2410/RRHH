@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Compromise extends Model
 {
@@ -23,5 +24,10 @@ class Compromise extends Model
 	public function alerts()
 	{
 		return $this->hasMany(CompromiseAlert::class);
+	}
+
+	public function getEndDateAttribute()
+	{
+		return Carbon::parse($this->ending)->format('d/m/Y');
 	}
 }

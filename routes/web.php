@@ -130,6 +130,8 @@ Route::get('/compromises/{user}/{evaluation}/create/', 'CompromiseController@cre
 Route::post('/compromises/{user}/{evaluation}/', 'CompromiseController@store')->name('compromises.store');
 Route::get('/compromises', 'CompromiseController@index')->name('compromises.index');
 Route::get('/compromises/{compromise}/', 'CompromiseController@show')->name('compromises.show');
+Route::get('/compromises/{compromise}/edit', 'CompromiseController@edit')->name('compromises.edit');
+Route::put('/compromises/{compromise}', 'CompromiseController@update')->name('compromises.update');
 
 //Rutas Reconocimientos
 Route::get('/recognitions', 'RecognitionController@index')->name('recognitions.index');

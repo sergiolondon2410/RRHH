@@ -62,6 +62,9 @@
 								<th>Empresa</th>
 								<th>Plazo</th>
 								<th>Estado</th>
+								@if(Auth::user()->user_type_id < 3)
+									<th>Acciones</th>
+								@endif
 							</tr>
 						</thead>
 						<tbody>
@@ -80,6 +83,12 @@
 										{{ Carbon\Carbon::parse($compromise->ending)->format('d/m/Y') }}
 									</td>
 									<td>{{ $status[$compromise->status] }}</td>
+									@if(Auth::user()->user_type_id < 3)
+										<td>
+											<a href="{{ route('compromises.show', ['compromise' => $compromise]) }}" data-toggle="tooltip" data-placement="bottom" title="Ver más"><i class="fa fa-info-circle fa-fw"></i></a>
+											<a href="{{ route('compromises.edit', ['compromise' => $compromise]) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil fa-fw"></i></a>
+										</td>
+									@endif
 								</tr>
 							@endforeach
 						</tbody>
