@@ -63,54 +63,61 @@ class CompromiseController extends Controller
 	{
 		$title = 'Editar compromiso';
 		$validators = User::where('organization_id', $compromise->user->organization_id)->get()->except(['id', $compromise->user->id])->pluck('full_name', 'id');
+		$status = [
+			"pending" => "Pendiente",
+			"achieved" => "Cumplido",
+			"unsuccessful" => "No cumplido"
+		];
 		$alarm = ["Ninguna alarma", "Un día antes", "Dos días antes", "Tres días antes", "Una semana antes"];
 
-		return view('admin.compromises.edit', compact('title','compromise', 'validators'));
+		return view('admin.compromises.edit', compact('title','compromise', 'validators', 'status'));
 	}
 
 	public function update(Request $request, Compromise $compromise)
 	{
-		// dd($compromise);
 		$title = 'Editar compromiso';
 		$validators = User::where('organization_id', $compromise->user->organization_id)->get()->except(['id', $compromise->user->id])->pluck('full_name', 'id');
-
-		$data = request()->validate(
-			[
-				'observation' => 'required',
-				'activity' => 'required'
-			],
-			[ 
-				'observation' => '*Nombre: Ingrese el nombre',
-				'activity.required' => '*Apellidos: Ingrese el apellido'
-			]
-		);
+		$status = [
+			"pending" => "Pendiente",
+			"achieved" => "Cumplido",
+			"unsuccessful" => "No cumplido"
+		];
+		$fail_view = \View::make('admin.compromises.edit', compact('title', 'compromise', 'validators','status'));
 
 		$compromise->validator_id = $request['validator'];
 
-		// if(is_null($request['activity'])){
-		// 	$request->session()->flash('danger', '*Acciones: Debe ingresar las acciones a realizar');
-		// 	return view('admin.compromises.edit', compact('title', 'compromise', 'validators'));
-		// }
-		// else{
-		// 	$compromise->activity = $request['activity'];
-		// }
+		if(is_null($request['observation'])){
+			$request->session()->flash('danger', '*Aspecto a mejorar: debe ingresar el aspecto a mejorar');
+			return $fail_view;
+		}
+		else{
+			$compromise->observation = $request['observation'];
+		}
 
-		// if(is_null($request['date'])){
-		// 	$request->session()->flash('danger', '*Fecha de cumplimiento: Debe ingresar una fecha límite para el cumplimiento del compromiso');	
-		// 	return view('admin.compromises.create', compact('user', 'validator', 'alarm'));
-		// }
-		// elseif(Carbon::createFromFormat('d/m/Y', $request['date']) <= Carbon::now()){
-		// 	$request->session()->flash('danger', '*Fecha de cumplimiento: Debe ingresar una fecha posterior');
-		// 	return view('admin.compromises.create', compact('user', 'validator', 'alarm'));
-		// }
-		// else{
-		// 	$ending = Carbon::createFromFormat('d/m/Y', $request['date'])->toDateTimeString();
-		// 	$compromise->ending = $ending;
-		// }
+		if(is_null($request['activity'])){
+			$request->session()->flash('danger', '*Acciones: Debe ingresar las acciones a realizar');
+			return $fail_view;
+		}
+		else{
+			$compromise->activity = $request['activity'];
+		}
 
-		// $compromise->observation = (is_null($request['observation'])) ? '' : $request['observation'];
-
-		// $compromise->save();
+		if(is_null($request['end_date'])){
+			$request->session()->flash('danger', '*Fecha de cumplimiento: Debe ingresar una fecha límite para el cumplimiento del compromiso');	
+			return $fail_view;
+		}
+		elseif(Carbon::createFromFormat('d/m/Y', $request['end_date']) <= Carbon::now()){
+			$request->session()->flash('danger', '*Fecha de cumplimiento: Debe ingresar una fecha posterior');
+			return $fail_view;
+		}
+		else{
+			$ending = Carbon::createFromFormat('d/m/Y', $request['end_date'])->toDateTimeString();
+			$compromise->ending = $ending;
+		}
+		
+		$compromise->save();
+		$request->session()->flash('success', 'Comprimiso editado correctamente');
+		return view('admin.compromises.show', compact('compromise', 'title', 'status'));
 	}
 
 	public function organization() //?????

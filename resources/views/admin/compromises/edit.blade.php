@@ -33,7 +33,7 @@
 							</div>
 							<div class="col-lg-12">
 								<div class="form-group">
-									{!! Form::label('observation', 'Aspecto a mejorar:') !!}
+									{!! Form::label('observation', '*Aspecto a mejorar:') !!}
 									{!! Form::text('observation', null, ['class' => 'form-control', 'value' => old('observation')]) !!}
 								</div>
 							</div>
@@ -44,12 +44,18 @@
 								</div>
 							</div>
 							<div class="col-lg-12">
-								{!! Form::label('end_date', 'Fecha de cumplimiento:') !!}
+								{!! Form::label('end_date', '*Fecha de cumplimiento:') !!}
 							</div>
 							<div class="col-lg-12">
 								<div class="form-group input-group">
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 									{!! Form::text('end_date', null, ['class' => 'form-control datepicker', 'value' => old('end_date')]) !!}
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									{!! Form::label('status', '*Estado') !!}
+									{!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
 								</div>
 							</div>
 							<div class="form-group col-sm-12" style="margin-top: 20px">
@@ -58,14 +64,15 @@
 						</div>
 					</div>
 					<!-- /.panel-body -->
+					<div class="panel-footer">
+						<a class="btn btn-default" href="{{ route('compromises.show', ['compromise' => $compromise]) }}"> <i class="fa fa-times"></i> Cancelar</a>
+					</div>
 				</div>
 			</div>
 			
 		</div>	
 
 	{!! Form::close() !!}
-
-	<a class="btn btn-default" href="{{ route('compromises.show', ['compromise' => $compromise]) }}"> <i class="fa fa-times"></i> Cancelar</a>
 
 @endsection
 

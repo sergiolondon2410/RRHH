@@ -63,12 +63,14 @@
 						</div>
 					</div>
 					<!-- /.panel-body -->
+					<div class="panel-footer">
+						<a class="btn btn-default" href="{{ route('applications.usercomputation', ['user' => $user, 'evaluation' => $evaluation]) }}"> <i class="fa fa-times"></i> Cancelar</a>
+					</div>
 				</div>
 			</div>
 		</div>
 	{!! Form::close() !!}
 
-	<p><a class="btn btn-default" href="{{ route('applications.usercomputation', ['user' => $user, 'evaluation' => $evaluation]) }}"> <i class="fa fa-times"></i> Cancelar</a></p>
 	<hr>
 
 @endsection
