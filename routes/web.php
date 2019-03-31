@@ -21,14 +21,15 @@
 
 // ---------------- Usuarios (Inicio) ---------------------
 
-// Route::get('/usuarios', 'UserController@index')->name('users.index');
-// Route::get('/usuarios/{user}', 'UserController@show')->name('users.show');
-// Route::get('/usuarios/nuevo', 'UserController@create')->name('users.create');
-// Route::post('/usuarios/crear', 'UserController@store')->name('users.store');
-// Route::get('/usuarios/editar/{user}', 'UserController@edit')->name('users.edit');
-// Route::put('/usuarios/{user}', 'UserController@update')->name('users.update');
-// Route::delete('/usuarios/{id}', 'UserController@destroy')->name('users.destroy');
-Route::resource('users', 'UserController');
+Route::post('/users', 'UserController@store')->name('users.store');
+Route::get('/users', 'UserController@index')->name('users.index');
+Route::get('/users/create', 'UserController@create')->name('users.create');
+Route::get('/users/{user}', 'UserController@show')->name('users.show');
+Route::put('/users/{user}', 'UserController@update')->name('users.update');
+Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
+Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
+// Route::get('/users/import/', 'UserController@import')->name('users.import');
+// Route::resource('users', 'UserController');
 
 // ---------------- Usuarios (Final) ---------------------
 
@@ -147,6 +148,11 @@ Route::resource('accomplishments', 'AccomplishmentController');
 //Rutas Requerimientos de capacitación
 Route::get('/trainings/{user}/{evaluation}/create/', 'TrainingController@create')->name('trainings.create');
 Route::post('/trainings/{user}/{evaluation}/', 'TrainingController@store')->name('trainings.store');
+
+Route::get('/imports', 'ImportController@index')->name('imports.index');
+// Route::get('/', 'ImportController@getImport')->name('import');
+Route::post('/imports/import_file', 'ImportController@importFile')->name('imports.import_file');
+Route::post('/imports/import_process', 'ImportController@processImport')->name('imports.import_process');
 
 Auth::routes();
 

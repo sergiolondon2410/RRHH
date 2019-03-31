@@ -198,10 +198,13 @@ class UserController extends Controller
         $user = User::find($id);
         $message = "El usuario $user->name $user->last_name fue eliminado correctamente";
         $user->delete();
-        // $request->session()->flash('success', $message);
         return redirect()->route('users.index')->with('success', $message);
     }
 
+    public function import(){
+        dd('Hola');
+        // return view('admin.users.import');
+    }
 
     public function getUserTypeArray()
     {

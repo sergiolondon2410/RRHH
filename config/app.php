@@ -163,6 +163,7 @@ return [
         'Collective\Html\HtmlServiceProvider',
         Yajra\DataTables\DataTablesServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -216,6 +217,7 @@ return [
         'Html' => 'Collective\Html\HtmlFacade',
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'PDF' => 'Barryvdh\DomPDF\Facade',
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
