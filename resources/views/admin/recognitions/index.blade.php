@@ -4,8 +4,37 @@
 
 @section('content')
 
+@php
+	$organization_get = 'undefined';
+	if(request()->get('organization') !== null){
+		$organization_get = request()->get('organization');
+	}
+@endphp
+
 	<div class="row">
 		<div class="col-lg-12">
+			<div class="panel panel-default">
+					<div class="panel-heading">
+						Filtros de búsqueda
+					</div>
+					<div class="panel-body">
+						{!! Form::open(['url' => route('recognitions.index'), 'method' => 'GET']) !!}
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										{!! Form::select('organization', $organizations, $organization_get, ['class' => 'form-control']) !!}
+									</div>
+								</div>
+								<div class="col-lg-2 col-md-offset-1">
+									<div class="form-group">
+										{!! Form::submit('Filtrar resultados', ['class' => 'form-control btn btn-default']) !!}
+									</div>
+								</div>
+							</div>
+							<!-- /.row (nested) -->
+						{!! Form::close() !!}
+					</div>
+				</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Reconocimientos
@@ -22,6 +51,7 @@
 									<th>Méritos</th>
 									<th>Otorgado por</th>
 									<th>Empresa</th>
+									<th>Acciones</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -35,6 +65,10 @@
 										<td>{{ $recognition->observation }}</td>
 										<td>{{ $recognition->grantter->full_name }}</td>
 										<td>{{ $recognition->user->organization->name }}</td>
+										<td>
+											<a href="{{ route('recognitions.show', ['recognition' => $recognition]) }}" data-toggle="tooltip" data-placement="bottom" title="Ver más"><i class="fa fa-info-circle fa-fw"></i></a>
+											<a href="{{ route('recognitions.edit', ['recognition' => $recognition]) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil fa-fw"></i></a>
+										</td>
 									</tr>
 								@endforeach
 							</tbody>

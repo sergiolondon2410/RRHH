@@ -46,6 +46,11 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        @if(Auth::user()->user_type_id < 3)
+                            <li>
+                                <a href="{{ route('processes.index') }}"><i class="fa fa-star fa-fw"></i> Procesos</a>
+                            </li>
+                        @endif
                         <li>
                             <a href="#"><i class="fa fa-certificate fa-fw"></i> Compromisos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -60,11 +65,6 @@
                                 @endif
                             </ul>
                         </li>
-                        @if(Auth::user()->user_type_id < 3)
-                            <li>
-                                <a href="{{ route('processes.index') }}"><i class="fa fa-star fa-fw"></i> Procesos</a>
-                            </li>
-                        @endif
                         <li>
                             <a href="#"><i class="fa fa-trophy fa-fw"></i> Reconocimientos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -80,6 +80,14 @@
                             </ul>
                         </li>
                         @if(Auth::user()->user_type_id < 3)
+                            <li>
+                                <a href="#"><i class="fa fa-bullhorn fa-fw"></i> Requerimientos de capacitación<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{{ route('trainings.index') }}">Ver Requerimientos</a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li>
                                 <a href="#"><i class="fa fa-cog fa-fw"></i> Ajustes<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">

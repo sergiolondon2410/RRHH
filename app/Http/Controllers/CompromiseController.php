@@ -85,6 +85,7 @@ class CompromiseController extends Controller
 		$fail_view = \View::make('admin.compromises.edit', compact('title', 'compromise', 'validators','status'));
 
 		$compromise->validator_id = $request['validator'];
+		$compromise->status = $request->status;
 
 		if(is_null($request['observation'])){
 			$request->session()->flash('danger', '*Aspecto a mejorar: debe ingresar el aspecto a mejorar');
@@ -114,9 +115,8 @@ class CompromiseController extends Controller
 			$ending = Carbon::createFromFormat('d/m/Y', $request['end_date'])->toDateTimeString();
 			$compromise->ending = $ending;
 		}
-		
 		$compromise->save();
-		$request->session()->flash('success', 'Comprimiso editado correctamente');
+		$request->session()->flash('success', 'Compromiso editado correctamente');
 		return view('admin.compromises.show', compact('compromise', 'title', 'status'));
 	}
 

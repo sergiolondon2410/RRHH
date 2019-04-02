@@ -136,21 +136,28 @@ Route::put('/compromises/{compromise}', 'CompromiseController@update')->name('co
 
 //Rutas Reconocimientos
 Route::get('/recognitions', 'RecognitionController@index')->name('recognitions.index');
+
+Route::get('/recognitions/{recognition}/', 'RecognitionController@show')->name('recognitions.show');
+Route::get('/recognitions/{recognition}/edit', 'RecognitionController@edit')->name('recognitions.edit');
+Route::put('/recognitions/{recognition}', 'RecognitionController@update')->name('recognitions.update');
 Route::get('/recognitions/{user}/{evaluation}/create/', 'RecognitionController@create')->name('recognitions.create');
 Route::post('/recognitions/{user}/{evaluation}/', 'RecognitionController@store')->name('recognitions.store');
 
-//Rutas Premios ?
+//Rutas Premios ? 
 Route::resource('awards', 'AwardController');
 
 //Rutas Reconocimientos ??????
 Route::resource('accomplishments', 'AccomplishmentController');
 
 //Rutas Requerimientos de capacitación
+Route::get('/trainings', 'TrainingController@index')->name('trainings.index');
+Route::get('/trainings/{training}/', 'TrainingController@show')->name('trainings.show');
+Route::get('/trainings/{training}/edit', 'TrainingController@edit')->name('trainings.edit');
+Route::put('/trainings/{training}', 'TrainingController@update')->name('trainings.update');
 Route::get('/trainings/{user}/{evaluation}/create/', 'TrainingController@create')->name('trainings.create');
 Route::post('/trainings/{user}/{evaluation}/', 'TrainingController@store')->name('trainings.store');
 
 Route::get('/imports', 'ImportController@index')->name('imports.index');
-// Route::get('/', 'ImportController@getImport')->name('import');
 Route::post('/imports/import_file', 'ImportController@importFile')->name('imports.import_file');
 Route::post('/imports/import_process', 'ImportController@processImport')->name('imports.import_process');
 

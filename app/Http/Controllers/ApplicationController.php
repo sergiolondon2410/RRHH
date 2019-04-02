@@ -33,9 +33,6 @@ class ApplicationController extends Controller
 	{
 		$evaluation = Evaluation::find($evaluation_id);
 		$user = User::find($user_id);
-		// $mates = User::where('organization_id',$user->organization_id)
-		// 			->where('id', '<>', $user_id)
-		// 			->get();
 		$mates = User::where('organization_id',$user->organization_id)->get()->except(['id', $user_id]);
 		$title = 'Editar evaluación';
 		return view('admin.applications.edit', compact('title','evaluation', 'user','mates'));
@@ -117,7 +114,6 @@ class ApplicationController extends Controller
 	public function processFilter(){
 		$process_id = Input::get('process');
 		$evaluations = Evaluation::where('process_id', $process_id)->get();
-		// $evaluations = Evaluation::all();
 		return response()->json($evaluations);
 	}
 

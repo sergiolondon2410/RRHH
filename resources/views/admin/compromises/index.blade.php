@@ -17,8 +17,8 @@
 	
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="panel panel-default">
-				@if(Auth::user()->user_type_id < 3)
+			@if(Auth::user()->user_type_id < 3)
+				<div class="panel panel-default">
 					<div class="panel-heading">
 						Filtros de búsqueda
 					</div>
@@ -44,8 +44,8 @@
 							<!-- /.row (nested) -->
 						{!! Form::close() !!}
 					</div>
-				@endif
-			</div>
+				</div>
+			@endif
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					{{ $title }}
