@@ -1,8 +1,9 @@
 @extends('layout')
 
-@section('title', $title)
+@section('title', "Subida masiva")
 
 @section('content')
+
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
@@ -34,4 +35,5 @@
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
+
 @endsection

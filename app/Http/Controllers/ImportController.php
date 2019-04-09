@@ -32,8 +32,8 @@ class ImportController extends Controller
 					$user_type = ($value->tipo_de_usuario_empleado_o_supervisor == 'Supervisor') ? 4 : 5 ;
 					$position = (is_null($value->cargo)) ? 'Empleado' : $value->cargo;
 					$area = (is_null($value->area)) ? 'Operativa' : $value->area;
-
-					$arr[$key] = [
+					// $users_array[$key] = [
+					$users[$key] = [
 						'name'      => $value->nombre, 
 						'last_name' => $value->apellido,
 						'email'     => $value->correo,
@@ -48,28 +48,32 @@ class ImportController extends Controller
 						'level' => 1
 					];
 				}
+
 			}
-			// User::create($arr);
-			$message = "Usuarios creados correctamente: ";
-			foreach ($arr as $user) {
-				User::create([
-					'name' => $user['name'],
-					'last_name' => $user['last_name'],
-					'email' => $user['email'],
-					'document' => $user['document'],
-					'organization_id' => $user['organization_id'],
-					'user_type_id' => $user['user_type'],
-					'position' => $user['position'],
-					'area' => $user['area'],
-					'password' => bcrypt($user['document']),
-					'profile_img' => 'profile_image.png',
-					'boss_id' => 1,
-					'level' => 1
-				]);
-				$message .= "Usuarios creados correctamente";
-			}
-			$request->session()->flash('success', $message);
-			return redirect()->action('UserController@index');
+			dd($users);
+			//-------------------- código que está montado inicio
+			// $message = "Usuarios creados correctamente: ";
+			// foreach ($users_array as $user) {
+			// 	User::create([
+			// 		'name' => $user['name'],
+			// 		'last_name' => $user['last_name'],
+			// 		'email' => $user['email'],
+			// 		'document' => $user['document'],
+			// 		'organization_id' => $user['organization_id'],
+			// 		'user_type_id' => $user['user_type'],
+			// 		'position' => $user['position'],
+			// 		'area' => $user['area'],
+			// 		'password' => bcrypt($user['document']),
+			// 		'profile_img' => 'profile_image.png',
+			// 		'boss_id' => 1,
+			// 		'level' => 1
+			// 	]);
+			// 	$message .= "Usuarios creados correctamente";
+			// }
+			// $request->session()->flash('success', $message);
+			// return redirect()->action('UserController@index');
+			//---------------------------- código que está montado fin
+
 		}
 		else{
 			$message = "El archivo no pudo ser leido correctamente, inténtelo nuevamente";
@@ -88,7 +92,7 @@ class ImportController extends Controller
 					//deja pasar el ciclo sin hacer nada
 				}
 				else{
-					$arr[$key] = [
+					$users_array[$key] = [
 						'name'      => $value->nombre, 
 						'last_name' => $value->apellido,
 						'email'     => $value->correo,
@@ -100,22 +104,22 @@ class ImportController extends Controller
 						'error_msg' => ''
 					];
 					if(is_null($value->nombre) || is_null($value->apellido) || is_null($value->correo) || is_null($value->documento)){
-						$arr[$key]['validated'] = false;
-						$arr[$key]['error_msg'] .= "Los campos con asterisko (*) son obligatorios.";
+						$users_array[$key]['validated'] = false;
+						$users_array[$key]['error_msg'] .= "Los campos con asterisko (*) son obligatorios.";
 					}
 					if(!is_null(User::where('email', $value->correo)->get())){
-						$arr[$key]['validated'] = false;
-						$arr[$key]['error_msg'] .= ' El Correo ya está tomado.';
+						$users_array[$key]['validated'] = false;
+						$users_array[$key]['error_msg'] .= ' El Correo ya está tomado.';
 					}
 					if(!is_numeric($value->documento)){
-						$arr[$key]['validated'] = false;
-						$arr[$key]['document'] = $value->documento;
-						$arr[$key]['error_msg'] .= ' El campo Documento debe ser numérico.';
+						$users_array[$key]['validated'] = false;
+						$users_array[$key]['document'] = $value->documento;
+						$users_array[$key]['error_msg'] .= ' El campo Documento debe ser numérico.';
 					}
 					// else{
 					// 	if(!is_null(User::where('document', $value->documento)->get())){
-					// 		$arr[$key]['validated'] = false;
-					// 		$arr[$key]['error_msg'] .= ' Ya existe un usuario con este documento.';
+					// 		$users_array[$key]['validated'] = false;
+					// 		$users_array[$key]['error_msg'] .= ' Ya existe un usuario con este documento.';
 					// 	}
 					// }
 				}
@@ -123,7 +127,7 @@ class ImportController extends Controller
 		}
 		// $validador = User::where('document', 'pepino')->get();
 		// dd($validador);
-		dd($arr);
+		dd($users_array);
 	}*/
 
 
