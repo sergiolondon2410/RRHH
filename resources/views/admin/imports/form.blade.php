@@ -8,27 +8,32 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					{{ $title }}
+					Usuarios {{ $organization->name}}
 				</div>
 					<!-- /.panel-heading -->
-				<div class="panel-body">
-					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-						<thead>
-							<tr>
-								<th>Nombre</th>
-								<th>Número de empleados</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach ($organizations as $organization)
-								<tr class="odd gradeX">
-									<td><a href="{{ url("/empresas/{$organization->id}") }}">{{ $organization->name }}</a></td>
-									<td>{{ $organization->employee_quantity }}</td>
+				{!! Form::open(['url' => route('imports.store', ['organization' => $organization]), 'method' => 'POST'])  !!}
+					<div class="panel-body">
+						<table width="100%" class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Nombre</th>
 								</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
+							</thead>
+							<tbody>
+								@foreach ($users as $user)
+									<tr class="odd gradeX">
+										<td>
+											<input type="text" name="names" value="{{ $user['name'] }}">
+										</td>
+									</tr>
+								@endforeach
+							</tbody>
+						</table>
+						<div class="form-group" style="margin-top: 20px">
+							{!! Form::submit('Crear usuarios', ['class' => 'form-control btn btn-default']) !!}
+						</div>
+					</div>
+				{!! Form::close() !!}
 				<!-- /.panel-body -->
 			</div>
 			<!-- /.panel -->

@@ -9,6 +9,7 @@ use App\Organization;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\ImportRequest;
 
 class ImportController extends Controller
 {
@@ -20,7 +21,7 @@ class ImportController extends Controller
 
 	public function importFile(Request $request)
 	{
-		$organization = $request->organization;
+		$organization = Organization::find($request->organization);
 		$path = $request->file('csv_file')->getRealPath();
 		$data = Excel::load($path)->get();
 		if($data->count()){
@@ -32,14 +33,13 @@ class ImportController extends Controller
 					$user_type = ($value->tipo_de_usuario_empleado_o_supervisor == 'Supervisor') ? 4 : 5 ;
 					$position = (is_null($value->cargo)) ? 'Empleado' : $value->cargo;
 					$area = (is_null($value->area)) ? 'Operativa' : $value->area;
-					// $users_array[$key] = [
 					$users[$key] = [
 						'name'      => $value->nombre, 
 						'last_name' => $value->apellido,
 						'email'     => $value->correo,
 						'password' => bcrypt($value->documento),
 						'user_type' => $user_type,
-						'organization_id' => $organization,
+						'organization_id' => $organization->id,
 						'document'  => intval($value->documento),
 						'position'  => $position,
 						'area'      => $area,
@@ -50,7 +50,8 @@ class ImportController extends Controller
 				}
 
 			}
-			dd($users);
+			// dd($users);
+			return view('admin.imports.form', compact('users', 'organization'));
 			//-------------------- código que está montado inicio
 			// $message = "Usuarios creados correctamente: ";
 			// foreach ($users_array as $user) {
@@ -130,7 +131,21 @@ class ImportController extends Controller
 		dd($users_array);
 	}*/
 
+	public function store(ImportRequest $request, $organization)
+	{
+		// dd($request);
+		// $request->validate([
+		// 	'names.*' => 'required'
+		// ]);
 
+		// $ php artisan make:request ImportRequest
+
+	}
+
+	// public function create(ImportRequest $request)
+	// {
+	// 		return 'ok';
+	// }
 	// class CsvImportRequest extends FormRequest
 // {
 //     public function authorize()

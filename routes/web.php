@@ -33,18 +33,7 @@ Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 
 // ---------------- Usuarios (Final) ---------------------
 
-// Rutas para aplicación (Se debe cambiar por error de ortografía) BORRAR
-Route::get('/aplicacion', 'AplicationController@index');
-Route::get('/aplicacion/nuevo/{id}', 'AplicationController@create')->name('aplication.create');
-Route::post('/aplicacion/crear', 'AplicationController@store');
-
-
-// Rutas para implementación //Para borrar
-Route::get('/implementacion', 'ImplementationController@index');
-
 //Rutas Respuestas
-// Route::get('/respuestas/nuevo/{aplication_id}/{contador}', 'AnswerController@create')->name('answer.create');
-// Route::post('/respuestas/crear', 'AnswerController@store');
 Route::get('/answers/{application}/index', 'AnswerController@index')->name('answers.index');
 Route::get('/answers/{application}/{contador}/create', 'AnswerController@create')->name('answers.create');
 Route::post('/answers/{application}/{question}/{count}', 'AnswerController@store')->name('answers.store');
@@ -143,12 +132,6 @@ Route::put('/recognitions/{recognition}', 'RecognitionController@update')->name(
 Route::get('/recognitions/{user}/{evaluation}/create/', 'RecognitionController@create')->name('recognitions.create');
 Route::post('/recognitions/{user}/{evaluation}/', 'RecognitionController@store')->name('recognitions.store');
 
-//Rutas Premios ? 
-Route::resource('awards', 'AwardController');
-
-//Rutas Reconocimientos ??????
-Route::resource('accomplishments', 'AccomplishmentController');
-
 //Rutas Requerimientos de capacitación
 Route::get('/trainings', 'TrainingController@index')->name('trainings.index');
 Route::get('/trainings/{training}/', 'TrainingController@show')->name('trainings.show');
@@ -157,9 +140,11 @@ Route::put('/trainings/{training}', 'TrainingController@update')->name('training
 Route::get('/trainings/{user}/{evaluation}/create/', 'TrainingController@create')->name('trainings.create');
 Route::post('/trainings/{user}/{evaluation}/', 'TrainingController@store')->name('trainings.store');
 
+//Rutas subida masiva de usuarios
 Route::get('/imports', 'ImportController@index')->name('imports.index');
 Route::post('/imports/import_file', 'ImportController@importFile')->name('imports.import_file');
 Route::post('/imports/import_process', 'ImportController@processImport')->name('imports.import_process');
+Route::post('/imports/{orgnization}/', 'ImportController@store')->name('imports.store');
 
 Auth::routes();
 
