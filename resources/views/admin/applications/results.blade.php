@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('layout') 
 
-@section('title', "Registro de resultados")
+@section('title', "Registro de resultados - $organization->name")
 
 @section('content')
 
@@ -115,55 +115,60 @@
 			</div>
 			<!-- /.panel -->
 		</div>
-		<div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Gráficas por competencia
-				</div>
-				<!-- /.panel-heading -->
-				<div class="panel-body">
-					@if(count($competences) > 0)
+		@if(count($competences) > 0)
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Gráficas por competencia
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
 						@foreach ($competences as $competence)
 							<div id="chart_competence_{{ $competence->id }}"></div>
 						@endforeach
-					@endif
+					</div>
+					<div class="panel-footer">
+						<a class="btn btn-default" href="{{ route('applications.competenceschartprint', ['evaluation' => $evaluation, 'position' => $position_get, 'area' => $area_get, 'competence_type' => 'Competencias']) }}" target="_blank"> <i class="fa fa-file-pdf-o"></i> Exportar esta gráfica a PDF</a>
+					</div>
 				</div>
-				
-				<div class="panel-footer">
-					<a class="btn btn-default" href="{{ route('applications.competenceschartprint', ['evaluation' => $evaluation, 'position' => $position_get, 'area' => $area_get]) }}" target="_blank"> <i class="fa fa-file-pdf-o"></i> Generar reporte en PDF</a>
-				</div>
+				<!-- /.panel -->
 			</div>
-			<!-- /.panel -->
-		</div>
-		<div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Gráficas por indicador de productividad
-				</div>
-				<!-- /.panel-heading -->
-				<div class="panel-body">
-					@if(count($indicators) > 0)
+		@endif
+		@if(count($indicators) > 0)
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Gráficas por indicador de productividad
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
 						@foreach ($indicators as $indicator)
 							<div id="chart_indicator_{{ $indicator->id }}"></div>
 						@endforeach
-					@endif
+					</div>
+					<div class="panel-footer">
+						<a class="btn btn-default" href="{{ route('applications.competenceschartprint', ['evaluation' => $evaluation, 'position' => $position_get, 'area' => $area_get, 'competence_type' => 'Indicadores']) }}" target="_blank"> <i class="fa fa-file-pdf-o"></i> Exportar esta gráfica a PDF</a>
+					</div>
 				</div>
+				<!-- /.panel -->
 			</div>
-			<!-- /.panel -->
-		</div>
+		@endif
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Resultados globales de medición
 				</div>
 				<!-- /.panel-heading -->
-				<div class="panel-body">
-					<div id="chart_global_competences"></div>
-				</div>
-
-				<div class="panel-body">
-					<div id="chart_global_indicators"></div>
-				</div>
+				@if(count($competences) > 0)
+					<div class="panel-body">
+						<div id="chart_global_competences"></div>
+					</div>
+				@endif
+				@if(count($indicators) > 0)
+					<div class="panel-body">
+						<div id="chart_global_indicators"></div>
+					</div>
+				@endif
 			</div>
 			<!-- /.panel -->
 		</div>
@@ -246,7 +251,6 @@
 					chart_{{$competence->id}}.draw(data_{{$competence->id}}, google.charts.Bar.convertOptions(options_{{$competence->id}}));
 				@endforeach
 			@endif
-
 			@if(count($indicators) > 0)
 				@foreach ($indicators as $indicator)
 					var data_{{$indicator->id}} = new google.visualization.arrayToDataTable([
@@ -286,74 +290,76 @@
 					chart_{{$indicator->id}}.draw(data_{{$indicator->id}}, google.charts.Bar.convertOptions(options_{{$indicator->id}}));
 				@endforeach
 			@endif
-
-			var data_competences = new google.visualization.arrayToDataTable([
-				['Competencia', 'Total'],
-				@foreach($competences as $competence)
-					[
-						"{{ $competence->name }}", 
-						{{ round(collect($competences_summation[$competence->name])->avg(), 3)*100 }}
-					],
-				@endforeach
-			]);
-			var options_competences = {
-				chart: {
-					title: 'Resultado por Competencias',
-					subtitle: 'Porcentaje total',
-				},
-				legend: { position: 'none' },
-				axes: {
-					x: {
-						0: { side: 'bottom', label: 'Competencias'}
-					}
-				},
-				vAxis: {
-					format: '#,##%',
-					gridlines: {
-						count: 10,
+			@if(count($competences) > 0)
+				var data_competences = new google.visualization.arrayToDataTable([
+					['Competencia', 'Total'],
+					@foreach($competences as $competence)
+						[
+							"{{ $competence->name }}", 
+							{{ round(collect($competences_summation[$competence->name])->avg(), 3)*100 }}
+						],
+					@endforeach
+				]);
+				var options_competences = {
+					chart: {
+						title: 'Resultado por Competencias',
+						subtitle: 'Porcentaje total',
 					},
-				},
-				height: 400,
-				width: 900,
-				bar: { groupWidth: "50%" }
-			};
-
-			var chart = new google.charts.Bar(document.getElementById('chart_global_competences'));
-			chart.draw(data_competences, google.charts.Bar.convertOptions(options_competences));
-
-			var data_indicators = new google.visualization.arrayToDataTable([
-				['Indicador', 'Total'],
-				@foreach($indicators as $indicator)
-					[
-						"{{ $indicator->name }}", 
-						{{ round(collect($indicators_summation[$indicator->name])->avg(), 3)*100 }}
-					],
-				@endforeach
-			]);
-			var options_indicators = {
-				chart: {
-					title: 'Resultado por Indicadores de productividad',
-					subtitle: 'Porcentaje total',
-				},
-				legend: { position: 'none' },
-				axes: {
-					x: {
-						0: { side: 'bottom', label: 'Indicadores'}
-					}
-				},
-				vAxis: {
-					format: '#,##%',
-					gridlines: {
-						count: 10,
+					legend: { position: 'none' },
+					axes: {
+						x: {
+							0: { side: 'bottom', label: 'Competencias'}
+						}
 					},
-				},
-				height: 400,
-				width: 900,
-				bar: { groupWidth: "50%" }
-			};
+					vAxis: {
+						format: '#,##%',
+						gridlines: {
+							count: 10,
+						},
+					},
+					height: 400,
+					width: 900,
+					bar: { groupWidth: "50%" }
+				};
 
-			var chart = new google.charts.Bar(document.getElementById('chart_global_indicators'));
-			chart.draw(data_indicators, google.charts.Bar.convertOptions(options_indicators));
+				var chart = new google.charts.Bar(document.getElementById('chart_global_competences'));
+				chart.draw(data_competences, google.charts.Bar.convertOptions(options_competences));
+			@endif
+			@if(count($indicators) > 0)
+				var data_indicators = new google.visualization.arrayToDataTable([
+					['Indicador', 'Total'],
+					@foreach($indicators as $indicator)
+						[
+							"{{ $indicator->name }}", 
+							{{ round(collect($indicators_summation[$indicator->name])->avg(), 3)*100 }}
+						],
+					@endforeach
+				]);
+				var options_indicators = {
+					chart: {
+						title: 'Resultado por Indicadores de productividad',
+						subtitle: 'Porcentaje total',
+					},
+					legend: { position: 'none' },
+					axes: {
+						x: {
+							0: { side: 'bottom', label: 'Indicadores'}
+						}
+					},
+					vAxis: {
+						format: '#,##%',
+						gridlines: {
+							count: 10,
+						},
+					},
+					height: 400,
+					width: 900,
+					bar: { groupWidth: "50%" }
+				};
+
+				var chart = new google.charts.Bar(document.getElementById('chart_global_indicators'));
+				chart.draw(data_indicators, google.charts.Bar.convertOptions(options_indicators));
+			@endif
 		};
 	</script>
 	

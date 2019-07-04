@@ -139,6 +139,7 @@ class ApplicationController extends Controller
 		$competence_type_id_comp = 1; //Competencias
 		$competence_type_id_ind = 2; //Indicadores de productividad
 		$evaluation_id = $evaluation->id;
+		$organization = $evaluation->process->organization;
 		$competences = $this->evaluationCompetences($competence_type_id_comp, $evaluation_id);
 		$indicators = $this->evaluationCompetences($competence_type_id_ind, $evaluation_id);
 		$positions = User::select('position')
@@ -179,7 +180,7 @@ class ApplicationController extends Controller
 				array_push($indicators_summation[$indicator->name], $user_array['competences_avg'][$indicator->id]['total']);
 			}
 		}
-		return view('admin.applications.results', compact('evaluation', 'users_competences', 'users_indicators', 'competences', 'indicators', 'competences_summation', 'indicators_summation', 'areas', 'positions'));
+		return view('admin.applications.results', compact('evaluation', 'users_competences', 'users_indicators', 'competences', 'indicators', 'competences_summation', 'indicators_summation', 'areas', 'positions', 'organization'));
 	}
 
 	public function selectedUsers($position, $area, $evaluation_id){
@@ -337,13 +338,12 @@ class ApplicationController extends Controller
 		// return $view;
 	}
 
-	public function competencesChartPrint(Evaluation $evaluation, $position, $area){
-		
-		$competence_type_id_comp = 1; //Competencias
+	public function competencesChartPrint(Evaluation $evaluation, $position, $area, $competence_type){
+		$competence_type_array = ["Competencias" => 1, "Indicadores" => 2];
+		$competence_type_id_comp = $competence_type_array[$competence_type]; //Competencias
 		$competences = $this->evaluationCompetences($competence_type_id_comp, $evaluation->id);
-		// $user_competences = $this->userResult($user, $evaluation, $competence_type_id_comp);
 		$users_completed = $this->selectedUsers($position, $area, $evaluation->id);
-
+		$organization = $evaluation->process->organization;
 		$users_competences = [];
 		$competences_summation = [];
 		foreach($competences as $competence){
@@ -357,15 +357,13 @@ class ApplicationController extends Controller
 			}
 		}
 		
-		$prefilename = 'GraficaporCompetencias'.$evaluation->name.'_'.Carbon::now()->format('Y_m_d').'.pdf';
+		$prefilename = 'Graficapor'.$competence_type.$evaluation->name.'_'.Carbon::now()->format('Y_m_d').'.pdf';
 		$filename = static::camel($prefilename);
-		$view = \View::make('admin.applications.competenceschartpdf', compact('evaluation', 'users_competences', 'competences'))->render();
+		$view = \View::make('admin.applications.competenceschartpdf', compact('evaluation', 'users_competences', 'competences', 'organization', 'competence_type'))->render();
 		$pdf = \App::make('dompdf.wrapper');
 		$pdf->loadHTML($view);
 
 		return $pdf->stream($filename);
-		// return $view;
-		
 	}
 
 	public function resultsPdf(Evaluation $evaluation){

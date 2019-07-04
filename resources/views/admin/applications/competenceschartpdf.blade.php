@@ -12,7 +12,7 @@
 	<meta name="author" content="">
 	<link rel="shortcut icon" type="image/png" href="{{ asset('/images/favicon.png') }}"/>
 
-	<title>Registro de resultados - {{ $evaluation->name }} - Gente OK</title>
+	<title>Registro de resultados - {{ $evaluation->name }} - {{ $organization->name }}</title>
 
 	<!-- Bootstrap Core CSS -->
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -33,42 +33,39 @@
 
 </head>
 <body>
-
 	<div id="wrapper">
-		{{-- <div id="page-wrapper"> --}}
-			<div class="row">
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-1">
+				<h1 class="page-header">Registro de resultados - {{ $organization->name }}</h1>
+			</div>
+			@if(count($competences) > 0)
 				<div class="col-lg-10 col-lg-offset-1">
-					<h1 class="page-header">Registro de resultados</h1>
-				</div>
-				@if(count($competences) > 0)
-					<div class="col-lg-10 col-lg-offset-1">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								Gráficas por competencia - Evaluación: {{ $evaluation->name }}
-							</div>
-							<!-- /.panel-heading -->
-							<div class="panel-body">
-								@foreach($competences as $competence)
-									<div class="row">
-										<div class="col-lg-12">
-											<p><strong>{{ $competence->name }}</strong></p>
-										</div>
-										@foreach($users_competences as $user_competence)
-											<div class="col-lg-4">
-												{{ $user_competence['user_fullname'] }}: <i>{{ round(collect($user_competence['competences_avg'][$competence->id]['total'])->avg(), 3)*100 }}%</i>
-											</div>
-											<div class="col-lg-8">
-												<img src="{{ asset('/storage') }}/100_bar.png" width="{{ round(collect($user_competence['competences_avg'][$competence->id]['total'])->avg(), 3)*500 }}em" height="50em">
-											</div>
-										@endforeach
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							Gráficas por {{ $competence_type}} - Evaluación: {{ $evaluation->name }}
+						</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							@foreach($competences as $competence)
+								<div class="row">
+									<div class="col-lg-12">
+										<p><strong>{{ $competence->name }}</strong></p>
 									</div>
-								@endforeach
-							</div>
+									@foreach($users_competences as $user_competence)
+										<div class="col-lg-4">
+											{{ $user_competence['user_fullname'] }}: <i>{{ round(collect($user_competence['competences_avg'][$competence->id]['total'])->avg(), 3)*100 }}%</i>
+										</div>
+										<div class="col-lg-8">
+											<img src="{{ asset('/storage') }}/100_bar.png" width="{{ round(collect($user_competence['competences_avg'][$competence->id]['total'])->avg(), 3)*500 }}em" height="50em">
+										</div>
+									@endforeach
+								</div>
+							@endforeach
 						</div>
 					</div>
-				@endif
-			</div>
-		{{-- </div> --}}
+				</div>
+			@endif
+		</div>
 	</div>
 	
 	<!-- jQuery -->

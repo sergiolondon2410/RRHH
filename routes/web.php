@@ -110,7 +110,7 @@ Route::get('/applications/{evaluation}/userresults/', 'ApplicationController@use
 Route::get('/applications/{evaluation}/resultspdf/', 'ApplicationController@resultsPdf')->name('applications.resultspdf');
 Route::get('/applications/organization', 'ApplicationController@organizationFilter')->name('applications.organization'); //??????
 Route::get('/applications/process', 'ApplicationController@processFilter')->name('applications.process');
-Route::get('/applications/{evaluation}/{position}/{area}/competenceschartprint/', 'ApplicationController@competencesChartPrint')->name('applications.competenceschartprint');
+Route::get('/applications/{evaluation}/{position}/{area}/{competence_type}/competenceschartprint/', 'ApplicationController@competencesChartPrint')->name('applications.competenceschartprint');
 
 //Rutas Compromisos
 Route::get('/compromises/organization/', 'CompromiseController@organization')->name('compromises.organization');
