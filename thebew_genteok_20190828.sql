@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-04-2019 a las 04:56:23
+-- Tiempo de generación: 29-08-2019 a las 03:05:19
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -21,35 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `thebew_genteok`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `accomplishments`
---
-
-CREATE TABLE `accomplishments` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `observation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `award_id` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `giver_id` int(10) UNSIGNED NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `accomplishments`
---
-
-INSERT INTO `accomplishments` (`id`, `observation`, `award_id`, `user_id`, `deleted_at`, `created_at`, `updated_at`, `giver_id`) VALUES
-(1, 'Prueba', 1, 11, NULL, '2018-09-04 03:00:00', '2018-09-04 03:00:00', 1),
-(2, 'vzvfvdfvd', 3, 10, NULL, '2018-09-10 03:00:00', '2018-09-10 03:00:00', 8),
-(3, 'fdffgfd', 3, 13, NULL, '2018-09-10 03:00:00', '2018-09-10 03:00:00', 8),
-(4, 'Eres un líder positivo, sigue así', 5, 14, NULL, '2018-09-10 03:00:00', '2018-09-11 19:12:41', 8),
-(5, 'Felicitaciones!! conservas bien tu puesto de trabajo', 7, 9, NULL, '2018-09-11 18:49:55', '2018-09-11 18:49:55', 8),
-(6, 'Ccadada', 3, 10, '2018-09-11 19:24:55', '2018-09-11 19:23:07', '2018-09-11 19:24:55', 8);
 
 -- --------------------------------------------------------
 
@@ -80,8 +51,6 @@ INSERT INTO `answers` (`id`, `measure_id`, `created_at`, `updated_at`, `applicat
 (9, 1, '2018-09-28 23:30:47', '2018-09-28 23:30:47', 2, NULL, 6),
 (10, 3, '2018-09-28 23:30:55', '2018-09-28 23:30:55', 2, NULL, 7),
 (11, 3, '2018-09-28 23:31:13', '2018-09-28 23:31:13', 2, NULL, 8),
-(12, 3, '2018-10-02 01:35:10', '2018-10-02 01:35:10', 11, NULL, 1),
-(13, 4, '2018-10-02 01:38:42', '2018-10-02 01:38:42', 11, NULL, 2),
 (14, 1, '2018-10-16 22:43:28', '2018-10-16 22:43:28', 1, NULL, 1),
 (15, 3, '2018-10-16 22:48:04', '2018-10-16 22:48:04', 1, NULL, 2),
 (16, 2, '2018-10-16 23:24:03', '2018-10-16 23:24:03', 1, NULL, 5),
@@ -98,39 +67,6 @@ INSERT INTO `answers` (`id`, `measure_id`, `created_at`, `updated_at`, `applicat
 (27, 2, '2018-10-19 01:32:15', '2018-10-19 01:32:15', 15, NULL, 6),
 (28, 1, '2018-10-19 01:32:18', '2018-10-19 01:32:18', 15, NULL, 7),
 (29, 2, '2018-10-19 01:32:21', '2018-10-19 01:32:21', 15, NULL, 8);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `aplications`
---
-
-CREATE TABLE `aplications` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `implementation_id` int(10) UNSIGNED NOT NULL,
-  `evaluator_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `aplications`
---
-
-INSERT INTO `aplications` (`id`, `implementation_id`, `evaluator_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 3, '2018-04-20 09:37:52', '2018-04-20 09:37:52'),
-(2, 1, 2, 3, '2018-04-20 09:55:29', '2018-04-20 09:55:29'),
-(3, 1, 2, 3, '2018-04-20 09:57:20', '2018-04-20 09:57:20'),
-(4, 1, 2, 3, '2018-04-20 12:13:45', '2018-04-20 12:13:45'),
-(5, 1, 2, 3, '2018-04-20 12:16:10', '2018-04-20 12:16:10'),
-(6, 1, 2, 3, '2018-04-20 12:16:55', '2018-04-20 12:16:55'),
-(7, 1, 2, 3, '2018-04-20 12:30:53', '2018-04-20 12:30:53'),
-(8, 1, 2, 3, '2018-04-20 12:31:40', '2018-04-20 12:31:40'),
-(9, 1, 2, 3, '2018-04-20 12:32:35', '2018-04-20 12:32:35'),
-(10, 1, 2, 3, '2018-04-20 19:06:20', '2018-04-20 19:06:20'),
-(11, 1, 2, 3, '2018-04-20 21:12:09', '2018-04-20 21:12:09'),
-(12, 1, 2, 3, '2018-06-19 10:28:41', '2018-06-19 10:28:41');
 
 -- --------------------------------------------------------
 
@@ -164,7 +100,7 @@ INSERT INTO `applications` (`id`, `evaluator_id`, `status`, `deleted_at`, `creat
 (8, 12, 'uninitialized', NULL, '2018-09-25 01:34:37', '2018-09-25 01:34:37', 12, 1),
 (9, 13, 'uninitialized', NULL, '2018-09-25 01:37:05', '2018-09-25 01:37:05', 13, 1),
 (10, 13, 'uninitialized', NULL, '2018-09-25 04:27:47', '2018-09-25 04:27:47', 13, 2),
-(11, 13, 'started', NULL, '2018-10-02 00:18:58', '2018-10-02 00:20:45', 10, 1),
+(11, 13, 'uninitialized', NULL, '2018-10-02 00:18:58', '2018-10-02 00:20:45', 10, 1),
 (12, 13, 'started', NULL, '2018-10-02 00:19:10', '2018-10-02 01:54:44', 8, 1),
 (13, 13, 'uninitialized', NULL, '2018-10-02 00:19:41', '2018-10-02 00:19:41', 14, 1),
 (14, 13, 'uninitialized', NULL, '2018-10-02 00:19:50', '2018-10-02 00:19:50', 12, 1),
@@ -194,138 +130,6 @@ CREATE TABLE `application_evaluation` (
 INSERT INTO `application_evaluation` (`id`, `application_id`, `evaluation_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, NULL, '2018-09-18 03:00:00', '2018-09-18 03:00:00'),
 (2, 2, 1, NULL, '2018-09-18 03:00:00', '2018-09-18 03:00:00');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `assignations`
---
-
-CREATE TABLE `assignations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `tested_id` int(10) UNSIGNED NOT NULL,
-  `evaluation_id` int(10) UNSIGNED NOT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `assignations`
---
-
-INSERT INTO `assignations` (`id`, `tested_id`, `evaluation_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 5, 1, NULL, '2018-08-28 05:00:00', '2018-08-29 03:00:00');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `awards`
---
-
-CREATE TABLE `awards` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `resource_id` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `organization_id` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `creator_id` int(10) UNSIGNED NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `awards`
---
-
-INSERT INTO `awards` (`id`, `name`, `description`, `resource_id`, `organization_id`, `created_at`, `updated_at`, `creator_id`) VALUES
-(1, 'Premio al desempeño', 'Busca premiar a la persona que mantuvo su desempeño por más de 3 meses seguidos', 1, 1, '2018-09-03 20:03:00', '2018-09-03 20:04:00', 4),
-(2, 'Premio Adidas', 'Prueba Adidas', 7, 7, '2018-09-03 20:49:00', '2018-09-03 20:49:00', 1),
-(3, 'Héroe de la puntualidad', 'Este premio de ofrece a la persona que llegó temprano más por más de seis meses seguidos', 16, 2, '2018-09-04 01:13:12', '2018-09-04 01:42:11', 1),
-(4, 'Medalla al emprendimiento', 'Este premio se otorga jkjk', 18, 1, '2018-09-04 16:57:48', '2018-09-04 16:57:48', 1),
-(5, 'Liderazgo', 'El premio al liderazgo .....', 5, 2, '2018-09-04 17:06:50', '2018-09-04 17:06:50', 1),
-(6, 'Premio creador', 'Premio que muestra quien fue su creador', 25, 1, '2018-09-07 18:44:39', '2018-09-07 18:44:39', 4),
-(7, 'Medalla al orden del puesto de trabajo', 'Se otorga a la persona que mantiene su puesto de trabajo en óptimas condiciones, previniendo así accidentes y conservando la armonía de la empresa.', 36, 2, '2018-09-11 18:38:37', '2018-09-11 18:38:37', 8);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `award_resources`
---
-
-CREATE TABLE `award_resources` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uri` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `award_resources`
---
-
-INSERT INTO `award_resources` (`id`, `name`, `uri`, `created_at`, `updated_at`) VALUES
-(1, 'Medalla estrella', '/badges/001-medal.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(2, 'Escudo estrella', '/badges/002-shield.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(3, 'Listón estrella', '/badges/003-star.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(4, 'Escudo uno', '/badges/004-one.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(5, 'Copa estrella', '/badges/005-trophy.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(6, 'Copa mundial', '/badges/006-soccer.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(7, 'Premio uno', '/badges/007-award.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(8, 'Premio estrellas', '/badges/008-award-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(9, 'Estatuilla estrella dorada', '/badges/009-award-2.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(10, 'Premio estrella', '/badges/010-award-3.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(11, 'Estatuilla alas', '/badges/011-award-4.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(12, 'Premio diamante', '/badges/012-diamond.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(13, 'Estatuilla estrella plateada', '/badges/013-star-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(14, 'Estatuilla academia', '/badges/014-oscar.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(15, 'Estatuilla uno', '/badges/015-trophy-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(16, 'Cinturón estrella', '/badges/016-champion-belt.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(17, 'Trofeo estrella', '/badges/017-trophy-2.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(18, 'Trofeo cohete', '/badges/018-award-5.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(19, 'Copa Sonrisa', '/badges/019-champion.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(20, 'Trofeo globo', '/badges/020-golden-globe.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(21, 'Trofeo rubí', '/badges/021-trophy-3.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(22, 'Medalla militar estrella roja', '/badges/022-medal-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(23, 'Emblema estrella', '/badges/023-badge.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(24, 'Listón uno', '/badges/024-one-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(25, 'Botón OK', '/badges/025-best.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(26, 'Listón uno rojo', '/badges/026-one-2.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(27, 'Escudo tres estrellas', '/badges/027-medal-2.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(28, 'Medalla militar estrella verde', '/badges/028-medal-3.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(29, 'Medalla militar circulo gris', '/badges/029-medal-4.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(30, 'Medalla militar circulo check', '/badges/030-medal-5.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(31, 'Medalla militar circulo estrella', '/badges/031-medal-6.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(32, 'Estrella uno', '/badges/032-star-2.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(33, 'Medalla militar cruz', '/badges/033-badge-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(34, 'Listón', '/badges/034-ribbon.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(35, 'Trofeo corazón', '/badges/035-reward.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00'),
-(36, 'Listón tierra', '/badges/036-reward-1.png', '2018-09-03 16:17:00', '2018-09-03 16:18:00');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `badges`
---
-
-CREATE TABLE `badges` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image_uri` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `badges`
---
-
-INSERT INTO `badges` (`id`, `created_at`, `updated_at`, `name`, `image_uri`) VALUES
-(1, '2018-08-07 03:00:00', '2018-08-07 03:00:00', 'Medalla estrella', '001-medal.png'),
-(2, '2018-08-07 03:00:00', '2018-08-07 03:00:00', 'Escudo estrella', '002-shield.png'),
-(3, '2018-08-07 03:00:00', '2018-08-07 03:00:00', 'premio estrella', '003-star.png'),
-(4, '2018-08-07 03:00:00', '2018-08-07 03:00:00', 'Escudo uno', '004-one.png');
 
 -- --------------------------------------------------------
 
@@ -704,7 +508,9 @@ INSERT INTO `organizations` (`id`, `name`, `created_at`, `updated_at`, `deleted_
 (11, 'Club Atlético Nacional', '2018-06-18 09:58:01', '2018-06-18 09:58:01', NULL, 'empresa-11.png', '653424423-8', '31123122', '51 - 100'),
 (12, 'Exito', '2018-06-18 10:13:38', '2018-06-18 10:13:38', NULL, 'empresa-12.jpg', '4334535678-9', '341116545', '> 100'),
 (13, 'Bavaria S.A.', '2018-06-19 21:25:50', '2018-06-19 21:25:50', NULL, 'empresa-13.png', '312421322', '76776484', '> 100'),
-(14, 'Inser - instituto de fertilidad humana', '2018-09-21 20:53:43', '2018-09-21 20:53:43', NULL, 'empresa-14.png', '12234445', '+57(4) 268 8000', '51 - 100');
+(14, 'Inser - instituto de fertilidad humana', '2018-09-21 20:53:43', '2018-09-21 20:53:43', NULL, 'empresa-14.png', '12234445', '+57(4) 268 8000', '51 - 100'),
+(15, 'Centro Sur', '2019-05-13 12:54:37', '2019-05-13 12:54:37', NULL, 'empresa-15.png', '811037405-1', '3177804800', '21 - 50'),
+(17, 'Plaza Mayor Medellín', '2019-08-27 19:46:22', '2019-08-27 19:46:22', NULL, 'empresa-17.png', '890909297-2', '01 8000 424 100', '> 100');
 
 -- --------------------------------------------------------
 
@@ -941,7 +747,7 @@ INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `user_type_
 (1, 'Sergio', 'Londoño', 'sergio@mail.com', '123', 2, 1, '1128444449', 'ingeniero', 'tecno', '2017-06-19 05:00:00', NULL, '2018-04-17 05:00:00', '2018-08-22 00:38:26', NULL, 'perfil-1_1534887506.png', 1, 1),
 (2, 'Juan', 'Pérez', 'jp@mail.com', '123', 5, 2, '12634563464', 'Operario', 'Operativa', NULL, NULL, NULL, '2018-08-23 05:15:51', '2018-08-23 05:15:51', 'profile_image.png', 1, 0),
 (3, 'Pepe', 'Mora', 'pepe@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 5, 2, '1234567', 'Asistente operativo', 'Operativa', '2016-03-15 05:00:00', 'g4V5sVf3nEVD7nQTLWEM0B0o6N3VfRuRQPcofnVy3mXaMu6YhTIljanwdDKz', '2018-04-19 10:48:08', '2018-08-22 23:14:08', '2018-08-22 23:14:08', 'profile_image.png', 1, 0),
-(4, 'SuperAdministrador', 'Gente', 'admin@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 1, 1, '9876382', 'Auxiliar contable', 'Operativa', NULL, 'TM2BuMjWIEhrs6uolRpPVFqnDgPiuDdBupdiVeBqp5t4o6bhAg2hy9H47CJH', '2018-04-19 22:41:42', '2018-04-19 22:41:42', NULL, 'profile_image.png', 1, 0),
+(4, 'SuperAdministrador', 'Gente', 'admin@mail.com', '$2y$10$sOcAWdz79xkrm8T6punExOBUOI43u/xC22YdDXT2imIAfLg9tnj8u', 1, 1, '9876382', 'Auxiliar contable', 'Operativa', NULL, 'NNZpbv8Q4F1TccgJwqmeBWddiO6SOf3Lre32XMjbC1KrTiuqvxqijACizv87', '2018-04-19 22:41:42', '2018-04-19 22:41:42', NULL, 'profile_image.png', 1, 0),
 (5, 'Rosa', 'Gómez', 'rosa@mail.com', '$2y$10$B5BoRHsrJsjTvwCAdV2L6.4SiexqWiy8va4MnwfVm5iqXjcobgjM.', 5, 2, '1256784', 'Jefe de área', 'Operativa', NULL, NULL, '2018-04-20 03:53:56', '2018-08-23 05:45:54', '2018-08-23 05:45:54', 'profile_image.png', 1, 0),
 (6, 'Maria', 'Pino', 'maria@mail.com', '$2y$10$0nZiuXGNT1VyO4mud2JY3es7L6.AY6Ix3vUWbeCRBcrzymgLyPndy', 5, 2, '125678422', 'Cajero', 'Operativa', NULL, NULL, '2018-04-20 04:02:40', '2018-08-22 23:12:04', '2018-08-22 23:12:04', 'profile_image.png', 1, 0),
 (7, 'Brito', 'Ventura', 'brito@mail.com', '$2y$10$Ff9LGKW8btZeRfQfwSqg2OdMqA.q/FvFALgAWX/NYLzB4cb7cI3H6', 5, 2, '8766251', 'Gerente de sucursal', 'Operativa', NULL, NULL, '2018-04-20 04:04:16', '2018-08-22 23:05:34', '2018-08-22 23:05:34', 'profile_image.png', 1, 0),
@@ -957,7 +763,66 @@ INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `user_type_
 (17, 'Gilma Patricia', 'Rubiano Useda', 'enfermeria.bogota@inser.com.co', '$2y$10$LU9q6zw0CSXippQjI2JAD.irFwHhjH7oT.F1xQcnaD3Mr4CmWP8QK', 5, 14, '1033705388', 'Empleada', 'Enfermería', NULL, NULL, '2018-09-24 04:12:11', '2018-09-24 05:03:17', NULL, 'profile_image.png', 1, 1),
 (18, 'Katherine Gisell', 'Hernández Osorio', 'laboratorio.bogota@inser.com.co', '$2y$10$5QJ4QvRsQYmmcYh0gqponuB7t8kIz7fqUKQgmQqKg8VA15TcIqsZC', 5, 14, '1012321484', 'Empleado', 'Laboratorio', NULL, NULL, '2018-09-24 04:35:17', '2018-09-26 04:31:16', NULL, 'profile_image.png', 1, 1),
 (19, 'Pepito', 'Pérez', 'pepito@mimail.com', '$2y$10$KyQyjsivO1xLLIHKO0YcNOYXu7uuNJG/80hu7NyxgtH6dnYT7/Cy6', 4, 3, '70119231', 'Gerente', 'Administrativa', NULL, NULL, '2019-04-01 20:55:58', '2019-04-01 20:55:58', NULL, 'profile_image.png', 1, 1),
-(20, 'Juana María', 'Alzate', 'juanaal@mail.com', '$2y$10$soR02AFn8nXmyM7GJBKg9uLaYWJV6xYiiecZgKuQfTsooppOeba5K', 5, 3, '43440551', 'Auxiliar contable', 'Contable', NULL, NULL, '2019-04-01 20:56:01', '2019-04-01 20:56:01', NULL, 'profile_image.png', 1, 1);
+(20, 'Juana María', 'Alzate', 'juanaal@mail.com', '$2y$10$soR02AFn8nXmyM7GJBKg9uLaYWJV6xYiiecZgKuQfTsooppOeba5K', 5, 3, '43440551', 'Auxiliar contable', 'Contable', NULL, NULL, '2019-04-01 20:56:01', '2019-04-01 20:56:01', NULL, 'profile_image.png', 1, 1),
+(21, 'Adriana Milena', 'Aarón Rincón ', 'adriana.aaron@plazamayor.com.co', '$2y$10$ztrUJWdwCYytr6PxefL/.eUSaSl4ChCk9XO6rWOpxFdYtXTYSu5LW', 5, 17, '1128274353', 'Analista de Causacion', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 19:57:37', '2019-08-27 19:57:37', NULL, 'Analista de Causacion', 1, 1),
+(22, 'Daniela ', 'Alvarez Olaya ', 'daniela.alvarez@plazamayor.com.co', '$2y$10$K5lWBzTuqd.mBgX52MI9.eAYeyk5U41HDpgiQZkeeKvVr0cWmA3y.', 5, 17, '1037618717', 'Auxiliar de Compras', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 19:57:37', '2019-08-27 19:57:37', NULL, 'Auxiliar de Compras', 1, 1),
+(23, 'Lina Marcela', 'Alvarez Villegas ', 'lina.alvarez@plazamayor.com.co', '$2y$10$IMXnssHO9qhpLupLfB.8JOBOOBNbDWV8MmyqEUhxX/V9yT/1LISoy', 5, 17, '43627820', 'Ejecutiva de Servicio al Cliente y Fidelización', 'Gerencia General', NULL, NULL, '2019-08-27 19:57:38', '2019-08-27 19:57:38', NULL, 'Ejecutiva de Servicio al Cliente y Fidelización', 1, 1),
+(24, 'Danilo Eduardo', 'Alvis Montes', 'danilo.alvis@plazamayor.com.co', '$2y$10$4Ly14wnEvJgW85NGsHoPV.Rn/JZZUsbY4G7D1gy7PuG9dgvt50S72', 5, 17, '1050958273', 'Auxiliar Salud y seguridad en el trabajo', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 19:57:38', '2019-08-27 19:57:38', NULL, 'Auxiliar Salud y seguridad en el trabajo', 1, 1),
+(25, 'Mary Luz', 'Alzate Zuluaga', 'mary.alzate@plazamayor.com.co', '$2y$10$yTOmORlhX/4Snj3ZB5R0Segl.ePiroOYCgEoGaqKlYulrRMlBIFyu', 5, 17, '1017199090', 'Auxiliar Contable Junior', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 19:57:38', '2019-08-27 19:57:38', NULL, 'Auxiliar Contable Junior', 1, 1),
+(26, 'Elizabeth', 'Arango Arango ', 'elizabeth.arango@plazamayor.com.co', '$2y$10$JLe8kK/IELZA1RLeXPICUOuF5WYGwh5n7FOJxG7ynXXhaNfPHxS5W', 5, 17, '43163872', 'Gerente Administrativa y Financiera', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 19:57:39', '2019-08-27 19:57:39', NULL, 'Gerente Administrativa y Financiera', 1, 1),
+(27, 'Sandra Yaneth', 'Arango Bedoya ', 'sandra.arango@plazamayor.com.co', '$2y$10$3n0GE5qKmzlkv7an7rGLFuyi2HxA3mlYSZYkZSoxXeFBbJ5Z152MC', 5, 17, '43641136', 'Auxiliar de Servicio   ', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 19:57:39', '2019-08-27 19:57:39', NULL, 'Auxiliar de Servicio   ', 1, 1),
+(28, 'Ofir Alexandra', 'Arango Manrique ', 'alexandra.arango@plazamayor.com.co', '$2y$10$5RXlVo3cK.SQQvQAkfJuteU94HlL9iFpfmANGvtYVJGRdHV/ppuHe', 5, 17, '43905630', 'Auxiliar de Tesoreria', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 19:57:39', '2019-08-27 19:57:39', NULL, 'Auxiliar de Tesoreria', 1, 1),
+(29, 'Paola Andrea', 'Arango Monsalve ', 'paola.arango@plazamayor.com.co', '$2y$10$g.lQpVYkGwRxc67CnFCBxOV2eVi9S2SnCU54kF5fUjqpL1YnDQq1S', 5, 17, '32296543', 'Directora de Auditoria ', 'Gerencia General', NULL, NULL, '2019-08-27 19:57:39', '2019-08-27 19:57:39', NULL, 'Directora de Auditoria ', 1, 1),
+(30, 'Juan David', 'Arango Pelaez', 'juan.arango@plazamayor.com.co', '$2y$10$RRWQ.T0CrcyE5OeIun1b3eEENgvtKDqBOZoMWrnk8mgNJ/5iM2d2S', 5, 17, '8102228', 'Director Juridico', 'Secretaria General', NULL, NULL, '2019-08-27 19:57:40', '2019-08-27 19:57:40', NULL, 'Director Juridico', 1, 1),
+(31, 'Diana Yasmin', 'Arango Pineda ', 'diana.arango@plazamayor.com.co', '$2y$10$S90GScQ.ieAu7sHZ2XfdOOe9Lffe8cuvwFcdqPDnGNSPeJE3VokwG', 5, 17, '52325727', 'Auxiliar Soporte Operativo', 'Gerencia Comercial', NULL, NULL, '2019-08-27 19:57:40', '2019-08-27 19:57:40', NULL, 'Auxiliar Soporte Operativo', 1, 1),
+(32, 'Cindy Johana', 'Arango Roman', 'cindy.arango@plazamayor.com.co', '$2y$10$ccTGjOAkwTYMQr62A1.AouTpk7mAgXCuU.JGIcv5vU/uxwXTUSmP2', 5, 17, '1128402341', 'Analista Tecnico', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 19:57:40', '2019-08-27 19:57:40', NULL, 'Analista Tecnico', 1, 1),
+(33, 'Geisy Lorena', 'Arango Usuga ', 'lorena.arango@plazamayor.com.co', '$2y$10$Cedx6QYREgDu/qW.GVO..OMqXpaxRSpvgykfKRKJnKsAtqhB81uvm', 5, 17, '1037608874', 'Auxiliar Soporte Operativo', 'Gerencia Comercial', NULL, NULL, '2019-08-27 19:57:40', '2019-08-27 19:57:40', NULL, 'Auxiliar Soporte Operativo', 1, 1),
+(34, 'Lina Maria', 'Arboleda Arcila ', 'lina.arboleda@plazamayor.com.co', '$2y$10$CkxjHUjCPfiyoNNOg9LnzOi8SAxYEoLpqkRUDK3wVUpJuhvul1176', 5, 17, '1152437533', 'Analista Financiera', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 19:57:41', '2019-08-27 19:57:41', NULL, 'Analista Financiera', 1, 1),
+(35, 'Sandra Milena', 'Arenas Valencia ', 'sandra.arenas@plazamayor.com.co', '$2y$10$ZbtDIbCkGBDBogpwmIczmuhY1WM/8SZWWPL8cQe1MQytm54BDXYPu', 5, 17, '43759270', 'Analista de Servicios Adicionales', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 19:57:41', '2019-08-27 19:57:41', NULL, 'Analista de Servicios Adicionales', 1, 1),
+(36, 'Elizabeth', 'Arenas Villa ', 'elizabeth.arenas@plazamayor.com.co', '$2y$10$94f9.0nhhIB3TLpH2QXq0OlMRoyhK1tkjG0YLTjS5/FYkKULY6bN.', 5, 17, '1037582817', 'Abogado', 'Secretaria General', NULL, NULL, '2019-08-27 19:57:41', '2019-08-27 19:57:41', NULL, 'Abogado', 1, 1),
+(37, 'David', 'Arias Jaramillo ', 'david.arias@plazamayor.com.co', '$2y$10$6ra7ei/hPxOxuXE1pAPBCOJht/uXZebQdtS.zGBdzHuyvfrNNRczG', 5, 17, '71787785', 'Gerente de Servicio y Operaciones', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 19:57:42', '2019-08-27 19:57:42', NULL, 'Gerente de Servicio y Operaciones', 1, 1),
+(38, 'Maria Fernanda', 'Arroyave Valencia ', 'maria.arroyave@plazamayor.com.co', '$2y$10$6uiDa7yGOtDPmYhv8F0/guT3LR4AchzyWCCJQJ0CAR.l4cej3hsXi', 5, 17, '1017148535', 'Analista de Compras', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 19:57:42', '2019-08-27 19:57:42', NULL, 'Analista de Compras', 1, 1),
+(39, 'Yusleidi Viviana', 'Atehortua Muñeton ', 'viviana.atehortua@plazamayor.com.co', '$2y$10$Ma93oSdjFrU/JjYFnU56yerif4Gq7SU0o2c0k498.u9MHm5KtYJ2i', 5, 17, '32184003', 'Ejecutivo Comercial Sector Privado', 'Gerencia Comercial', NULL, NULL, '2019-08-27 19:57:42', '2019-08-27 19:57:42', NULL, 'Ejecutivo Comercial Sector Privado', 1, 1),
+(40, 'Juan Pablo', 'Avendaño Muñoz ', 'juan.avendano@plazamayor.com.co', '$2y$10$8QTNrXkLANJD5MIgktSVSu5KiobjIEOYolRIkVfP2gXks4S2.Hoia', 5, 17, '15342088', 'Ejecutivo Comercial Eventos Propios', 'Gerencia Comercial', NULL, NULL, '2019-08-27 20:08:16', '2019-08-27 20:08:16', NULL, 'profile_image.png', 1, 1),
+(41, 'Jovam Alexander', 'Benalcazar Castro ', 'jovam.benalcazar@plazamayor.com.co', '$2y$10$zcVVULtFBXPdr.99Efg7WOyON3Qit8RKVAjkQLGb8B9KUru9LMOC6', 5, 17, '71290749', 'Auxiliar de Almacén', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 20:08:16', '2019-08-27 20:08:16', NULL, 'profile_image.png', 1, 1),
+(42, 'Marcela Maria', 'Bermudez Monsalve ', 'marcela.bermudez@plazamayor.com.co', '$2y$10$SXOKeAB90Em0uuUlbx7UpeClsoDsXnkJtIbHQyd4DY.or.grgHmZu', 5, 17, '1128387688', 'Analista de Compras', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 20:08:16', '2019-08-27 20:08:16', NULL, 'profile_image.png', 1, 1),
+(43, 'Madelin Del Carmen', 'Bolaño Lopez ', 'madelin.bolano@plazamayor.com.co', '$2y$10$MGqAV.pUHIzArIHXt9zDv.fsA7FJU7qLSzZ7A28sCKerioQgWjGvu', 5, 17, '39048751', 'Ejecutivo Comercial Sector Gobierno', 'Gerencia Comercial', NULL, NULL, '2019-08-27 20:08:17', '2019-08-27 20:08:17', NULL, 'profile_image.png', 1, 1),
+(44, 'Juan Jose Rogelio', 'Builes Velasquez', 'juan.builes@plazamayor.com.co', '$2y$10$sMZWUMzKPu1CcDoyb32ao.Ltt2IqO4oXu6mu0Ehkyj9.mknGqGLcG', 5, 17, '71336201', 'Director de Ventas', 'Gerencia Comercial', NULL, NULL, '2019-08-27 20:08:17', '2019-08-27 20:08:17', NULL, 'profile_image.png', 1, 1),
+(45, 'Viviana Andrea', 'Bustamante Cano', 'viviana.bustamante@plazamayor.com.co', '$2y$10$vBirL4KP4chsgWzIb/1JaeeM.w2MYvUF8lbP9LM3IRll1pGIvubry', 5, 17, '32207438', 'Productor Junior', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 20:08:17', '2019-08-27 20:08:17', NULL, 'profile_image.png', 1, 1),
+(46, 'Diana Carolina', 'Cadavid Villegas ', 'diana.cadavid@plazamayor.com.co', '$2y$10$q9dqAnE0PM62GqwHcWuH7uzvF0Hh9mb.GtgpR2YXXMQ03Qxg4dmP2', 5, 17, '1128267871', 'Ejecutiva Comercial Sector Privado', 'Gerencia Comercial', NULL, NULL, '2019-08-27 20:08:18', '2019-08-27 20:08:18', NULL, 'profile_image.png', 1, 1),
+(47, 'Daniela', 'Cardenas Marin ', 'daniela.cardenas@plazamayor.com.co', '$2y$10$Y/dObdtUgl4e5thXj0ZVceDvj/CPjqXNtH071MN15SqBqDJTeH/dS', 5, 17, '1035428891', 'Ejecutiva Junior Eventos Propios', 'Gerencia Comercial', NULL, NULL, '2019-08-27 20:08:18', '2019-08-27 20:08:18', NULL, 'profile_image.png', 1, 1),
+(48, 'Mauricio', 'Cardenas Castañeda', 'mauricio.cardenas@plazamayor.com.co', '$2y$10$u7vZY27rx2iJ8Oe25edz7OxyGdVcI2zKwg7CHBhzcG.N76TxGhaiu', 5, 17, '79580571', 'Jefe de Seguridad', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 20:08:18', '2019-08-27 20:08:18', NULL, 'profile_image.png', 1, 1),
+(49, 'Debora Elizabeth', 'Cardona  Giraldo ', 'debora.cardona@plazamayor.com.co', '$2y$10$3eENxVr5Lrl2L1970f1rwuv5W/rBwje6k/6QIJDyWF51RQdBeLb0a', 5, 17, '43976249', 'Director de Servicio', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 20:08:19', '2019-08-27 20:08:19', NULL, 'profile_image.png', 1, 1),
+(50, 'Juliana', 'Cardona Quiros', 'juliana.cardona@plazamayor.com.co', '$2y$10$3k1Y2VdZsH2BfK3/Z/klmO6UnFFlxtfnv7ZI.A4eQ5Yg3dJZT.tDe', 5, 17, '21527034', 'Gerente General', 'Gerencia General', NULL, NULL, '2019-08-27 20:08:19', '2019-08-27 20:08:19', NULL, 'profile_image.png', 1, 1),
+(51, 'Alejandra', 'Casabianca Fernandez ', 'alejandra.casabianca@plazamayor.com.co', '$2y$10$DRVkbdMEHHx9vk2HYJ1yKO7BYn0oj5t1xeIQu3cA/3mvnMADFOfSi', 5, 17, '32241951', 'Productor Master', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 20:08:19', '2019-08-27 20:08:19', NULL, 'profile_image.png', 1, 1),
+(52, 'Edison Emilio', 'Castro Tabares ', 'edison.castro@plazamayor.com.co', '$2y$10$stosBR6Q0AUNaUS2y5UmK.LKne/VDPLSul6WeTYrGQohEJLYH25vG', 5, 17, '15387140', 'Coordinador de Costos y Presupuesto', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 20:08:20', '2019-08-27 20:08:20', NULL, 'profile_image.png', 1, 1),
+(53, 'Santiago León', 'Ciro Molina', 'santiago.ciro@plazamayor.com.co', '$2y$10$R/adM6gqsGjVQmLynE7eVOMvxWScOgKJJVMVHxllvlAksJD2EgVQS', 5, 17, '1152188727', 'Analista de Auditoria ', 'Gerencia General', NULL, NULL, '2019-08-27 20:08:20', '2019-08-27 20:08:20', NULL, 'profile_image.png', 1, 1),
+(54, 'Melisa', 'Davila Alzate ', 'melisa.davila@plazamayor.com.co', '$2y$10$XNlv1Ic3SbmyRipBwtcjmuPdyYCAMTRdlmQHRsBKnP9XkLZVj0hoS', 5, 17, '43978866', 'Auxiliar Operativo ', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 20:08:20', '2019-08-27 20:08:20', NULL, 'profile_image.png', 1, 1),
+(55, 'Tatiana', 'De Vivero Acevedo', 'tatiana.devivero@plazamayor.com.co', '$2y$10$QLzNmgbRPIktbWwnvrh3SeOXYtQD/8IsL1tVslQEEykvHUx0B9pEy', 5, 17, '43220107', 'Coordinador de Talento Humano', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 20:08:20', '2019-08-27 20:08:20', NULL, 'profile_image.png', 1, 1),
+(56, 'Jessica Maria', 'Díaz Celis ', 'jessica.diaz@plazamayor.com.co', '$2y$10$CSpfbO9xfypI0fpe495OS.CfCfNL7q7dKSo5Kx1edJpd5RiUUGy0u', 5, 17, '1037592592', 'Ejecutivo Comercial Sector Gobierno', 'Gerencia Comercial', NULL, NULL, '2019-08-27 20:08:21', '2019-08-27 20:08:21', NULL, 'profile_image.png', 1, 1),
+(57, 'Juan Felipe', 'Dominguez Sanchez ', 'juan.dominguez@plazamayor.com.co', '$2y$10$CRj.ntoWbOQvbU0IGJk.W.cpLmuLUNuYQLjaNIR6Ng3wIG7Ha0Wnu', 5, 17, '98620812', 'Coordinador de Mantenimiento e infraestructura', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 20:08:21', '2019-08-27 20:08:21', NULL, 'profile_image.png', 1, 1),
+(58, 'Hernan Alberto', 'Echavarria Duque ', 'hernan.echavarria@plazamayor.com.co', '$2y$10$JpZ.mEhOvykZL2nvJBTcLub.AHAgml5ol9lS2RtUyZlbhypEiugoO', 5, 17, '4583785', 'Coordinador de TIC', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 20:08:21', '2019-08-27 20:08:21', NULL, 'profile_image.png', 1, 1),
+(59, 'Nancy Astrid', 'Echeverri Alvaran ', 'nancy.echeverri@plazamayor.com.co', '$2y$10$VX1h3Cuzm1z.rHKIVgvjou34chmumSPIMgfEto026.783aFPe4zZi', 5, 17, '43679487', 'Auxiliar Soporte Operativo', 'Gerencia Comercial', NULL, NULL, '2019-08-27 20:08:22', '2019-08-27 20:08:22', NULL, 'profile_image.png', 1, 1),
+(60, 'Isabel Cristina', 'Estrada Vasquez ', 'isabel.estrada@plazamayor.com.co', '$2y$10$qLVqLq3zafYG44NC3Z.ErOWhMOSd5pt1e.SX4OjiNKujCsRUWO/5C', 5, 17, '43061263', 'Auxiliar Soporte Operativo', 'Gerencia Comercial', NULL, NULL, '2019-08-27 20:08:22', '2019-08-27 20:08:22', NULL, 'profile_image.png', 1, 1),
+(61, 'Laura Juliana', 'Franco Molina ', 'laura.franco@plazamayor.com.co', '$2y$10$g0IrPbnV3c9hVl4RbGW/h.uSdneq3.7yoh.ZejkvBGcEOCal8KeiW', 5, 17, '1039446623', 'Directora Eventos Propios', 'Gerencia Comercial', NULL, NULL, '2019-08-27 20:08:22', '2019-08-27 20:08:22', NULL, 'profile_image.png', 1, 1),
+(62, 'Dayanna', 'Fernandez Florez', 'dayanna.fernandez@plazamayor.com.co', '$2y$10$4YMsj/Nf0xoSGqPKXn06TeNKG0eY3vHKLdlYl1ZI77b4gq5VdCpB2', 5, 17, '1026159518', 'Auxiliar de Planeacion', 'Gerencia General', NULL, NULL, '2019-08-27 20:08:22', '2019-08-27 20:08:22', NULL, 'profile_image.png', 1, 1),
+(63, 'Johanna', 'Galeano Hernandez', 'johanna.galeano@plazamayor.com.co', '$2y$10$0CvgDM89t7HBf8jn8VqpI.XR7XOBSf0DvXdal5.AgGrV5N9LR1s8e', 5, 17, '1017122242', 'Directora Comercial Sector Gobierno', 'Gerencia Comercial', NULL, NULL, '2019-08-27 20:08:23', '2019-08-27 20:08:23', NULL, 'profile_image.png', 1, 1),
+(64, 'Mauricio Humberto', 'Gamboa Zapata', 'mauricio.gamboa@plazamayor.com.co', '$2y$10$k2ki5VweA1LC5Crnt/uywOtwanDSqnWty7CxpUkfWqobwy/X5NEIK', 5, 17, '1017128814', 'Analista de Costos', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 20:08:23', '2019-08-27 20:08:23', NULL, 'profile_image.png', 1, 1),
+(65, 'Daniela', 'Garcia Galeano', 'daniela.garcia@plazamayor.com.co', '$2y$10$cyqGp.sjdn8E4ibmcU2EeOd6Gzsx1IjsGSrbckF9NwQ8KkGmTYyla', 5, 17, '1037605535', 'Auxiliar Jurídico ', 'Secretaria General', NULL, NULL, '2019-08-27 20:08:23', '2019-08-27 20:08:23', NULL, 'profile_image.png', 1, 1),
+(66, 'Camilo', 'Garcia Villa ', 'camilo.garcia@plazamayor.com.co', '$2y$10$fSf8/cXSzr8kgbQoqSDOo.zbX5bDWlsZLdgYjj2Y0KOr2bNlP0gvy', 5, 17, '1039457066', 'Ejecutivo Junior Eventos Propios', 'Gerencia Comercial', NULL, NULL, '2019-08-27 20:08:24', '2019-08-27 20:08:24', NULL, 'profile_image.png', 1, 1),
+(67, 'Maria Isabel', 'Gaviria Rengifo', 'maria.gaviria@plazamayor.com.co', '$2y$10$fkh.bu61tk5QllZPXF0D4u4PhJ/lBd4nNJ5nidGKMZ.yiZjRW5liK', 5, 17, '42826908', 'Directora de Planeación y Desarrollo Organizacional', 'Gerencia General', NULL, NULL, '2019-08-27 20:08:24', '2019-08-27 20:08:24', NULL, 'profile_image.png', 1, 1),
+(68, 'Carlos Mario', 'Gil Rodriguez ', 'mario.gil@plazamayor.com.co', '$2y$10$PgndXP5aOYVcLK3xB5FaDe0Rbo.p.dgfm4vD0TJ98srennznsX0C2', 5, 17, '8408751', 'Tecnico Electromecanico', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 20:08:24', '2019-08-27 20:08:24', NULL, 'profile_image.png', 1, 1),
+(69, 'Kelly Yohana', 'Gomez Morales ', 'kelly.gomez@plazamayor.com.co', '$2y$10$V2dRWNSwmLYhF322RYRlauNHk969BeM9NZJV9UfRApaqqGgtNZEgC', 5, 17, '1128437911', 'Ejecutiva Comercial Sector Gobierno', 'Gerencia Comercial', NULL, NULL, '2019-08-27 20:08:24', '2019-08-27 20:08:24', NULL, 'profile_image.png', 1, 1),
+(70, 'Camilo Andres', 'Gomez Mosquera ', 'camilo.gonoz@plazamayor.abm.ab', '$2y$10$b/dJcL793Re7KRiXRVPFgOObPpl4fT8O7go7EqpvfIughN5Ux7w5.', 5, 17, '1037606179', 'Abogado ', 'Secretaria General', NULL, NULL, '2019-08-27 20:08:25', '2019-08-27 20:08:25', NULL, 'profile_image.png', 1, 1),
+(71, 'Yovanny Arturo', 'Gonzalez Cardona ', 'arturo.gonzalez@plazamayor.com.co', '$2y$10$gZBuEHrVzr5f.ZW0doiVoOl1wxC/gALEkWlxeA.EMU7V3Rva7GwD2', 5, 17, '98589230', 'Productor Senior', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 20:08:25', '2019-08-27 20:08:25', NULL, 'profile_image.png', 1, 1),
+(72, 'Luis Eduardo', 'Guerra Restrepo ', 'luis.guerra@plazamayor.com.co', '$2y$10$xo3jopZvdIht2oWo5LTKH.UQVBWZsBM7XJfyW26LPCldRPuXPthNq', 5, 17, '71641873', 'Coordinador de Compras', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 20:08:25', '2019-08-27 20:08:25', NULL, 'profile_image.png', 1, 1),
+(73, 'Maria Fernanda', 'Guerrero Echavarria ', 'maria.guerrero@plazamayor.com.co', '$2y$10$bmp0YrnNcR28XhjwpXbHSeYpv8k3.qGwoN9V84D1BHwmi35zxO5Iu', 5, 17, '44005167', 'Analista de Procesos y Riesgos', 'Gerencia General', NULL, NULL, '2019-08-27 20:08:26', '2019-08-27 20:08:26', NULL, 'profile_image.png', 1, 1),
+(74, 'Lizeht Beronica', 'Guisao Aldana ', 'beronica.guisao@plazamayor.com.co', '$2y$10$Y.vqQCw/z5TQaf5q0FFKC.fsl16F0FNmQhVOgnL2lZw2w5JSRjJ4a', 5, 17, '1036633439', 'Auxiliar Contable', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 20:08:26', '2019-08-27 20:08:26', NULL, 'profile_image.png', 1, 1),
+(75, 'Alid Libeth', 'Gutierrez Duran ', 'alid.gutierrez@plazamayor.com.co', '$2y$10$ZICen5L..3tFjehY/KeN7u1I7J6vftLUxH5KZU9wrK13HjHdyHin2', 5, 17, '37370963', 'Analista de Tesoreria', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 20:08:26', '2019-08-27 20:08:26', NULL, 'profile_image.png', 1, 1),
+(76, 'Luis Fernando', 'Gúzman Soto', 'luis.guzman@plazamayor.com.co', '$2y$10$qhOL9OVNOXmFPjUEJ3VxHeSid.vpL9EIw8SD4bC8Za18jpsRT0fxm', 5, 17, '98530687', 'Mensajero', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 20:08:27', '2019-08-27 20:08:27', NULL, 'profile_image.png', 1, 1),
+(77, 'Tatiana Sofía', 'Henao Avendaño ', 'tatiana.henao@plazamayor.com.co', '$2y$10$vFJihWzphFQSBGUKqP0nO.Y8HDCFiIjo04jbg9Cuf8HjQk2JZGhGK', 5, 17, '1128431480', 'Analista de Compras', 'Gerencia Administrativa y Financiera', NULL, NULL, '2019-08-27 20:08:27', '2019-08-27 20:08:27', NULL, 'profile_image.png', 1, 1),
+(78, 'Edwar Andres', 'Herrera Vargas ', 'edwar.herrera@plazamayor.com.co', '$2y$10$.umT3QNTjIZTPLupV2qG.OmDUQa5QfbGhrau16vvW8T7xxXzRK2UC', 5, 17, '1040036447', 'Auxiliar Operativo Zona Franca', 'Gerencia de Servicio y Operaciones', NULL, NULL, '2019-08-27 20:08:27', '2019-08-27 20:08:27', NULL, 'profile_image.png', 1, 1),
+(79, 'Santiago', 'Hidalgo López', 'santiago.hidalgo@plazamayor.com.co', '$2y$10$DI0BeiXbuoB2EqsMyq1Dcug8GYnEVuHByMVBkpc3PMnF8bDwhBe2y', 5, 17, '1152212437', 'Analista de Auditoria ', 'Gerencia General', NULL, NULL, '2019-08-27 20:08:27', '2019-08-27 20:08:27', NULL, 'profile_image.png', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -988,15 +853,6 @@ INSERT INTO `user_types` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 --
--- Indices de la tabla `accomplishments`
---
-ALTER TABLE `accomplishments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `accomplishments_award_id_foreign` (`award_id`),
-  ADD KEY `accomplishments_user_id_foreign` (`user_id`),
-  ADD KEY `accomplishments_giver_id_foreign` (`giver_id`);
-
---
 -- Indices de la tabla `answers`
 --
 ALTER TABLE `answers`
@@ -1004,15 +860,6 @@ ALTER TABLE `answers`
   ADD UNIQUE KEY `answers_application_id_question_id_unique` (`application_id`,`question_id`),
   ADD KEY `answers_measure_id_foreign` (`measure_id`),
   ADD KEY `answers_question_id_foreign` (`question_id`);
-
---
--- Indices de la tabla `aplications`
---
-ALTER TABLE `aplications`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `aplications_implementation_id_foreign` (`implementation_id`),
-  ADD KEY `aplications_evaluator_id_foreign` (`evaluator_id`),
-  ADD KEY `aplications_user_id_foreign` (`user_id`);
 
 --
 -- Indices de la tabla `applications`
@@ -1029,35 +876,6 @@ ALTER TABLE `applications`
 ALTER TABLE `application_evaluation`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `application_evaluation_application_id_evaluation_id_unique` (`application_id`,`evaluation_id`);
-
---
--- Indices de la tabla `assignations`
---
-ALTER TABLE `assignations`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `assignations_tested_id_foreign` (`tested_id`),
-  ADD KEY `assignations_evaluation_id_foreign` (`evaluation_id`);
-
---
--- Indices de la tabla `awards`
---
-ALTER TABLE `awards`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `awards_resource_id_foreign` (`resource_id`),
-  ADD KEY `awards_organization_id_foreign` (`organization_id`),
-  ADD KEY `awards_creator_id_foreign` (`creator_id`);
-
---
--- Indices de la tabla `award_resources`
---
-ALTER TABLE `award_resources`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `badges`
---
-ALTER TABLE `badges`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `competences`
@@ -1209,22 +1027,10 @@ ALTER TABLE `user_types`
 --
 
 --
--- AUTO_INCREMENT de la tabla `accomplishments`
---
-ALTER TABLE `accomplishments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT de la tabla `answers`
 --
 ALTER TABLE `answers`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
---
--- AUTO_INCREMENT de la tabla `aplications`
---
-ALTER TABLE `aplications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `applications`
@@ -1237,30 +1043,6 @@ ALTER TABLE `applications`
 --
 ALTER TABLE `application_evaluation`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `assignations`
---
-ALTER TABLE `assignations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `awards`
---
-ALTER TABLE `awards`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT de la tabla `award_resources`
---
-ALTER TABLE `award_resources`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
-
---
--- AUTO_INCREMENT de la tabla `badges`
---
-ALTER TABLE `badges`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `competences`
@@ -1332,7 +1114,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `organizations`
 --
 ALTER TABLE `organizations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `processes`
@@ -1374,7 +1156,7 @@ ALTER TABLE `trainings`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT de la tabla `user_types`
@@ -1387,14 +1169,6 @@ ALTER TABLE `user_types`
 --
 
 --
--- Filtros para la tabla `accomplishments`
---
-ALTER TABLE `accomplishments`
-  ADD CONSTRAINT `accomplishments_award_id_foreign` FOREIGN KEY (`award_id`) REFERENCES `awards` (`id`),
-  ADD CONSTRAINT `accomplishments_giver_id_foreign` FOREIGN KEY (`giver_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `accomplishments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
 -- Filtros para la tabla `answers`
 --
 ALTER TABLE `answers`
@@ -1403,35 +1177,12 @@ ALTER TABLE `answers`
   ADD CONSTRAINT `answers_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`);
 
 --
--- Filtros para la tabla `aplications`
---
-ALTER TABLE `aplications`
-  ADD CONSTRAINT `aplications_evaluator_id_foreign` FOREIGN KEY (`evaluator_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `aplications_implementation_id_foreign` FOREIGN KEY (`implementation_id`) REFERENCES `implementations` (`id`),
-  ADD CONSTRAINT `aplications_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
 -- Filtros para la tabla `applications`
 --
 ALTER TABLE `applications`
   ADD CONSTRAINT `applications_evaluation_id_foreign` FOREIGN KEY (`evaluation_id`) REFERENCES `evaluations` (`id`),
   ADD CONSTRAINT `applications_evaluator_id_foreign` FOREIGN KEY (`evaluator_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `applications_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Filtros para la tabla `assignations`
---
-ALTER TABLE `assignations`
-  ADD CONSTRAINT `assignations_evaluation_id_foreign` FOREIGN KEY (`evaluation_id`) REFERENCES `evaluations` (`id`),
-  ADD CONSTRAINT `assignations_tested_id_foreign` FOREIGN KEY (`tested_id`) REFERENCES `users` (`id`);
-
---
--- Filtros para la tabla `awards`
---
-ALTER TABLE `awards`
-  ADD CONSTRAINT `awards_creator_id_foreign` FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `awards_organization_id_foreign` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`),
-  ADD CONSTRAINT `awards_resource_id_foreign` FOREIGN KEY (`resource_id`) REFERENCES `award_resources` (`id`);
 
 --
 -- Filtros para la tabla `compromises`

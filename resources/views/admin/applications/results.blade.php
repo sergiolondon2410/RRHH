@@ -159,16 +159,17 @@
 					Resultados globales de medición
 				</div>
 				<!-- /.panel-heading -->
-				@if(count($competences) > 0)
-					<div class="panel-body">
+				<div class="panel-body">
+					@if(count($competences) > 0)
 						<div id="chart_global_competences"></div>
-					</div>
-				@endif
-				@if(count($indicators) > 0)
-					<div class="panel-body">
+					@endif
+					@if(count($indicators) > 0)
 						<div id="chart_global_indicators"></div>
-					</div>
-				@endif
+					@endif
+				</div>
+				<div class="panel-footer">
+					<a class="btn btn-default" href="{{ route('applications.globalchartprint', ['evaluation' => $evaluation, 'position' => $position_get, 'area' => $area_get]) }}" target="_blank"> <i class="fa fa-file-pdf-o"></i> Exportar esta gráfica a PDF</a>
+				</div>
 			</div>
 			<!-- /.panel -->
 		</div>

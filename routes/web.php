@@ -111,6 +111,7 @@ Route::get('/applications/{evaluation}/resultspdf/', 'ApplicationController@resu
 Route::get('/applications/organization', 'ApplicationController@organizationFilter')->name('applications.organization'); //??????
 Route::get('/applications/process', 'ApplicationController@processFilter')->name('applications.process');
 Route::get('/applications/{evaluation}/{position}/{area}/{competence_type}/competenceschartprint/', 'ApplicationController@competencesChartPrint')->name('applications.competenceschartprint');
+Route::get('/applications/{evaluation}/{position}/{area}/globalchartprint/', 'ApplicationController@globalChartPrint')->name('applications.globalchartprint');
 
 //Rutas Compromisos
 Route::get('/compromises/organization/', 'CompromiseController@organization')->name('compromises.organization');
@@ -144,7 +145,7 @@ Route::post('/trainings/{user}/{evaluation}/', 'TrainingController@store')->name
 Route::get('/imports', 'ImportController@index')->name('imports.index');
 Route::post('/imports/import_file', 'ImportController@importFile')->name('imports.import_file');
 Route::post('/imports/import_process', 'ImportController@processImport')->name('imports.import_process');
-Route::post('/imports/{orgnization}/', 'ImportController@store')->name('imports.store');
+Route::post('/imports/{organization}/', 'ImportController@store')->name('imports.store');
 
 Auth::routes();
 

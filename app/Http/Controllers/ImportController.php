@@ -33,7 +33,7 @@ class ImportController extends Controller
 					$user_type = ($value->tipo_de_usuario_empleado_o_supervisor == 'Supervisor') ? 4 : 5 ;
 					$position = (is_null($value->cargo)) ? 'Empleado' : $value->cargo;
 					$area = (is_null($value->area)) ? 'Operativa' : $value->area;
-					$users[$key] = [
+					/*$users[$key] = [
 						'name'      => $value->nombre, 
 						'last_name' => $value->apellido,
 						'email'     => $value->correo,
@@ -46,33 +46,46 @@ class ImportController extends Controller
 						'profile_img' => 'profile_image.png',
 						'boss_id' => 1,
 						'level' => 1
-					];
+					];*/
+					User::create([
+						'name' => $value->nombre,
+						'last_name' => $value->apellido,
+						'email' => $value->correo,
+						'document' => intval($value->documento),
+						'organization_id' => $organization->id,
+						'user_type_id' => $user_type,
+						'position' => $position,
+						'area' => $area,
+						'password' => bcrypt($value->documento),
+						'profile_img' => 'profile_image.png',
+						'boss_id' => 1,
+						'level' => 1
+					]);
 				}
 
 			}
 			// dd($users);
-			return view('admin.imports.form', compact('users', 'organization'));
+			// return view('admin.imports.form', compact('users', 'organization'));
 			//-------------------- código que está montado inicio
-			// $message = "Usuarios creados correctamente: ";
-			// foreach ($users_array as $user) {
-			// 	User::create([
-			// 		'name' => $user['name'],
-			// 		'last_name' => $user['last_name'],
-			// 		'email' => $user['email'],
-			// 		'document' => $user['document'],
-			// 		'organization_id' => $user['organization_id'],
-			// 		'user_type_id' => $user['user_type'],
-			// 		'position' => $user['position'],
-			// 		'area' => $user['area'],
-			// 		'password' => bcrypt($user['document']),
-			// 		'profile_img' => 'profile_image.png',
-			// 		'boss_id' => 1,
-			// 		'level' => 1
-			// 	]);
-			// 	$message .= "Usuarios creados correctamente";
-			// }
-			// $request->session()->flash('success', $message);
-			// return redirect()->action('UserController@index');
+			$message = "Usuarios creados correctamente: ";
+			/*foreach ($users as $user) {
+				User::create([
+					'name' => $user['name'],
+					'last_name' => $user['last_name'],
+					'email' => $user['email'],
+					'document' => $user['document'],
+					'organization_id' => $user['organization_id'],
+					'user_type_id' => $user['user_type'],
+					'position' => $user['position'],
+					'area' => $user['area'],
+					'password' => bcrypt($user['document']),
+					'profile_img' => $user['position'],
+					'boss_id' => 1,
+					'level' => 1
+				]);
+			}*/
+			$request->session()->flash('success', $message);
+			return redirect()->action('UserController@index');
 			//---------------------------- código que está montado fin
 
 		}
