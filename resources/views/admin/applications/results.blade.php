@@ -363,6 +363,5 @@
 			@endif
 		};
 	</script>
-	
 
 @endsection

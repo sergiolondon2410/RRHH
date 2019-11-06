@@ -578,6 +578,27 @@ class ApplicationController extends Controller
 		return $output;
 	}
 
+	public function autoEvaluation(Request $request, Evaluation $evaluation)
+	{	
+		$users = User::where('organization_id', $evaluation->process->organization_id)->get();
+		foreach($users as $user){
+			$auto = Application::where('evaluation_id', $evaluation->id)
+								->where('evaluator_id', $user->id)
+								->where('user_id', $user->id)
+								->get();
+			if($auto->isEmpty()){
+				Application::create([
+					'evaluation_id' => $evaluation->id,
+					'user_id' => $user->id,
+					'evaluator_id' => $user->id
+				]);
+			}
+		}
+		$title = "Usuarios asignados a la evaluación: ".$evaluation->name;
+		$request->session()->flash('success', 'Asignación de autoevaluaciones realizada correctamente');
+		return view('admin.applications.index', compact('evaluation', 'users', 'title'));
+	}
+
 	public function averageByCompetence(Application $application, $competences){//deprecado - reemplazar en details
 		$promedios = [];
 		foreach ($competences as $competence) {

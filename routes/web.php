@@ -112,6 +112,7 @@ Route::get('/applications/organization', 'ApplicationController@organizationFilt
 Route::get('/applications/process', 'ApplicationController@processFilter')->name('applications.process');
 Route::get('/applications/{evaluation}/{position}/{area}/{competence_type}/competenceschartprint/', 'ApplicationController@competencesChartPrint')->name('applications.competenceschartprint');
 Route::get('/applications/{evaluation}/{position}/{area}/globalchartprint/', 'ApplicationController@globalChartPrint')->name('applications.globalchartprint');
+Route::get('/applications/{evaluation}/autoevaluation', 'ApplicationController@autoEvaluation')->name('applications.autoevaluation');
 
 //Rutas Compromisos
 Route::get('/compromises/organization/', 'CompromiseController@organization')->name('compromises.organization');
@@ -132,6 +133,7 @@ Route::get('/recognitions/{recognition}/edit', 'RecognitionController@edit')->na
 Route::put('/recognitions/{recognition}', 'RecognitionController@update')->name('recognitions.update');
 Route::get('/recognitions/{user}/{evaluation}/create/', 'RecognitionController@create')->name('recognitions.create');
 Route::post('/recognitions/{user}/{evaluation}/', 'RecognitionController@store')->name('recognitions.store');
+Route::delete('/recognitions/{recognition}', 'RecognitionController@destroy')->name('recognitions.destroy');
 
 //Rutas Requerimientos de capacitación
 Route::get('/trainings', 'TrainingController@index')->name('trainings.index');

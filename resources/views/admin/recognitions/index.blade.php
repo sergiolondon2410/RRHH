@@ -68,6 +68,10 @@
 										<td>
 											<a href="{{ route('recognitions.show', ['recognition' => $recognition]) }}" data-toggle="tooltip" data-placement="bottom" title="Ver más"><i class="fa fa-info-circle fa-fw"></i></a>
 											<a href="{{ route('recognitions.edit', ['recognition' => $recognition]) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil fa-fw"></i></a>
+											{!! Form::model($recognition, ['method' => 'POST', 'action' => ['RecognitionController@destroy', $recognition->id],  'files' => true])  !!}
+												@method('DELETE')
+												<input type="submit" class="btn btn-danger btn-sm" value="Eliminar" onclick="return confirm('Está seguro de eliminar el reconocimiento {{ $recognition->name }}? ')">
+											{!! Form::close() !!}
 										</td>
 									</tr>
 								@endforeach

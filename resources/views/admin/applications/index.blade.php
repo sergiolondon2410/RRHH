@@ -61,6 +61,9 @@
 					</table>
 				</div>
 				<!-- /.panel-body -->
+				<div class="panel-footer">
+					<a class="btn btn-default" href="{{ route('applications.autoevaluation', ['evaluation' => $evaluation]) }}"> <i class="fa fa-check-circle"></i> Asignar autoevaluación a todos los usuarios</a>
+				</div>
 			</div>
 			<!-- /.panel -->
 		</div>

@@ -110,4 +110,13 @@ class RecognitionController extends Controller
 		$request->session()->flash('success', 'Reconocimiento editado correctamente');
 		return view('admin.recognitions.show', compact('recognition', 'title'));
 	}
+
+	public function destroy(Request $request, $id)
+    {
+        $recognition = Recognition::find($id);
+        $message = "El reconocimiento $recognition->name fue eliminado correctamente";
+        $recognition->delete();
+        return redirect()->route('recognitions.index')->with('success', $message);
+    }
+
 }
